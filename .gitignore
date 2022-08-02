@@ -1,40 +1,9 @@
-# Visual Studio & IDE cache
-.vs/
-.vscode/
-*.user
-*.userosscache
-*.sln.docstates
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
 
-# Build Directories
-bin/
-obj/
-x64/
-x86/
-ARM64/
-Debug/
-Release/
-out/
-build/CMakeCache.txt
-build/CmakeFiles/
-
-# Compiled Binaries & Outputs
-*.exe
-*.dll
-*.lib
-*.ilk
-*.pdb
-*.exp
-*.appx
-*.msix
-*.pri
-
-# Temporary & Log Files
-*.log
-*.tmp
-*.cache
-*.suo
-*.ipch
-
-# OS/System Specific
-.DS_Store
-Thumbs.db
+/.vs/Rectify11Installer/v15
+/libmsstyle/bin/Debug
+/libmsstyle/obj/Debug
+/Rectify11Installer/bin/Debug
+/Rectify11Installer/obj/Debug
