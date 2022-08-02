@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using System.Runtime.InteropServices;
 using libmsstyle;
@@ -10,20 +15,12 @@ using Rectify11Installer.Win32;
 
 namespace Rectify11Installer.Controls
 {
-    public enum ButtonState
-    {
-        Normal = 1,
-        Hot,
-        Pressed,
-        Disabled,
-        Focused
-    }
     public class WinUIButton : Control
     {
         private string _ButtonText = "";
         [Browsable(false), DesignerSerializationVisibility(
                             DesignerSerializationVisibility.Hidden)]
-        public new string Text { get; set; }
+        public new string Text { get; set; } = "";
 
         private ButtonState CurrentState = ButtonState.Normal;
         private const int DTT_COMPOSITED = 8192;
@@ -31,7 +28,10 @@ namespace Rectify11Installer.Controls
         private const int DTT_TEXTCOLOR = 1;
         public string ButtonText
         {
-            get { return _ButtonText; }
+            get
+            {
+                return _ButtonText;
+            }
             set
             {
                 _ButtonText = value;
@@ -40,17 +40,8 @@ namespace Rectify11Installer.Controls
         }
         public WinUIButton()
         {
-            SetStyle(ControlStyles.Selectable | ControlStyles.StandardClick | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor | ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             BackColor = Color.Transparent;
-        }
-        protected override void OnEnabledChanged(EventArgs e)
-        {
-            base.OnEnabledChanged(e);
-            if (Enabled)
-                CurrentState = ButtonState.Normal;
-            else
-                CurrentState = ButtonState.Disabled;
-            InvalidateEx();
         }
         protected override CreateParams CreateParams
         {
@@ -63,7 +54,12 @@ namespace Rectify11Installer.Controls
         }
         protected unsafe override void OnPaint(PaintEventArgs args)
         {
+            base.OnPaint(args);
             Bitmap buttonImage = null;
+            if (!Enabled)
+            {
+                CurrentState = ButtonState.Disabled;
+            }
 
             //Hack to fix black borders, but we lose transpancy
             args.Graphics.Clear(Color.White);
@@ -85,14 +81,13 @@ namespace Rectify11Installer.Controls
                 case ButtonState.Disabled:
                     tpart = ThemeParts.Disabled;
                     break;
-                case ButtonState.Hot:
+                case ButtonState.Hover:
                     tpart = ThemeParts.Hot;
                     break;
-                case ButtonState.Pressed:
+                case ButtonState.HoverClicked:
                     tpart = ThemeParts.Pressed;
                     break;
                 default:
-                    tpart = ThemeParts.Normal;
                     break;
             }
             if (DesignMode)
@@ -135,14 +130,24 @@ namespace Rectify11Installer.Controls
             info.biPlanes = 1;
             info.biBitCount = 32;
             info.biCompression = 0; // BI_RGB
-            int* pixels;
-            IntPtr dib = NativeMethods.CreateDIBSection(memoryHdc, info, 0, out pixels, IntPtr.Zero, 0);
+            IntPtr dib = NativeMethods.CreateDIBSection(memoryHdc, info, 0, out int* pixels, IntPtr.Zero, 0);
             for (int y = 0; y < buttonImage.Height; y++)
             {
                 for (int x = 0; x < buttonImage.Width; x++)
                 {
                     var pixel = buttonImage.GetPixel(x, y);
                     var d = Theme.IsUsingDarkMode ? Color.Black : Color.White;
+                    //if (pixel.A == 0)
+                    //{
+                    //    pixel = d;
+                    //}
+                    //else
+                    //{
+                    //    if (pixel.A != 255)
+                    //    {
+                    //        pixel = d;
+                    //    }
+                    //}
 
                     *pixels++ = pixel.ToArgb();
                 }
@@ -166,23 +171,11 @@ namespace Rectify11Installer.Controls
             NativeMethods.BitBlt(hdc, bounds.Left, bounds.Top, bounds.Width, bounds.Height, memoryHdc, 0, 0, SRCCOPY);
             //NativeMethods.TransparentBlt(hdc, bounds.Left, bounds.Top, bounds.Width, bounds.Height, memoryHdc, 0, 0, bounds.Width, bounds.Height, (uint)Color.Magenta.ToArgb());
 
+
             args.Graphics.ReleaseHdc(hdc);
-            base.OnPaint(args);
 
         }
-        public void PerformClick()
-        {
-            if (CanSelect)
-                base.OnClick(EventArgs.Empty);
-        }
-        protected override void OnDoubleClick(EventArgs e)
-        {
-            if (CurrentState == ButtonState.Pressed)
-            {
-                Focus();
-                PerformClick();
-            }
-        }
+
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
@@ -192,13 +185,13 @@ namespace Rectify11Installer.Controls
                 return;
             }
 
-            CurrentState = ButtonState.Hot;
+            CurrentState = ButtonState.Hover;
             InvalidateEx();
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            base.OnMouseLeave(e);
+            base.OnMouseEnter(e);
 
             if (!Enabled)
             {
@@ -219,7 +212,7 @@ namespace Rectify11Installer.Controls
                 return;
             }
 
-            CurrentState = ButtonState.Pressed;
+            CurrentState = ButtonState.HoverClicked;
             InvalidateEx();
         }
 
@@ -232,7 +225,7 @@ namespace Rectify11Installer.Controls
                 return;
             }
 
-            CurrentState = ButtonState.Hot;
+            CurrentState = ButtonState.Normal;
             InvalidateEx();
         }
 
@@ -243,6 +236,22 @@ namespace Rectify11Installer.Controls
             this.Invalidate();
             //Rectangle rc = new(this.Location, this.Size);
             //Parent.Invalidate(rc, true);
+        }
+        private void InvalidateExEx()
+        {
+            if (Parent == null)
+                return;
+
+            this.Invalidate();
+            Rectangle rc = new Rectangle(Location, Size);
+            Parent.Invalidate(rc, true);
+        }
+        enum ButtonState
+        {
+            Normal,
+            Disabled,
+            Hover,
+            HoverClicked
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

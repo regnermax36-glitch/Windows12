@@ -1,9 +1,12 @@
 ﻿using libmsstyle;
 using Microsoft.Win32;
 using Rectify11Installer.Controls;
-using Rectify11Installer.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Rectify11Installer
 {
@@ -11,23 +14,32 @@ namespace Rectify11Installer
     {
         public static VisualStyle DarkStyle = new VisualStyle();
         public static VisualStyle LightStyle = new VisualStyle();
-        public static bool IsUsingDarkMode { get; private set; }
-        public static void InitTheme()
+        public static bool IsUsingDarkMode
         {
-            var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
-            var registryValueObject = key.GetValue("AppsUseLightTheme");
-            if (registryValueObject == null)
-            {  }
-            var registryValue = (int)registryValueObject;
-            IsUsingDarkMode = registryValue <= 0;
-            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
+            get
+            {
+                var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+                var registryValueObject = key.GetValue("AppsUseLightTheme");
+                if (registryValueObject == null)
+                {
+                    return false;
+                }
+                var registryValue = (int)registryValueObject;
+
+                return registryValue <= 0;
+            }
         }
         public static event EventHandler OnThemeChanged;
 
+        static Theme()
+        {
+            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
+        }
+
         public static void LoadTheme()
         {
-            DarkStyle.Load(Path.Combine(Variables.r11Folder, "Dark.msstyles"));
-            LightStyle.Load(Path.Combine(Variables.r11Folder, "light.msstyles"));
+            DarkStyle.Load(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Rectify11\Dark.msstyles");
+            LightStyle.Load(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Rectify11\light.msstyles");
         }
 
         private static void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
@@ -36,14 +48,12 @@ namespace Rectify11Installer
             {
                 case UserPreferenceCategory.General:
                     if (OnThemeChanged != null)
-                    {
-                        InitTheme();
                         OnThemeChanged.Invoke(sender, e);
-                    }
                     break;
             }
         }
-        
+
+
         public static StylePart GetNavArrowPart(VisualStyle v, NavigationButtonType type)
         {
             foreach (var classes in v.Classes.Values)
@@ -95,24 +105,7 @@ namespace Rectify11Installer
 
             return null;
         }
-        public static StylePart GetGroupBox(VisualStyle v)
-        {
-            foreach (var classes in v.Classes.Values)
-            {
-                if (classes.ClassName == "Button")
-                {
-                    foreach (var parts in classes.Parts)
-                    {
-                        if (parts.Value.PartName == "GROUPBOX")
-                        {
-                            return parts.Value;
-                        }
-                    }
-                }
-            }
 
-            return null;
-        }
         public static StylePart GetCommandLinkGlyphPart(VisualStyle v)
         {
             foreach (var classes in v.Classes.Values)

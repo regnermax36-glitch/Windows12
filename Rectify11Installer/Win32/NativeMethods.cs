@@ -7,19 +7,9 @@ using System.Threading.Tasks;
 
 namespace Rectify11Installer.Win32
 {
-    public class NativeMethods
+    class NativeMethods
     {
-		[DllImport("user32.dll")]
-		public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool revert);
-
-		[DllImport("user32.dll")]
-		public static extern int EnableMenuItem(IntPtr hMenu, int IDEnableItem, int enable);
-		public const int SC_CLOSE = 0xF060;
-		public const int MF_BYCOMMAND = 0;
-		public const int MF_ENABLED = 0;
-		public const int MF_GRAYED = 1;
-
-		[DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
+        [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
         internal static extern IntPtr CreateCompatibleDC(IntPtr hDC);
         [DllImport("gdi32.dll")]
         internal unsafe static extern IntPtr CreateDIBSection(IntPtr hdc, BITMAPINFO pbmi, uint iUsage, out int* ppvBits, IntPtr hSection, uint dwOffset);
@@ -34,9 +24,6 @@ namespace Rectify11Installer.Win32
         internal static extern bool BitBlt(IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, uint dwRop);
         public const int WP_CAPTION = 1;
         public const int CS_ACTIVE = 1;
-
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
         [StructLayout(LayoutKind.Sequential)]
         public class BITMAPINFO
         {
@@ -76,25 +63,7 @@ namespace Rectify11Installer.Win32
             public IntPtr pfnDrawTextCallback;
             public IntPtr lParam;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MARGINS
-        {
-            public int cxLeftWidth;      // width of left border that retains its size
-            public int cxRightWidth;     // width of right border that retains its size
-            public int cyTopHeight;      // height of top border that retains its size
-            public int cyBottomHeight;   // height of bottom border that retains its size
-        };
-		public static bool SetCloseButton(frmWizard frm, bool enable)
-		{
-			IntPtr hMenu = NativeMethods.GetSystemMenu(frm.Handle, false);
-			if (hMenu != IntPtr.Zero)
-			{
-				NativeMethods.EnableMenuItem(hMenu,
-											 NativeMethods.SC_CLOSE,
-											 NativeMethods.MF_BYCOMMAND | (enable ? NativeMethods.MF_ENABLED : NativeMethods.MF_GRAYED));
-				return true;
-			}
-			return false;
-		}
-	}
+
+
+    }
 }

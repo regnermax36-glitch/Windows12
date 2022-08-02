@@ -79,7 +79,7 @@ namespace Rectify11Installer.Controls
         public FakeCommandLink()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.Selectable | ControlStyles.StandardClick | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             foreach (Control control in Controls)
             {
                 control.MouseEnter += new EventHandler(TheMouseEnter);
@@ -94,7 +94,7 @@ namespace Rectify11Installer.Controls
             this.MouseUp += new MouseEventHandler(TheMouseUp);
             base.Click += new EventHandler(TheMouseClick);
 
-            BackColor = Theme.IsUsingDarkMode ? Color.Black : Color.White;
+            BackColor = Color.Transparent;
 
             pictureBox1.BackColor = Color.Transparent;
             lblTitle.BackColor = Color.Transparent;
@@ -181,9 +181,9 @@ namespace Rectify11Installer.Controls
         {
             if (Enabled)
             {
-                SetState(ThemeParts.Hot);
+                SetState(ThemeParts.Normal);
 
-                pictureBox1.Image = GetGlyphImage(ThemeParts.Hot);
+                pictureBox1.Image = GetGlyphImage(ThemeParts.Normal);
                 Color forecolor = Theme.IsUsingDarkMode ? DefaultBackColor : Color.Black;
 
                 lblTitle.ForeColor = forecolor;
