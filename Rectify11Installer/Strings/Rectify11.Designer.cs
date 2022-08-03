@@ -19,7 +19,7 @@ namespace Rectify11Installer.Strings {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Rectify11 {
@@ -61,191 +61,11 @@ namespace Rectify11Installer.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Agree.
-        /// </summary>
-        internal static string buttonAgree {
-            get {
-                return ResourceManager.GetString("buttonAgree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        internal static string buttonCancel {
-            get {
-                return ResourceManager.GetString("buttonCancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install.
-        /// </summary>
-        internal static string buttonInstall {
-            get {
-                return ResourceManager.GetString("buttonInstall", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Next.
-        /// </summary>
-        internal static string buttonNext {
-            get {
-                return ResourceManager.GetString("buttonNext", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use Enhanced Ribbon.
-        /// </summary>
-        internal static string epEnhRibbon {
-            get {
-                return ResourceManager.GetString("epEnhRibbon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Extend Mica to explorer navigation bar.
-        /// </summary>
-        internal static string epExtMica {
-            get {
-                return ResourceManager.GetString("epExtMica", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customize your Desktop.
-        /// </summary>
-        internal static string epHeader {
-            get {
-                return ResourceManager.GetString("epHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select your desired desktop experience.
-        /// </summary>
-        internal static string epTitle {
-            get {
-                return ResourceManager.GetString("epTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Windows 10 Rounded.
-        /// </summary>
-        internal static string epW10Radio {
-            get {
-                return ResourceManager.GetString("epW10Radio", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Windows 10 Taskbar.
-        /// </summary>
-        internal static string epW10Taskbar {
-            get {
-                return ResourceManager.GetString("epW10Taskbar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Windows 11 Default.
-        /// </summary>
-        internal static string epW11Radio {
-            get {
-                return ResourceManager.GetString("epW11Radio", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to License Agreement.
-        /// </summary>
-        internal static string eulaPageHeader {
-            get {
-                return ResourceManager.GetString("eulaPageHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {\rtf1\ansi\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li360\f0\fs20 This software is provided &apos;as-is&apos;, without any express or implied warranty. In NO event will the author be held liable for any damages arising from the use of this software.\par{\pntext\f0 2.\tab}Rectify11 is free to use by anyone, but you cannot sell it. You cannot bundle this product as a part of another product without written permission from the author.\par{\pntext\f0 3.\tab}You cannot claim [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string eulaR11 {
-            get {
-                return ResourceManager.GetString("eulaR11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Before you can install Rectify11, you must agree to this license agreement:.
-        /// </summary>
-        internal static string eulaTitle {
-            get {
-                return ResourceManager.GetString("eulaTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to cancel the installation?.
-        /// </summary>
-        internal static string exitText {
-            get {
-                return ResourceManager.GetString("exitText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can choose what will be Rectified..
-        /// </summary>
-        internal static string installChoiceDescription {
-            get {
-                return ResourceManager.GetString("installChoiceDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Choose what to install.
-        /// </summary>
-        internal static string installChoiceTitle {
-            get {
-                return ResourceManager.GetString("installChoiceTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install ExplorerPatcher.
-        /// </summary>
-        internal static string installEP {
-            get {
-                return ResourceManager.GetString("installEP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Rectify your current Windows installation..
         /// </summary>
         internal static string installNote {
             get {
                 return ResourceManager.GetString("installNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install Shell.
-        /// </summary>
-        internal static string installShell {
-            get {
-                return ResourceManager.GetString("installShell", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install Themes.
-        /// </summary>
-        internal static string installThemes {
-            get {
-                return ResourceManager.GetString("installThemes", resourceCulture);
             }
         }
         
@@ -259,170 +79,7 @@ namespace Rectify11Installer.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install Wallpapers.
-        /// </summary>
-        internal static string installWallpapers {
-            get {
-                return ResourceManager.GetString("installWallpapers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install Winver.
-        /// </summary>
-        internal static string installWinver {
-            get {
-                return ResourceManager.GetString("installWinver", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Extras.
-        /// </summary>
-        internal static string optionExtra {
-            get {
-                return ResourceManager.GetString("optionExtra", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to System icons.
-        /// </summary>
-        internal static string optionIcons {
-            get {
-                return ResourceManager.GetString("optionIcons", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Themes.
-        /// </summary>
-        internal static string optionThemes {
-            get {
-                return ResourceManager.GetString("optionThemes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rectify11 Wallpapers.
-        /// </summary>
-        internal static string optionWallpaper {
-            get {
-                return ResourceManager.GetString("optionWallpaper", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Did you know.
-        /// </summary>
-        internal static string progressText {
-            get {
-                return ResourceManager.GetString("progressText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon r11 {
-            get {
-                object obj = ResourceManager.GetObject("r11", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please close everything and save your work as a reboot will be required at the end of the installation..
-        /// </summary>
-        internal static string summaryFooter {
-            get {
-                return ResourceManager.GetString("summaryFooter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Summary.
-        /// </summary>
-        internal static string summaryHeader {
-            get {
-                return ResourceManager.GetString("summaryHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install Rectify11 on this Windows installation..
-        /// </summary>
-        internal static string summaryItems {
-            get {
-                return ResourceManager.GetString("summaryItems", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to do the following:.
-        /// </summary>
-        internal static string summaryTitle {
-            get {
-                return ResourceManager.GetString("summaryTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dark with Mica.
-        /// </summary>
-        internal static string themeBlack {
-            get {
-                return ResourceManager.GetString("themeBlack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select your desired theme..
-        /// </summary>
-        internal static string themeChoiceTitle {
-            get {
-                return ResourceManager.GetString("themeChoiceTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dark.
-        /// </summary>
-        internal static string themeDark {
-            get {
-                return ResourceManager.GetString("themeDark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Personalize your experience.
-        /// </summary>
-        internal static string themeHeader {
-            get {
-                return ResourceManager.GetString("themeHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Light.
-        /// </summary>
-        internal static string themeLight {
-            get {
-                return ResourceManager.GetString("themeLight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rectify11 Installer.
-        /// </summary>
-        internal static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restores the original Windows look..
+        ///   Looks up a localized string similar to Restores the original Windows 11 look..
         /// </summary>
         internal static string uninstallNote {
             get {
@@ -458,15 +115,6 @@ namespace Rectify11Installer.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version: .
-        /// </summary>
-        internal static string Version {
-            get {
-                return ResourceManager.GetString("Version", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Welcome.
         /// </summary>
         internal static string welcome {
@@ -476,7 +124,7 @@ namespace Rectify11Installer.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The setup will go through the various steps required to install Rectify11 on your PC, for a more consistent experience. Select your desirable option to continue..
+        ///   Looks up a localized string similar to The setup will go through the various steps required to install Rectify11 on your PC, for a more consistent experience. It is recommended to close all the background applications before you proceed. Select your desirable option to continue..
         /// </summary>
         internal static string welcomeDescription {
             get {

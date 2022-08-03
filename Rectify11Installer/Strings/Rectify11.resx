@@ -117,24 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonAgree" xml:space="preserve">
-    <value>Agree</value>
-  </data>
-  <data name="buttonCancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="buttonNext" xml:space="preserve">
-    <value>Next</value>
-  </data>
-  <data name="eulaPageHeader" xml:space="preserve">
-    <value>License Agreement</value>
-  </data>
-  <data name="eulaR11" xml:space="preserve">
-    <value>{\rtf1\ansi\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li360\f0\fs20 This software is provided 'as-is', without any express or implied warranty. In NO event will the author be held liable for any damages arising from the use of this software.\par{\pntext\f0 2.\tab}Rectify11 is free to use by anyone, but you cannot sell it. You cannot bundle this product as a part of another product without written permission from the author.\par{\pntext\f0 3.\tab}You cannot claim that you made the software.\par{\pntext\f0 4.\tab}This notice may not be removed or altered from any distribution.\par\pard\par\parCopyright \'a9 Microsoft Corporation and the Rectify11 Team.\par{\pntext\f0\space} We are NOT affilated with Microsoft Corporation in ANY way. This is a community made project.\par}</value>
-  </data>
-  <data name="eulaTitle" xml:space="preserve">
-    <value>Before you can install Rectify11, you must agree to this license agreement:</value>
-  </data>
   <data name="installNote" xml:space="preserve">
     <value>Rectify your current Windows installation.</value>
   </data>
@@ -142,7 +124,7 @@
     <value>Install Now</value>
   </data>
   <data name="uninstallNote" xml:space="preserve">
-    <value>Restores the original Windows look.</value>
+    <value>Restores the original Windows 11 look.</value>
   </data>
   <data name="uninstallTitle" xml:space="preserve">
     <value>Uninstall Rectify11</value>
@@ -153,110 +135,10 @@
   <data name="updateTitle" xml:space="preserve">
     <value>Update Now</value>
   </data>
-  <data name="Version" xml:space="preserve">
-    <value>Version: </value>
-  </data>
   <data name="welcome" xml:space="preserve">
     <value>Welcome</value>
   </data>
   <data name="welcomeDescription" xml:space="preserve">
-    <value>The setup will go through the various steps required to install Rectify11 on your PC, for a more consistent experience. Select your desirable option to continue.</value>
-  </data>
-  <data name="installChoiceDescription" xml:space="preserve">
-    <value>You can choose what will be Rectified.</value>
-  </data>
-  <data name="installChoiceTitle" xml:space="preserve">
-    <value>Choose what to install</value>
-  </data>
-  <data name="themeChoiceTitle" xml:space="preserve">
-    <value>Select your desired theme.</value>
-  </data>
-  <data name="themeHeader" xml:space="preserve">
-    <value>Personalize your experience</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Rectify11 Installer</value>
-  </data>
-  <data name="themeBlack" xml:space="preserve">
-    <value>Dark with Mica</value>
-  </data>
-  <data name="themeDark" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="themeLight" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="epEnhRibbon" xml:space="preserve">
-    <value>Use Enhanced Ribbon</value>
-  </data>
-  <data name="epExtMica" xml:space="preserve">
-    <value>Extend Mica to explorer navigation bar</value>
-  </data>
-  <data name="epHeader" xml:space="preserve">
-    <value>Customize your Desktop</value>
-  </data>
-  <data name="epTitle" xml:space="preserve">
-    <value>Select your desired desktop experience</value>
-  </data>
-  <data name="epW10Radio" xml:space="preserve">
-    <value>Windows 10 Rounded</value>
-  </data>
-  <data name="epW10Taskbar" xml:space="preserve">
-    <value>Windows 10 Taskbar</value>
-  </data>
-  <data name="epW11Radio" xml:space="preserve">
-    <value>Windows 11 Default</value>
-  </data>
-  <data name="progressText" xml:space="preserve">
-    <value>Did you know</value>
-  </data>
-  <data name="summaryFooter" xml:space="preserve">
-    <value>Please close everything and save your work as a reboot will be required at the end of the installation.</value>
-  </data>
-  <data name="summaryItems" xml:space="preserve">
-    <value>Install Rectify11 on this Windows installation.</value>
-  </data>
-  <data name="summaryTitle" xml:space="preserve">
-    <value>You are about to do the following:</value>
-  </data>
-  <data name="buttonInstall" xml:space="preserve">
-    <value>Install</value>
-  </data>
-  <data name="optionExtra" xml:space="preserve">
-    <value>Extras</value>
-  </data>
-  <data name="optionIcons" xml:space="preserve">
-    <value>System icons</value>
-  </data>
-  <data name="optionThemes" xml:space="preserve">
-    <value>Themes</value>
-  </data>
-  <data name="optionWallpaper" xml:space="preserve">
-    <value>Rectify11 Wallpapers</value>
-  </data>
-  <data name="installEP" xml:space="preserve">
-    <value>Install ExplorerPatcher</value>
-  </data>
-  <data name="installShell" xml:space="preserve">
-    <value>Install Shell</value>
-  </data>
-  <data name="installThemes" xml:space="preserve">
-    <value>Install Themes</value>
-  </data>
-  <data name="installWallpapers" xml:space="preserve">
-    <value>Install Wallpapers</value>
-  </data>
-  <data name="installWinver" xml:space="preserve">
-    <value>Install Winver</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="r11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\r11.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="summaryHeader" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="exitText" xml:space="preserve">
-    <value>Are you sure you want to cancel the installation?</value>
+    <value>The setup will go through the various steps required to install Rectify11 on your PC, for a more consistent experience. It is recommended to close all the background applications before you proceed. Select your desirable option to continue.</value>
   </data>
 </root>
