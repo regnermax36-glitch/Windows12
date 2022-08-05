@@ -8,7 +8,7 @@ namespace Rectify11Installer.Controls
 {
     public class NavigationButton : Control
     {
-        private NavigationButtonType t = NavigationButtonType.Backward;
+        private NavigationButtonType t;
         private Bitmap Glyph;
         public NavigationButtonType NavigationButtonType
         {

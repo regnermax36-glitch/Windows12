@@ -50,10 +50,10 @@ namespace Rectify11Installer.Controls
 
         public GroupBox()
         {
-            this.Location = new Point(3, 28);
-            this.Size = new Size(347, 294);
+            this.Location = new Point(11, 33);
+            this.Size = new Size(298, 274);
             this.SetStyle(ControlStyles.SupportsTransparentBackColor | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
-            this.BackColor = Theme.IsUsingDarkMode ? Color.Black : Color.White;
+            this.BackColor = Color.Transparent;
             SetState(ThemeParts.Normal);
             this.MouseUp += NavigationButton_MouseUp;
 

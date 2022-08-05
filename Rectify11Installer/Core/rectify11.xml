@@ -3,318 +3,292 @@
 <!--Rectify11 Patch file list-->
 
 <Patches>
-	<!--Mun files-->
-	<Patch Mui="accessibilitycpl.dll.mun" mask="ICONGROUP,|UIFILE," HardlinkTarget="%sysresdir%\accessibilitycpl.dll.mun" />
-	<Patch Mui="aclui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\aclui.dll.mun" />
-	<Patch Mui="actioncentercpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\actioncentercpl.dll.mun" />
-	<Patch Mui="appwiz.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\appwiz.cpl.mun" />
-	<Patch Mui="authfwgp.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\authfwgp.dll.mun" />
-	<Patch Mui="colorui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\colorui.dll.mun" />
-	<Patch Mui="comdlg32.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\comdlg32.dll.mun" />
-	<Patch Mui="comres.dll.mun" mask="ICONGROUP,"	HardlinkTarget="%sysresdir%\comres.dll.mun" />
-	<Patch Mui="connect.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\connect.dll.mun" />
-	<Patch Mui="cryptui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\cryptui.dll.mun" />
-	<Patch Mui="cryptuiwizard.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\cryptuiwizard.dll.mun" />
-	<Patch Mui="cttune.exe.mun" mask="ICONGROUP,|IMAGE," HardlinkTarget="%sysresdir%\cttune.exe.mun" />
-	<Patch Mui="dataexchange.dll.mun" mask="PNG," HardlinkTarget="%sysresdir%\dataexchange.dll.mun" />
-	<Patch Mui="dccw.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\dccw.exe.mun" />
-	<Patch Mui="ddores.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\ddores.dll.mun" />
-	<Patch Mui="devicecenter.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\devicecenter.dll.mun" />
-	<Patch Mui="devicepairing.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\DevicePairing.dll.mun" />
-	<Patch Mui="devicepairingfolder.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\devicepairingfolder.dll.mun" />
-	<Patch Mui="dfrgui.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\dfrgui.exe.mun" />
-	<Patch Mui="dmdskres.dll.mun" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sysresdir%\dmdskres.dll.mun" />
-	<Patch Mui="dsquery.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\dsquery.dll.mun" />
-	<Patch Mui="dsuiext.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\dsuiext.dll.mun" />
-	<Patch Mui="easeofaccessdialog.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\easeofaccessdialog.exe.mun" />
-	<Patch Mui="edputil.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\edputil.dll.mun" />
-	<Patch Mui="explorerframe.dll.mun" mask="ICONGROUP,|IMAGE," HardlinkTarget="%sysresdir%\explorerframe.dll.mun" />
-	<Patch Mui="filemgmt.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\filemgmt.dll.mun" />
-	<Patch Mui="firewallcontrolpanel.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\firewallcontrolpanel.dll.mun" />
-	<Patch Mui="gpedit.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\gpedit.dll.mun" />
-	<Patch Mui="ieframe.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\ieframe.dll.mun" />
-	<Patch Mui="imageres.dll.mun" mask="WAVE,|ICONGROUP," HardlinkTarget="%sysresdir%\imageres.dll.mun" />
-	<Patch Mui="imagesp1.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\imagesp1.dll.mun" />
-	<Patch Mui="inetcpl.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\inetcpl.cpl.mun" />
-	<Patch Mui="intl.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\intl.cpl.mun" />
-	<Patch Mui="iscsicli.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\iscsicli.exe.mun" />
-	<Patch Mui="iscsicpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\iscsicpl.dll.mun" />
-	<Patch Mui="iscsicpl.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\iscsicpl.exe.mun" />
-	<Patch Mui="keymgr.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\keymgr.dll.mun" />
-	<Patch Mui="magnify.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\magnify.exe.mun" />
-	<Patch Mui="main.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\main.cpl.mun" />
-	<Patch Mui="mdminst.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mdminst.dll.mun" />
-	<Patch Mui="mmcbase.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mmcbase.dll.mun" />
-	<Patch Mui="mmcndmgr.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mmcndmgr.dll.mun" />
-	<Patch Mui="mmres.dll.mun" mask="ICONGROUP,|PNG," HardlinkTarget="%sysresdir%\mmres.dll.mun" />
-	<Patch Mui="mmsys.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mmsys.cpl.mun" />
-	<Patch Mui="msdt.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\msdt.exe.mun" />
-	<Patch Mui="mssvp.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mssvp.dll.mun" />
-	<Patch Mui="mstsc.exe.mun" mask="ICONGROUP,|IMAGE,|BITMAP," HardlinkTarget="%sysresdir%\mstsc.exe.mun" />
-	<Patch Mui="mstscax.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mstscax.dll.mun" />
-	<Patch Mui="msxml3.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\msxml3.dll.mun" />
-	<Patch Mui="mycomput.dll.mun" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sysresdir%\mycomput.dll.mun" />
-	<Patch Mui="mydocs.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\mydocs.dll.mun" />
-	<Patch Mui="netcenter.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\netcenter.dll.mun" />
-	<Patch Mui="netshell.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\netshell.dll.mun" />
-	<Patch Mui="networkexplorer.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\networkexplorer.dll.mun" />
-	<Patch Mui="newdev.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\newdev.dll.mun" />
-	<Patch Mui="ntshrui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\ntshrui.dll.mun" />
-	<Patch Mui="powercpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\powercpl.dll.mun" />
-	<Patch Mui="printui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\printui.dll.mun" />
-	<Patch Mui="prnfldr.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\prnfldr.dll.mun" />
-  <Patch Mui="psr.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\psr.exe.mun" />
-  <Patch Mui="rasdlg.dll.mun" mask="ICONGROUP,|BITMAP" HardlinkTarget="%sysresdir%\rasdlg.dll.mun" />
-	<Patch Mui="rasgcw.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\rasgcw.dll.mun" />
-	<Patch Mui="rasplap.dll.mun" mask="BITMAP," HardlinkTarget="%sysresdir%\rasplap.dll.mun" />
-	<Patch Mui="rastls.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\rastls.dll.mun" />
-	<Patch Mui="rastlsext.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\rastlsext.dll.mun" />
-	<Patch Mui="remotepg.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\remotepg.dll.mun" />
-	<Patch Mui="sensorscpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sensorscpl.dll.mun" />
-	<Patch Mui="sethc.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sethc.exe.mun" />
-	<Patch Mui="shell32.dll.mun" mask="ICONGROUP,|UIFILE," HardlinkTarget="%sysresdir%\shell32.dll.mun" />
-	<Patch Mui="shrpubw.exe.mun" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sysresdir%\shrpubw.exe.mun" />
-  <Patch Mui="sndvolsso.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sndvolsso.dll.mun" />
-	<Patch Mui="sppcomapi.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sppcomapi.dll.mun" />
-	<Patch Mui="srchadmin.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\srchadmin.dll.mun" />
-	<Patch Mui="srpuxnativesnapin.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\srpuxnativesnapin.dll.mun" />
-  <Patch Mui="stobject.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\stobject.dll.mun" />
-	<Patch Mui="sud.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sud.dll.mun" />
-	<Patch Mui="synccenter.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\synccenter.dll.mun" />
-	<Patch Mui="sysdm.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sysdm.cpl.mun" />
-	<Patch Mui="sysmon.ocx.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\sysmon.ocx.mun" />
-	<Patch Mui="tapiui.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\tapiui.dll.mun" />
-	<Patch Mui="themecpl.dll.mun" mask="ICONGROUP,|IMAGE," HardlinkTarget="%sysresdir%\themecpl.dll.mun" />
-	<Patch Mui="themeui.dll.mun" mask="ICONGROUP,|IMAGE," HardlinkTarget="%sysresdir%\themeui.dll.mun" />
-	<Patch Mui="timedate.cpl.mun" mask="ICONGROUP,|PNGFILE," HardlinkTarget="%sysresdir%\timedate.cpl.mun" />
-	<Patch Mui="usercpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\usercpl.dll.mun" />
-	<Patch Mui="van.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\van.dll.mun" />
-	<Patch Mui="vault.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\vault.dll.mun" />
-	<Patch Mui="wcnwiz.dll.mun" mask="ICONGROUP,|IMAGE," HardlinkTarget="%sysresdir%\wcnwiz.dll.mun" />
-	<Patch Mui="wdc.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wdc.dll.mun" />
-  <Patch Mui="wmploc.dll.mun" mask="ICONGROUP,|BITMAP,|CURSORGROUP,|256,|257," HardlinkTarget="%sysresdir%\wmploc.dll.mun" />
-  <Patch Mui="wpdshext.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wpdshext.dll.mun" />
-	<Patch Mui="wscui.cpl.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wscui.cpl.mun" />
-	<Patch Mui="wsecedit.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wsecedit.dll.mun" />
-  <Patch Mui="wuapi.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wuapi.dll.mun" />
+	<Patch Package="microsoft-windows-accessibilitycpl" mask="ICONGROUP,| UIFILE," HardlinkTarget="C:\Windows\SystemResources\accessibilitycpl.dll.mun" />
+	<Patch Package="microsoft-windows-aclui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\aclui.dll.mun" />
+	<Patch Package="microsoft-windows-healthcentercpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\actioncentercpl.dll.mun" />
+	<Patch Package="microsoft-windows-appwiz" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\appwiz.cpl.mun" />
+	<Patch Package="networking-mpssvc-admin" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\authfwgp.dll.mun" />
+	<Patch Package="microsoft-windows-autoplay" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\autoplay.dll" />
+	<Patch Package="microsoft-windows-icm-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\colorcpl.exe" />
+	<Patch Package="microsoft-windows-icm-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\colorui.dll.mun" />
+	<Patch Package="microsoft-windows-comdlg32" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\comdlg32.dll.mun" />
+	<Patch Package="microsoft-windows-com-complus.res" mask="ICONGROUP,"	HardlinkTarget="C:\Windows\SystemResources\comres.dll.mun" />
+	<Patch Package="microsoft-windows-getconnectedwizards" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\connect.dll.mun" />
+	<Patch Package="microsoft-windows-cryptui-dll" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\cryptui.dll.mun" />
+	<Patch Package="microsoft-windows-cryptuiwizard-dll" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\cryptuiwizard.dll.mun" />
+	<Patch Package="microsoft-windows-cttune" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\cttune.exe.mun" />
+	<Patch Package="microsoft-windows-dataexchange-api" mask="PNG," HardlinkTarget="C:\Windows\SystemResources\dataexchange.dll.mun" />
+	<Patch Package="microsoft-windows-icm-dccw" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\dccw.exe.mun" />
+	<Patch Package="microsoft-windows-ddores" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\ddores.dll.mun" />
+	<Patch Package="microsoft-windows-devicecenter" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\devicecenter.dll.mun" />
+	<Patch Package="microsoft-windows-devicepairingdll" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\DevicePairing.dll.mun" />
+	<Patch Package="microsoft-windows-devicepairingfolder" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\devicepairingfolder.dll.mun" />
+	<Patch Package="microsoft-windows-pnpdevicemanager" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\System32\devmgr.dll" />
+	<Patch Package="microsoft-windows-defrag-adminui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\dfrgui.exe.mun" />
+	<Patch Package="microsoft-windows-diagcpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\diagcpl.dll" />
+	<Patch Package="microsoft-windows-diskmanagement" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\dmdskres.dll.mun" />
+	<Patch Package="microsoft-windows-dsquery" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\dsquery.dll.mun" />
+	<Patch Package="ds-ui-ext" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\dsuiext.dll.mun" />
+	<Patch Package="microsoft-windows-sethc" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\easeofaccessdialog.exe.mun" />
+	<Patch Package="microsoft-windows-edp-util" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\edputil.dll.mun" />
+	<Patch Package="microsoft-windows-explorerframe" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\explorerframe.dll.mun" />
 
-  <!--Dll and Exe files-->
-  <Patch Mui="AdmTmpl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\AdmTmpl.dll" />
-  <Patch Mui="appmgr.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\appmgr.dll" />
-  <Patch Mui="ApproveChildRequest.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\ApproveChildRequest.exe" />
-  <Patch Mui="audiosrv.dll.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\audiosrv.dll.mui" />
-  <Patch Mui="audiosrv.dll.mui" mask="ICONGROUP," HardlinkTarget="%lang%\audiosrv.dll.mui" />
-	<Patch Mui="autoplay.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\autoplay.dll" />
-  <Patch Mui="baaupdate.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\baaupdate.exe" />
-  
-  <!--Branding-->
-  <Patch Mui="basebrd.dll" mask="IMAGE," HardlinkTarget="%branding%\Basebrd\basebrd.dll" />
+	<!--<Patch Package="microsoft-windows-sharedfoldersui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\fhcpl.dll.mun" />-->
 
-  <Patch Mui="bdechangepin.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\bdechangepin.exe" />
-  <Patch Mui="BdeHdCfg.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\BdeHdCfg.exe" />
-  <Patch Mui="bdeunlock.exe.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\bdeunlock.exe.mui" />
-  <Patch Mui="bdeunlock.exe.mui" mask="ICONGROUP," HardlinkTarget="%lang%\bdeunlock.exe.mui" />
-  <Patch Mui="BitLockerWizard.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\BitLockerWizard.exe" />
-  <Patch Mui="BitLockerWizardElev.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\BitLockerWizardElev.exe" />
-  <Patch Mui="cabview.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\cabview.dll" />
-  <Patch Mui="CastingShellExt.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\CastingShellExt.dll" />
-  <Patch Mui="calc.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\calc.exe" />
-  <Patch Mui="cewmdm.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\cewmdm.dll" />
-  <Patch Mui="cleanmgr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cleanmgr.exe" />
-  <Patch Mui="cliconfg.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cliconfg.exe" />
-  <Patch Mui="cmd.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cmd.exe" />
-  <Patch Mui="cmdl32.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cmdl32.exe" />
-  <Patch Mui="cmmon32.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cmmon32.exe" />
-  <Patch Mui="cmstp.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cmstp.exe" />
-  <Patch Mui="colorcpl.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\colorcpl.exe" />
-  <Patch Mui="ComputerDefaults.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\ComputerDefaults.exe" />
-  <Patch Mui="conhost.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\conhost.exe" />
-  <Patch Mui="control.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\control.exe" />
-  <Patch Mui="credwiz.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\credwiz.exe" />
-  <Patch Mui="cscript.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\cscript.exe" />
-  <Patch Mui="cscui.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\cscui.dll" />
-  <Patch Mui="ctfmon.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\ctfmon.exe" />
-  <Patch Mui="CustomInstallExec.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\CustomInstallExec.exe" />
-  <Patch Mui="Defrag.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\Defrag.exe" />
-  <Patch Mui="desk.cpl" mask="ICONGROUP," HardlinkTarget="%sys32%\desk.cpl" />
-  <Patch Mui="DeviceEject.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\DeviceEject.exe" />
-  <Patch Mui="DevicePairingWizard.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\DevicePairingWizard.exe" />
-  <Patch Mui="DeviceProperties.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\DeviceProperties.exe" />
-  <Patch Mui="devmgr.dll" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sys32%\devmgr.dll" />
-  <Patch Mui="DFDWiz.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\DFDWiz.exe" />
-  <Patch Mui="DiagCpl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\DiagCpl.dll" />
-  <Patch Mui="dialer.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\dialer.exe" />
-  <Patch Mui="Display.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\Display.dll" />
-  <Patch Mui="dpapimig.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\dpapimig.exe" />
-  <Patch Mui="DpiScaling.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\DpiScaling.exe" />
-  <Patch Mui="dsprop.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\dsprop.dll" />
-  <Patch Mui="dvdplay.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\dvdplay.exe" />
-  <Patch Mui="dxdiag.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\dxdiag.exe" />
-  <Patch Mui="DXP.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\DXP.dll" />
-  <Patch Mui="Dxpserver.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\Dxpserver.exe" />
-  <Patch Mui="EhStorAuthn.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\EhStorAuthn.exe" />
-  <Patch Mui="eventvwr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\eventvwr.exe" />
-  <Patch Mui="Faultrep.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\Faultrep.dll" />
-  <Patch Mui="fhmanagew.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\fhmanagew.exe" />
-  <Patch Mui="FileHistory.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\FileHistory.exe" />
-  <Patch Mui="Fondue.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\Fondue.exe" />
-  <Patch Mui="fontext.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\fontext.dll" />
-  <Patch Mui="fontview.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\fontview.exe" />
-  <Patch Mui="fvecpl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\fvecpl.dll" />
-  <Patch Mui="fvenotify.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\fvenotify.exe" />
-  <Patch Mui="fveprompt.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\fveprompt.exe" />
-  <Patch Mui="fveui.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\fveui.dll" />
-  <Patch Mui="fvewiz.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\fvewiz.dll" />
-	<Patch Mui="GamePanel.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\GamePanel.exe" />
-	<Patch Mui="hdwwiz.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\hdwwiz.exe" />
-	<Patch Mui="hotplug.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\hotplug.dll" />
-	<Patch Mui="iexpress.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\iexpress.exe" />
-	<Patch Mui="isoburn.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\isoburn.exe" />
-  <Patch Mui="lpksetup.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\lpksetup.exe" />
-	<Patch Mui="LicenseManagerShellext.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\LicenseManagerShellext.exe" />
-	<Patch Mui="localsec.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\localsec.dll" />
-	<Patch Mui="manage-bde.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\manage-bde.exe" />
-	<Patch Mui="MdRes.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MdRes.exe" />
-	<Patch Mui="MdSched.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MdSched.exe" />
-	<Patch Mui="MicrosoftEdgeBCHost.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MicrosoftEdgeBCHost.exe" />
-	<Patch Mui="MicrosoftEdgeCP.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MicrosoftEdgeCP.exe" />
-	<Patch Mui="MicrosoftEdgeDevTools.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MicrosoftEdgeDevTools.exe" />
-	<Patch Mui="miguiresource.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\miguiresource.dll" />
-	<Patch Mui="mmc.exe.mui" mask="ICONGROUP,|BITMAP," HardlinkTarget="%lang%\mmc.exe.mui" />
-  <Patch Mui="mmc.exe.mui" mask="ICONGROUP,|BITMAP," HardlinkTarget="%en-US%\mmc.exe.mui" />
-	<Patch Mui="mobsync.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\mobsync.exe" />
-	<Patch Mui="modemui.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\modemui.dll" />
-	<Patch Mui="MSchedExe.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MSchedExe.exe" />
-	<Patch Mui="msconfig.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\msconfig.exe" />
-	<Patch Mui="msinfo32.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\msinfo32.exe" />
-	<Patch Mui="mshta.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\mshta.exe" />
-	<Patch Mui="msra.exe" mask="ICONGROUP,|Bitmap," HardlinkTarget="%sys32%\msra.exe" />
-	<Patch Mui="MultiDigiMon.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\MultiDigiMon.exe" />
-	<Patch Mui="ncpa.cpl" mask="ICONGROUP," HardlinkTarget="%sys32%\ncpa.cpl" />
-	<Patch Mui="ndadmin.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\ndadmin.exe" />
-  <Patch Mui="ndfapi.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\ndfapi.dll" />
-  <Patch Mui="netplwiz.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\netplwiz.dll" />
-  <Patch Mui="netplwiz.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\netplwiz.exe" />
-	<Patch Mui="newdev.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\newdev.exe" />
-  <Patch Mui="notepad.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\notepad.exe" />
-	<Patch Mui="nslookup.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\nslookup.exe" />
-	<Patch Mui="objsel.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\objsel.dll" />
-	<Patch Mui="occache.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\occache.dll" />
-	<Patch Mui="odbcad32.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%sys32%\odbcad32.exe" />
-	<Patch Mui="odbcint.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\odbcint.dll" />
-	<Patch Mui="OptionalFeatures.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\OptionalFeatures.exe" />
-	<Patch Mui="perfmon.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\perfmon.exe" />
-	<Patch Mui="pmcsnap.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\pmcsnap.dll" />
-  <Patch Mui="pnidui.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\pnidui.dll" />
-  <Patch Mui="powercfg.cpl" mask="ICONGROUP," HardlinkTarget="%sys32%\powercfg.cpl" />
-  <Patch Mui="powrprof.dll.mui" mask="ICONGROUP," HardlinkTarget="%lang%\powrprof.dll.mui" />
-  <Patch Mui="powrprof.dll.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\powrprof.dll.mui" />
-	<Patch Mui="PresentationSettings.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\PresentationSettings.exe" />
-	<Patch Mui="PrintIsolationHost.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\PrintIsolationHost.exe" />
-	<Patch Mui="proquota.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\proquota.exe" />
-	<Patch Mui="recdisc.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\recdisc.exe" />
-	<Patch Mui="RecoveryDrive.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\RecoveryDrive.exe" />
-	<Patch Mui="regedit.exe" mask="ICONGROUP," HardlinkTarget="%windir%\regedit.exe" />
-  <Patch Mui="regedt32.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\regedt32.exe" />
-	<Patch Mui="rekeywiz.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\rekeywiz.exe" />
-	<Patch Mui="RelPost.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\RelPost.exe" />
-	<Patch Mui="repair-bde.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\repair-bde.exe" />
-  <Patch Mui="resmon.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\resmon.exe" />
-	<Patch Mui="rstrui.exe" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sys32%\rstrui.exe" />
-	<Patch Mui="runonce.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\runonce.exe" />
-	<Patch Mui="sdcpl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\sdcpl.dll" />
-	<Patch Mui="sdclt.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\sdclt.exe" />
-  <Patch Mui="SearchFilterHost.exe.mui" mask="ICONGROUP," HardlinkTarget="%lang%\SearchFilterHost.exe.mui" />
-  <Patch Mui="SearchFilterHost.exe.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\SearchFilterHost.exe.mui" />
-	<Patch Mui="SearchFolder.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\SearchFolder.dll" />
-	<Patch Mui="SearchProtocolHost.exe.mui" mask="ICONGROUP," HardlinkTarget="%lang%\SearchProtocolHost.exe.mui" />
-  <Patch Mui="SearchProtocolHost.exe.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\SearchProtocolHost.exe.mui" />
-	<Patch Mui="SecEdit.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SecEdit.exe" />
-  <Patch Mui="setup_wm.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%prog%\Windows Media Player\setup_wm.exe" />
-  <Patch Mui="setupapi.dll.mui" mask="ICONGROUP," HardlinkTarget="%en-US%\setupapi.dll.mui" />
-	<Patch Mui="setupapi.dll.mui" mask="ICONGROUP," HardlinkTarget="%lang%\setupapi.dll.mui" />
-  <Patch Mui="setupugc.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\setupugc.exe" />
-  
-  <!--Branding-->
-  <Patch Mui="shellbrd.dll" mask="IMAGE," HardlinkTarget="%branding%\Shellbrd\shellbrd.dll" />
-  
-  <Patch Mui="shutdownux.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\shutdownux.dll" />
-	<Patch Mui="shwebsvc.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\shwebsvc.dll" />
-	<Patch Mui="sigverif.exe" mask="ICONGROUP,|BITMAP," HardlinkTarget="%sys32%\sigverif.exe" />
-	<Patch Mui="slui.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\slui.exe" />
-	<Patch Mui="SpaceControl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\SpaceControl.dll" />
-  <Patch Mui="SpaceAgent.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SpaceAgent.exe" />
-	<Patch Mui="spoolsv.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\spoolsv.exe" />
-	<Patch Mui="srrstr.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\srrstr.dll" />
-	<Patch Mui="SystemPropertiesAdvanced.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesAdvanced.exe" />
-	<Patch Mui="SystemPropertiesComputerName.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesComputerName.exe" />
-	<Patch Mui="SystemPropertiesDataExecutionPrevention.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesDataExecutionPrevention.exe" />
-	<Patch Mui="SystemPropertiesHardware.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesHardware.exe" />
-	<Patch Mui="SystemPropertiesPerformance.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesPerformance.exe" />
-	<Patch Mui="SystemPropertiesProtection.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesProtection.exe" />
-	<Patch Mui="SystemPropertiesRemote.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\SystemPropertiesRemote.exe" />
-	<Patch Mui="tabcal.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\tabcal.exe" />
-	<Patch Mui="TabletPC.cpl" mask="ICONGROUP," HardlinkTarget="%sys32%\TabletPC.cpl" />
-	<Patch Mui="telephon.cpl" mask="ICONGROUP," HardlinkTarget="%sys32%\telephon.cpl" />
-	<Patch Mui="tpmcompc.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\tpmcompc.dll" />
+	<Patch Package="microsoft-windows-sharedfoldersui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\filemgmt.dll.mun" />
+	<Patch Package="networking-mpssvc-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\firewallcontrolpanel.dll.mun" />
+	<Patch Package="microsoft-windows-securestartup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fvecpl.dll" />
+	<Patch Package="microsoft-windows-g..policy-admin-gpedit" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\gpedit.dll.mun" />
+	<Patch Package="microsoft-windows-ieframe" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\ieframe.dll.mun" />
+	<Patch Package="microsoft-windows-imageres" mask="WAVE,| ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\imageres.dll.mun" />
+	<Patch Package="microsoft-windows-imagesp1" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\imagesp1.dll.mun" />
+	<Patch Package="microsoft-windows-i..nternetcontrolpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\inetcpl.cpl.mun" />
+	<Patch Package="microsoft-windows-intl" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\intl.cpl.mun" />
 
-  <!--troubleshooters-->
-  <Patch Mui="Troubleshooter: Apps" mask="ICONGROUP," HardlinkTarget="%diag%\Apps\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Audio" mask="ICONGROUP," HardlinkTarget="%diag%\Audio\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: BITS" mask="ICONGROUP," HardlinkTarget="%diag%\BITS\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Device" mask="ICONGROUP," HardlinkTarget="%diag%\Device\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: IEBrowseWeb" mask="ICONGROUP," HardlinkTarget="%diag%\IEBrowseWeb\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: IESecurity" mask="ICONGROUP," HardlinkTarget="%diag%\IESecurity\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Keyboard" mask="ICONGROUP," HardlinkTarget="%diag%\Keyboard\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Networking" mask="ICONGROUP," HardlinkTarget="%diag%\Networking\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: PCW" mask="ICONGROUP," HardlinkTarget="%diag%\PCW\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Power" mask="ICONGROUP," HardlinkTarget="%diag%\Power\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Printer" mask="ICONGROUP," HardlinkTarget="%diag%\Printer\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Search" mask="ICONGROUP," HardlinkTarget="%diag%\Search\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Speech" mask="ICONGROUP," HardlinkTarget="%diag%\Speech\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: Video" mask="ICONGROUP," HardlinkTarget="%diag%\Video\DiagPackage.dll" />
-  <Patch Mui="Troubleshooter: WindowsUpdate" mask="ICONGROUP," HardlinkTarget="%diag%\WindowsUpdate\DiagPackage.dll" />
-  
-	<Patch Mui="TSWorkspace.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\TSWorkspace.dll" />
-	<Patch Mui="twext.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\twext.dll" />
-  <Patch Mui="uiribbon.dll" mask="PNG," HardlinkTarget="%sys32%\uiribbon.dll" />
-	<Patch Mui="verifiergui.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\verifiergui.exe" />
-	<Patch Mui="webcheck.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\webcheck.dll" />
-	<Patch Mui="wermgr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wermgr.exe" />
-	<Patch Mui="WerFault.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WerFault.exe" />
-	<Patch Mui="WerFaultSecure.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WerFaultSecure.exe" />
-	<Patch Mui="wextract.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wextract.exe" />
-	<Patch Mui="wiaacmgr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wiaacmgr.exe" />
-  <Patch Mui="wincredui.dll.mui" mask="ICONGROUP,|BITMAP," HardlinkTarget="%lang%\wincredui.dll.mui" />
-  <Patch Mui="wincredui.dll.mui" mask="ICONGROUP,|BITMAP," HardlinkTarget="%en-US%\wincredui.dll.mui" />
-	<Patch Mui="wksprt.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wksprt.exe" />
-	<Patch Mui="wlanpref.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\wlanpref.dll" />
-	<Patch Mui="wlrmdr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wlrmdr.exe" />
-	<Patch Mui="WMPDMC.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WMPDMC.exe" />
-  <Patch Mui="wmp.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\wmp.dll" />
-  <Patch Mui="wmpconfig.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%prog%\Windows Media Player\wmpconfig.exe" />
-  <Patch Mui="wmplayer.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%prog%\Windows Media Player\wmplayer.exe" />
-  <Patch Mui="wmpshare.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%prog%\Windows Media Player\wmpshare.exe" />
-  <Patch Mui="wordpad.exe" mask="ICONGROUP," x86="true" HardlinkTarget="%prog%\Windows NT\Accessories\wordpad.exe" />
-  <Patch Mui="WorkFolders.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WorkFolders.exe" />
-	<Patch Mui="WorkfoldersControl.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\WorkfoldersControl.dll" />
-	<Patch Mui="WorkFoldersRes.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\WorkFoldersRes.dll" />
-	<Patch Mui="wpd_ci.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\wpd_ci.dll" />
-  <Patch Mui="wpr.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wpr.exe" />
-	<Patch Mui="WSCollect.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WSCollect.exe" />
-	<Patch Mui="WSReset.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\WSReset.exe" />
-	<Patch Mui="wusa.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\wusa.exe" />
-	<Patch Mui="xwizards.dll" mask="ICONGROUP," HardlinkTarget="%sys32%\xwizards.dll" />
-	<Patch Mui="xwizard.exe" mask="ICONGROUP," HardlinkTarget="%sys32%\xwizard.exe" />
-  
-  <!--TODO: fix-->
-	<!--<Patch Mui="taskmgr.exe.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\taskmgr.exe.mun" />-->
-	<!--<Patch Mui="fhcpl.dll.mun" mask="ICONGROUP," HardlinkTarget="%sysresdir%\fhcpl.dll.mun" />-->
-	<!--<Patch Mui="microsoft-windows-themeui" mask="ICONGROUP,|PNG," HardlinkTarget="%sysresdir%\timedate.dll.mun" />-->
-	<!--<Patch Mui="microsoft-windows-imagesp1" mask="ICONGROUP," HardlinkTarget="%sysresdir%\iscigd.dll.mun" />-->
-	<!--<Patch Mui="microsoft-windows-timedate" mask="ICONGROUP," HardlinkTarget="%sysresdir%\tlsext.cpl.mun" />-->
-	<!--<Patch Mui="microsoft-windows-van" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wscedit.dll.mun" />-->
-	<!--<Patch Mui="microsoft-windows-van" mask="ICONGROUP," HardlinkTarget="%sysresdir%\wscui.dll.mun" /> (does not exist)-->
-	<!--<Patch Mui="microsoft-windows-van" mask="ICONGROUP,|BITMAP" HardlinkTarget="%sysresdir%\wuapi.dll.mun" />-->
+	<!--<Patch Package="microsoft-windows-imagesp1" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\iscigd.dll.mun" />-->
 
+	<Patch Package="microsoft-windows-i..i_initiator_service" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\iscsicli.exe.mun" />
+	<Patch Package="microsoft-windows-iscsi_initiator_ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\iscsicpl.dll.mun" />
+	<Patch Package="microsoft-windows-iscsi_initiator_ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\iscsicpl.exe.mun" />
+	<Patch Package="microsoft-windows-keymgr" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\keymgr.dll.mun" />
+	<Patch Package="microsoft-windows-magnify" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\magnify.exe.mun" />
+	<Patch Package="microsoft-windows-main" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\main.cpl.mun" />
+	<Patch Package="microsoft-windows-unimodem-config" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mdminst.dll.mun" />
+	<Patch Package="microsoft-windows-m..-management-console" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mmcbase.dll.mun" />
+	<Patch Package="microsoft-windows-m..console-nodemanager" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mmcndmgr.dll.mun" />
+	<Patch Package="microsoft-windows-mmres" mask="ICONGROUP,| PNG," HardlinkTarget="C:\Windows\SystemResources\mmres.dll.mun" />
+	<Patch Package="microsoft-windows-mmsys" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mmsys.cpl.mun" />
+	<Patch Package="microsoft-windows-msdt" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\msdt.exe.mun" />
+	<Patch Package="windowssearchengine" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mssvp.dll.mun" />
+	<Patch Package="microsoft-windows-t..minalservicesclient" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\SystemResources\mstsc.exe.mun" />
+	<Patch Package="microsoft-windows-t..s-clientactivexcore" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mstscax.dll.mun" />
+	<Patch Package="microsoft-windows-msxml30" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\msxml3.dll.mun" />
+	<Patch Package="microsoft-windows-c..termanagementsnapin" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\SystemResources\mycomput.dll.mun" />
+	<Patch Package="microsoft-windows-mydocs" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\mydocs.dll.mun" />
+	<Patch Package="microsoft-windows-networkcenter" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\netcenter.dll.mun" />
+	<Patch Package="microsoft-windows-netshell" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\netshell.dll.mun" />
+	<Patch Package="microsoft-windows-networkexplorer" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\networkexplorer.dll.mun" />
+	<Patch Package="microsoft-windows-newdev" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\newdev.dll.mun" />
+	<Patch Package="microsoft-windows-ntshrui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\ntshrui.dll.mun" />
+	<Patch Package="microsoft-windows-powercpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\powercpl.dll.mun" />
+	<Patch Package="microsoft-windows-p..randprintui-printui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\printui.dll.mun" />
+	<Patch Package="microsoft-windows-p..randprintui-prnfldr" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\prnfldr.dll.mun" />
+	<Patch Package="microsoft-windows-rasdlg" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\SystemResources\rasdlg.dll.mun" />
+	<Patch Package="microsoft-windows-rasgetconnectedwizard" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\rasgcw.dll.mun" />
+	<Patch Package="microsoft-windows-rasplap" mask="BITMAP" HardlinkTarget="C:\Windows\SystemResources\rasplap.dll.mun" />
+	<Patch Package="microsoft-windows-onecoreuap-rastls" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\rastls.dll.mun" />
+	<Patch Package="microsoft-windows-rastls" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\rastlsext.dll.mun" />
+	<Patch Package="microsoft-windows-t..services-remotepage" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\remotepg.dll.mun" />
+	<Patch Package="microsoft-windows-backup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\sdcpl.dll" />
+	<Patch Package="microsoft-windows-mobilepc-sensors-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sensorscpl.dll.mun" />
+	<Patch Package="microsoft-windows-sethc" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sethc.exe.mun" />
+	<Patch Package="microsoft-windows-shell32" mask="ICONGROUP,| UIFILE," HardlinkTarget="C:\Windows\SystemResources\shell32.dll.mun" />
+	<Patch Package="microsoft-windows-sharedfoldersui" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\SystemResources\shrpubw.exe.mun" />
+	<Patch Package="microsoft-windows-s..spaces-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SpaceControl.dll" />
+	<Patch Package="microsoft-windows-security-spp-ux" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sppcomapi.dll.mun" />
+	<Patch Package="desktop_shell-search-srchadmin" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\srchadmin.dll.mun" />
+	<Patch Package="srpuxnativesnapin" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\srpuxnativesnapin.dll.mun" />
+	<Patch Package="microsoft-windows-sud" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sud.dll.mun" />
+	<Patch Package="microsoft-windows-mobsync" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\synccenter.dll.mun" />
+	<Patch Package="microsoft-windows-sysdm" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sysdm.cpl.mun" />
+	<Patch Package="microsoft-windows-performancetoolsgui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\sysmon.ocx.mun" />
+	<Patch Package="microsoft-windows-tapicore" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\tapiui.dll.mun" />
+
+	<!--This causes problems on XAML task manager-->
+	<!--<Patch Package="microsoft-windows-advancedtaskmanager" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\taskmgr.exe.mun" />-->
+
+	<Patch Package="microsoft-windows-tapicore" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\telephon.cpl" />
+	<Patch Package="microsoft-windows-themecpl" mask="ICONGROUP,| Image," HardlinkTarget="C:\Windows\SystemResources\themecpl.dll.mun" />
+	<Patch Package="microsoft-windows-themeui" mask="ICONGROUP,| Image," HardlinkTarget="C:\Windows\SystemResources\themeui.dll.mun" />
+	<Patch Package="microsoft-windows-timedate" mask="ICONGROUP,| PNG," HardlinkTarget="C:\Windows\SystemResources\timedate.cpl.mun" />
+
+	<!--
+		<Patch Package="microsoft-windows-themeui" mask="ICONGROUP,| PNG," HardlinkTarget="C:\Windows\SystemResources\timedate.dll.mun" />
+	-->
+	<!--
+	<Patch Package="microsoft-windows-timedate" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\tlsext.cpl.mun" />
+	-->
+
+	<Patch Package="microsoft-windows-t..lservices-workspace" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\tsworkspace.dll" />
+	<Patch Package="microsoft-windows-usercpl" mask="ICONGROUP,1,0" HardlinkTarget="C:\Windows\SystemResources\usercpl.dll.mun" />
+	<Patch Package="microsoft-windows-van" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\van.dll.mun" />
+	<Patch Package="microsoft-windows-security-vault-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\vault.dll.mun" />
+	<Patch Package="microsoft-windows-w..ig-registrar-wizard_31bf3856ad364e35" mask="ICONGROUP,| Image," HardlinkTarget="C:\Windows\SystemResources\wcnwiz.dll.mun" />
+	<Patch Package="microsoft-windows-performancetoolsgui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\wdc.dll.mun" />
+	<Patch Package="microsoft-windows-e..riseclientsync-host" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WorkFoldersControl.dll" />
+
+	<!--<Patch Package="microsoft-windows-van" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\wscedit.dll.mun" />-->
+
+	<Patch Package="microsoft-windows-s..center-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\wscui.cpl.mun" />
+
+	<!--<Patch Package="microsoft-windows-van" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\wscui.dll.mun" /> (does not exist)-->
+
+	<Patch Package="microsoft-windows-s..rationmanagement-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\SystemResources\wsecedit.dll.mun" />
+
+	<!--
+	<Patch Package="microsoft-windows-van" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\SystemResources\wuapi.dll.mun" />-->
+	
+	<!--todo organize this-->
+	<Patch Package="microsoft-windows-audio-audiocore" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\audiosrv.dll" />
+	<Patch Package="microsoft-windows-cabview" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cabview.dll" />
+	<Patch Package="microsoft-windows-calc" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\calc.exe" />
+	<Patch Package="microsoft-windows-coresystem-wpr" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wpr.exe" />
+	<Patch Package="microsoft-windows-d..ostic-user-resolver" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DFDWiz.exe" />
+	<Patch Package="microsoft-windows-deployment" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\setupugc.exe" />
+	<Patch Package="microsoft-windows-directshow-dvdplay" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\dvdplay.exe" />
+	<Patch Package="microsoft-windows-dpapi-keys" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\dpapimig.exe" />
+	<Patch Package="microsoft-windows-driververifier" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\verifiergui.exe" />
+	<Patch Package="microsoft-windows-e..crosoftedgedevtools" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MicrosoftEdgeDevTools.exe" />
+	<Patch Package="microsoft-windows-e..microsoftedgebchost" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MicrosoftEdgeBCHost.exe" />
+	<Patch Package="microsoft-windows-edge-microsoftedgecp" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MicrosoftEdgeCP.exe" />
+	<Patch Package="microsoft-windows-efs-rekeywiz" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\rekeywiz.exe" />
+	<Patch Package="microsoft-windows-es-authentication" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\EhStorAuthn.exe" />
+	<Patch Package="microsoft-windows-filehistory-core" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fhmanagew.exe" />
+	<Patch Package="microsoft-windows-fontview" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fontview.exe" />
+	<Patch Package="microsoft-windows-g..olicy-admin-admtmpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\AdmTmpl.dll" />
+	<Patch Package="microsoft-windows-g..policy-admin-appmgr" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\appmgr.dll" />
+	<Patch Package="microsoft-windows-isoburn" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\isoburn.exe" />
+	<Patch Package="microsoft-windows-lpksetup" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\lpksetup.exe" />
+	<Patch Package="microsoft-windows-nslookup" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\nslookup.exe" />
+	<Patch Package="microsoft-windows-p..installerandprintui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\printui.exe" />
+	<Patch Package="microsoft-windows-p..ng-server-isolation" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\PrintIsolationHost.exe" />
+	<Patch Package="microsoft-windows-parentalcontrols-ots" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ApproveChildRequest.exe" />
+	<Patch Package="microsoft-windows-printing-spooler-core" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\spoolsv.exe" />
+	<Patch Package="microsoft-windows-proquota" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\proquota.exe" />
+	<Patch Package="microsoft-windows-registry-editor" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\regedt32.exe" />
+	<Patch Package="microsoft-windows-registry-editor" mask="ICONGROUP," HardlinkTarget="C:\Windows\regedit.exe" />
+	<Patch Package="microsoft-windows-remoteassistance-exe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\msra.exe" />
+	<Patch Package="microsoft-windows-runonce" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\runonce.exe" />
+	<Patch Package="microsoft-windows-s..client-ui-wscollect" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WSCollect.exe" />
+	<Patch Package="microsoft-windows-s..e-client-ui-wsreset" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WSReset.exe" />
+	<Patch Package="microsoft-windows-s..estartup-change-pin" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\bdechangepin.exe" />
+	<Patch Package="microsoft-windows-s..nsemanager-shellext" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\LicenseManagerShellext.exe" />
+	<Patch Package="microsoft-windows-s..restartup-baaupdate" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\baaupdate.exe" />
+	<Patch Package="microsoft-windows-s..up-drivepreparation" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\BdeHdCfg.exe" />
+	<Patch Package="microsoft-windows-securestartup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\BitLockerWizard.exe" />
+	<Patch Package="microsoft-windows-securestartup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\BitLockerWizardElev.exe" />
+
+	<!--<Patch Package="microsoft-windows-securestartup-unlock" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\bdeunlock.exe" />-->
+
+	<Patch Package="microsoft-windows-security-secedit" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SecEdit.exe" />
+	<Patch Package="microsoft-windows-sigverif" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\System32\sigverif.exe" />
+	<Patch Package="microsoft-windows-w..sition-uicomponents" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wiaacmgr.exe" />
+	<Patch Package="microsoft-xbox-gameoverlay" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\GamePanel.exe" />
+	<Patch Package="dsprop" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\dsprop.dll" />
+	<Patch Package="eventviewersettings" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\eventvwr.exe" />
+	<Patch Package="eventviewersettings" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\miguiresource.dll" />
+	<Patch Package="microsoft-onecore-console-host-core" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\conhost.exe" />
+	<Patch Package="microsoft-windows-appx-deployment-server" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\CustomInstallExec.exe" />
+	<Patch Package="microsoft-windows-backup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\sdcpl.dll" />
+	<Patch Package="microsoft-windows-cleanmgr" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cleanmgr.exe" />
+	<Patch Package="microsoft-windows-commandprompt" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cmd.exe" />
+	<Patch Package="microsoft-windows-computerdefaults" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ComputerDefaults.exe" />
+	<Patch Package="microsoft-windows-control" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\control.exe" />
+	<Patch Package="microsoft-windows-credwiz" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\credwiz.exe" />
+	<Patch Package="microsoft-windows-d..-mmc-usersandgroups" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\localsec.dll" />
+	<Patch Package="microsoft-windows-d..x-directxdiagnostic" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\dxdiag.exe" />
+	<Patch Package="microsoft-windows-defrag-cmdline" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\Defrag.exe" />
+	<Patch Package="microsoft-windows-desk" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\desk.cpl" />
+	<Patch Package="microsoft-windows-devicepairingapp" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DevicePairingWizard.exe" />
+	<Patch Package="microsoft-windows-deviceproperties" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DeviceProperties.exe" />
+	<Patch Package="microsoft-windows-diagcpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DiagCpl.dll" />
+	<Patch Package="microsoft-windows-display" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\Display.dll" />
+	<Patch Package="microsoft-windows-dpiscaling" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DpiScaling.exe" />
+	<Patch Package="microsoft-windows-dxp-deviceexperience" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DXP.dll" />
+	<Patch Package="microsoft-windows-dxp-deviceexperience" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\Dxpserver.exe" />
+	<Patch Package="microsoft-windows-e..host-shellnamespace" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WorkFoldersRes.dll" />
+	<Patch Package="microsoft-windows-e..riseclientsync-host" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WorkFolders.exe" />
+	<Patch Package="microsoft-windows-e..riseclientsync-host" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WorkfoldersControl.dll" />
+	<Patch Package="microsoft-windows-errorreportingcore" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wermgr.exe" />
+	<Patch Package="microsoft-windows-errorreportingfaults" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\Faultrep.dll" />
+	<Patch Package="microsoft-windows-errorreportingfaults" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WerFault.exe" />
+	<Patch Package="microsoft-windows-errorreportingfaults" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WerFaultSecure.exe" />
+	<Patch Package="microsoft-windows-filehistory-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\FileHistory.exe" />
+	<Patch Package="microsoft-windows-fontext" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fontext.dll" />
+	<Patch Package="microsoft-windows-icm-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\colorcpl.exe" />
+	<Patch Package="microsoft-windows-ie-htmlapplication" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\mshta.exe" />
+	<Patch Package="microsoft-windows-ie-iexpress" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\iexpress.exe" />
+	<Patch Package="microsoft-windows-ie-iexpress" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wextract.exe" />
+	<Patch Package="microsoft-windows-ie-objectcontrolviewer" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\occache.dll" />
+	<Patch Package="microsoft-windows-ie-offlinefavorites" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\webcheck.dll" />
+	<Patch Package="microsoft-windows-legacyhwui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\hdwwiz.exe" />
+	<Patch Package="microsoft-windows-m..-diagnostic-results" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MdRes.exe" />
+	<!--
+	<Patch Package="microsoft-windows-m..-management-console" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\mmc.exe" DisableOnSafeMode="true" Arch="amd64">-->
+	<Patch Package="microsoft-windows-m..-odbc-administrator" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\odbcad32.exe" />
+	<Patch Package="microsoft-windows-m..ac-sql-cliconfg-exe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cliconfg.exe" />
+	<Patch Package="microsoft-windows-m..c-drivermanager-rll" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\odbcint.dll" />
+	<Patch Package="microsoft-windows-m..diagnostic-schedule" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MdSched.exe" />
+	<Patch Package="microsoft-windows-m..resentationsettings" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\PresentationSettings.exe" />
+	<Patch Package="microsoft-windows-mobsyncexe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\mobsync.exe" />
+	<Patch Package="microsoft-windows-mschedexe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MSchedExe.exe" />
+	<Patch Package="microsoft-windows-msconfig-exe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\msconfig.exe" />
+	<Patch Package="microsoft-windows-msinfo32-exe-common" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\msinfo32.exe" />
+	<Patch Package="microsoft-windows-n..nosticsframeworkapi" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ndfapi.dll" />
+	<Patch Package="microsoft-windows-netplwiz-exe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\netplwiz.exe" />
+	<Patch Package="microsoft-windows-netshell" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ncpa.cpl" />
+	<Patch Package="microsoft-windows-newdev" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ndadmin.exe" />
+	<Patch Package="microsoft-windows-newdev" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\newdev.exe" />
+	<Patch Package="microsoft-windows-o..onalfeatures-fondue" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\Fondue.exe" />
+	<Patch Package="microsoft-windows-object-picker" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\objsel.dll" />
+	<Patch Package="microsoft-windows-offlinefiles-ui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cscui.dll" />
+	<Patch Package="microsoft-windows-optionalfeatures" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\OptionalFeatures.exe" />
+	<Patch Package="microsoft-windows-p..erandprintui-pmcppc" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\pmcsnap.dll" />
+	<Patch Package="microsoft-windows-p..nfiguration-cmdline" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\powercfg.exe" />
+	<Patch Package="microsoft-windows-performancetoolsgui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\perfmon.exe" />
+	<Patch Package="microsoft-windows-performancetoolsgui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\resmon.exe" />
+	<Patch Package="microsoft-windows-pnphotplugui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\DeviceEject.exe" />
+	<Patch Package="microsoft-windows-pnphotplugui" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\hotplug.dll" />
+	<Patch Package="microsoft-windows-rasconnectionmanager" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cmdl32.exe" />
+	<Patch Package="microsoft-windows-rasconnectionmanager" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cmmon32.exe" />
+	<Patch Package="microsoft-windows-rasconnectionmanager" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cmstp.exe" />
+	<Patch Package="microsoft-windows-recdisc-main" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\recdisc.exe" />
+	<Patch Package="microsoft-windows-recoverydrive" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\RecoveryDrive.exe" />
+	<Patch Package="microsoft-windows-reliability-postboot" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\RelPost.exe" />
+	<Patch Package="microsoft-windows-s..ces-backgroundagent" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SpaceAgent.exe" />
+	<Patch Package="microsoft-windows-s..estore-propertypage" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\srrstr.dll" />
+	<Patch Package="microsoft-windows-s..executionprevention" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesDataExecutionPrevention.exe" />
+	<Patch Package="microsoft-windows-s..mpropertiesadvanced" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesAdvanced.exe" />
+	<Patch Package="microsoft-windows-s..mpropertieshardware" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesHardware.exe" />
+	<Patch Package="microsoft-windows-s..opertiesperformance" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesPerformance.exe" />
+	<Patch Package="microsoft-windows-s..pertiescomputername" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesComputerName.exe" />
+	<Patch Package="microsoft-windows-s..restartup-repairbde" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\repair-bde.exe" />
+	<Patch Package="microsoft-windows-s..ropertiesprotection" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesProtection.exe" />
+	<Patch Package="microsoft-windows-s..spaces-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SpaceControl.dll" />
+	<Patch Package="microsoft-windows-safedocs-main" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\sdclt.exe" />
+	<Patch Package="microsoft-windows-scripting" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\cscript.exe" />
+	<Patch Package="microsoft-windows-searchfolder-library" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SearchFolder.dll" />
+	<Patch Package="microsoft-windows-securestartup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fvecpl.dll" />
+	<Patch Package="microsoft-windows-securestartup-cpl" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fvewiz.dll" />
+	<Patch Package="microsoft-windows-securestartup-notify" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fvenotify.exe" />
+	<Patch Package="microsoft-windows-securestartup-prompt" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fveprompt.exe" />
+	<Patch Package="microsoft-windows-securestartup-tool-exe" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\manage-bde.exe" />
+	<Patch Package="microsoft-windows-securestartup-ui-libs" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\fveui.dll" />
+	<Patch Package="microsoft-windows-security-spp-ux" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\slui.exe" />
+	<Patch Package="microsoft-windows-shutdownux" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\shutdownux.dll" />
+	<Patch Package="microsoft-windows-shwebsvc" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\shwebsvc.dll" />
+	<Patch Package="microsoft-windows-systempropertiesremote" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SystemPropertiesRemote.exe" />
+	<Patch Package="microsoft-windows-systemrestore-main" mask="ICONGROUP,| BITMAP" HardlinkTarget="C:\Windows\System32\rstrui.exe" />
+	<Patch Package="microsoft-windows-t..cesframework-ctfmon" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\ctfmon.exe" />
+	<Patch Package="microsoft-windows-t..es-workspaceruntime" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wksprt.exe" />
+	<Patch Package="microsoft-windows-t..lservices-workspace" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\TSWorkspace.dll" />
+	<Patch Package="microsoft-windows-tabletpc-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\MultiDigiMon.exe" />
+	<Patch Package="microsoft-windows-tabletpc-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\tabcal.exe" />
+	<Patch Package="microsoft-windows-tabletpc-controlpanel" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\TabletPC.cpl" />
+	<Patch Package="microsoft-windows-tapicore" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\dialer.exe" />
+	<Patch Package="microsoft-windows-tpm-adminsnapin" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\tpmcompc.dll" />
+	<Patch Package="microsoft-windows-twext" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\twext.dll" />
+	<Patch Package="microsoft-windows-unimodem-config" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\modemui.dll" />
+	<Patch Package="microsoft-windows-winlogon-tools" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wlrmdr.exe" />
+	<Patch Package="microsoft-windows-wlanpref" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wlanpref.dll" />
+	<Patch Package="microsoft-windows-wmpdmc-ux" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\WMPDMC.exe" />
+	<Patch Package="microsoft-windows-wusa" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wusa.exe" />
+	<Patch Package="microsoft-windows-xwizard-host-process" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\xwizard.exe" />
+	<Patch Package="microsoft-windows-xwizards" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\xwizards.dll" />
+	<Patch Package="microsoft.windows.h..ler.wpd-driverclass" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\wpd_ci.dll" />
+	<Patch Package="windowssearchengine" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SearchFilterHost.exe" />
+	<Patch Package="windowssearchengine" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\SearchProtocolHost.exe" />
+
+	<!--Safe mode-->
+	<Patch Package="microsoft-windows-setupapi" mask="ICONGROUP," HardlinkTarget="C:\Windows\System32\setupapi.dll" DisableOnSafeMode="true" />
 </Patches>

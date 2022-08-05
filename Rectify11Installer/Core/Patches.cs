@@ -46,24 +46,22 @@ public partial class Patches {
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 public partial class PatchesPatch {
     
-    private string muiField;
+    private string packageField;
     
     private string maskField;
-
-    private string x86Field;
-
+    
     private string hardlinkTargetField;
     
     private string disableOnSafeModeField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string Mui {
+    public string Package {
         get {
-            return this.muiField;
+            return this.packageField;
         }
         set {
-            this.muiField = value;
+            this.packageField = value;
         }
     }
     
@@ -77,18 +75,7 @@ public partial class PatchesPatch {
             this.maskField = value;
         }
     }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string x86 {
-        get {
-            return this.x86Field;
-        }
-        set {
-            this.x86Field = value;
-        }
-    }
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     public string HardlinkTarget {
