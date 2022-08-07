@@ -4,7 +4,6 @@ namespace Rectify11Installer.Pages
 {
     public partial class EPPage : WizardPage
     {
-
         public EPPage()
         {
             InitializeComponent();
