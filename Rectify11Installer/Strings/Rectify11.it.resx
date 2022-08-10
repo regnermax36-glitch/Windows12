@@ -130,7 +130,7 @@
     <value>Condizioni di Licenza</value>
   </data>
   <data name="eulaR11" xml:space="preserve">
-    <value>{\rtf1\ansi\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li360\f0\fs20 This software is provided 'as-is', without any express or implied warranty. In NO event will the author be held liable for any damages arising from the use of this software.\par{\pntext\f0 2.\tab}Rectify11 is free to use by anyone, but you cannot sell it. You cannot bundle this product as a part of another product without written permission from the author.\par{\pntext\f0 3.\tab}You cannot claim that you made the software.\par{\pntext\f0 4.\tab}This notice may not be removed or altered from any distribution.\par\pard\par\parCopyright \'a9 Microsoft Corporation and the Rectify11 Team.\par{\pntext\f0\space}NON siamo affiliati con Microsoft Corporation in NESSUN modo. Questo è un progetto creato dalla community.\par}</value>
+    <value>{\rtf1\ansi\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li360\f0\fs20 This software is provided 'as-is', without any express or implied warranty. In NO event will the author be held liable for any damages arising from the use of this software.\par{\pntext\f0 2.\tab}Rectify11 is free to use by anyone, but you cannot sell it. You cannot bundle this product as a part of another product without written permission from the author.\par{\pntext\f0 3.\tab}You cannot claim that you made the software.\par{\pntext\f0 4.\tab}This notice may not be removed or altered from any distribution.\par\pard\par\parCopyright \'a9 Microsoft Corporation and the Rectify11 Team\par{\pntext\f0\space} NON siamo affiliati con Microsoft Corporation in NESSUN modo. Questo è un progetto creato dalla community.\par}</value>
   </data>
   <data name="eulaTitle" xml:space="preserve">
     <value>Prima di poter installare Rectify11, deve accettare le condizioni di licenza:</value>
@@ -142,7 +142,7 @@
     <value>Installa Ora</value>
   </data>
   <data name="uninstallNote" xml:space="preserve">
-    <value>Ripristina il look originale di Windows.</value>
+    <value>Ripristina il look originale di Windows 11.</value>
   </data>
   <data name="uninstallTitle" xml:space="preserve">
     <value>Disinstalla Rectify11</value>
@@ -217,6 +217,6 @@
     <value>Stai per fare quanto segue:</value>
   </data>
   <data name="welcomeDescription" xml:space="preserve">
-    <value>Questo setup ti guiderà nei vari passaggi richiesti per installare Rectify11 sul tuo PC, per un'esperienza più consistente. Seleziona l'opzione che desideri per continuare.</value>
+    <value>Questo setup ti guiderà nei vari passaggi richiesti per installare Rectify11 sul tuo PC, per un'esperienza più consistente. Ti consigliamo di chiudere tutte le applicazioni in background prima di procedere. Seleziona l'opzione che desideri per continuare.</value>
   </data>
 </root>
