@@ -154,7 +154,7 @@
     <value>Zapraszamy</value>
   </data>
   <data name="welcomeDescription" xml:space="preserve">
-    <value>Instalator zainstaluje Rectify11 aby poprawić wygląd systemu Windows. Zalecane jest zamknięcie aplikacji działających w tle przed kontynowaniem. Wybierz opcję aby kontynuować.</value>
+    <value>Instalator zainstaluje Rectify11 aby poprawić wygląd systemu Windows. Wybierz opcję aby kontynuować.</value>
   </data>
   <data name="buttonAgree" xml:space="preserve">
     <value>Zgadzam się</value>
