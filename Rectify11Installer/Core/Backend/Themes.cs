@@ -1,337 +1,155 @@
 ﻿using Microsoft.VisualBasic;
-using Microsoft.Win32;
 using Rectify11Installer.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
 using static Rectify11Installer.Win32.NativeMethods;
 
 namespace Rectify11Installer.Core
 {
-	internal class Themes
-	{
-		/// <summary>
-		/// themes installation logic
-		/// </summary>
-		/// <returns>true if succeeds, else returns false</returns>
-		public static bool Install()
-		{
-			try
-			{
-				Logger.WriteLine("Installing Themes");
-				Logger.WriteLine("─────────────────");
-				if (!Common.WriteFiles(false, true))
-					return false;
-
-
-				if (Directory.Exists(Path.Combine(Variables.r11Folder, "themes")))
-				{
-					Logger.WriteLine(Path.Combine(Variables.r11Folder, "themes") + " exists. Deleting it.");
-					if (!Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "themes"), false))
-					{
-						return false;
-					}
-				}
-
-				// extract the 7z
-				Helper.SvExtract("themes.7z", "themes");
-
-				if (!InstallThemes())
-					return false;
-
-				try
-				{
-					if (!InstallOptions.SkipMFE)
-					{
-						InstallMfe();
-						Logger.WriteLine("InstallMfe() succeeded.");
-					}
-				}
-				catch (Exception ex)
-				{
-					Logger.Warn("InstallMfe() failed", ex);
-				}
-
-				try
-				{
-					InstallR11Cpl();
-					Logger.WriteLine("Installr11cpl() succeeded.");
-				}
-				catch (Exception ex)
-				{
-					Logger.Warn("Installr11cpl() failed", ex);
-				}
-
-				// mmc dpi fix
-				Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 1 /f");
-				Helper.SvExtract(true, "themes.7z", "mmc.exe.manifest");
-				Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"), Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"), Helper.OperationType.Copy);
-				File.Delete(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"));
-
-				try
-				{
-					ApplyScheme();
-					Logger.WriteLine("ApplyScheme() succeeded.");
-				}
-				catch (Exception ex)
-				{
-					Logger.Warn("ApplyScheme() failed", ex);
-				}
-
-				Variables.RestartRequired = true;
-				Logger.WriteLine("Themes.Install() succeeded.");
-				Logger.WriteLine("══════════════════════════════════════════════");
-				return true;
-			}
-			catch (Exception ex)
-			{
-				Logger.WriteLine("Themes.Install() failed", ex);
-				return false;
-			}
-		}
-
-		/// <summary>
-		/// themes uninstallation logic
-		/// </summary>
-		/// <returns>true if succeeds, else returns false</returns>
-		public static bool Uninstall()
-		{
-			try
-			{
-				var s = IsArm64() ? Properties.Resources.secureux_arm64 : Properties.Resources.secureux_x64;
-				var dll = IsArm64() ? Properties.Resources.ThemeDll_arm64 : Properties.Resources.ThemeDll_x64;
-
-				if (!Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe"), s, Helper.OperationType.Write))
-					return false;
-				if (!Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "ThemeDll.dll"), dll, Helper.OperationType.Write))
-					return false;
-
-				string mode = Theme.IsUsingDarkMode ? "dark.theme" : "aero.theme";
-				if (File.Exists(Path.Combine(Variables.Windir, "Resources", "Themes", mode)))
-					Process.Start(Path.Combine(Variables.Windir, "Resources", "Themes", mode));
-				string theme = Theme.IsUsingDarkMode ? "Windows (dark)" : "Windows (light)";
-				Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " apply " + '"' + theme + '"', AppWinStyle.Hide, true);
-
-				UninstallThemeWallpapers();
-
-				Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " uninstall", AppWinStyle.Hide, true);
-				Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "Themetool.exe"));
-
-				UninstallCursors();
-
-				UninstallMsstyles();
-
-				Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe"));
-				Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "ThemeDll.dll"));
-
-				UninstallMfe();
-
-				try
-				{
-					var key = Registry.ClassesRoot.OpenSubKey(@"CLSID", true);
-					key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
-					key.Dispose();
-					key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace", true);
-					key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
-					key.Dispose();
-					key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontSubstitutes", true);
-					key.SetValue("MS Shell Dlg 2", "Tahoma");
-					key.SetValue("MS Shell Dlg", "Microsoft Sans Serif");
-					key.Dispose();
-					key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-					key.SetValue("MenuHeight", "-285");
-					key.SetValue("MenuWidth", "-285");
-					key.Dispose();
-					Logger.WriteLine("Removed registry entries.");
-				}
-				catch { }
-
-				UninstallR11Cpl();
-				Logger.WriteLine("Deleted Rectify11 Control Center.");
-
-				Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 0 /f");
-				Helper.SafeFileDeletion(Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"));
-
-				Logger.WriteLine("Themes.Uninstall() succeeded.");
-				Logger.WriteLine("══════════════════════════════════════════════");
-				return true;
-			}
-			catch (Exception ex)
-			{
-				Logger.WriteLine("Themes.Uninstall() failed", ex);
-				return false;
-			}
-		}
-
-		/// <summary>
-		/// installs themes
-		/// </summary>
-		private static bool InstallThemes()
-		{
-			try
-			{
-				InstallThemeWallpapers();
-
-				Helper.SafeFileOperation(
-					Path.Combine(Variables.r11Folder, "themes", "ThemeTool.exe"),
-					Path.Combine(Variables.Windir, "ThemeTool.exe"),
-					Helper.OperationType.Copy);
-
-				Logger.WriteLine("Copied Themetool.");
-				try
-				{
-                    Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " install", AppWinStyle.Hide, true);
+    internal class Themes
+    {
+        public static bool Install()
+        {
+            Logger.WriteLine("Installing Themes");
+            Logger.WriteLine("─────────────────");
+            if (!Common.WriteFiles(false, true))
+            {
+                Logger.WriteLine("WriteFiles() failed.");
+                return false;
+            }
+            Logger.WriteLine("WriteFiles() succeeded.");
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "taskkill.exe") + " /f /im micaforeveryone.exe", AppWinStyle.Hide, true);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "taskkill.exe") + " /f /im micafix.exe", AppWinStyle.Hide, true);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "taskkill.exe") + " /f /im explorerframe.exe", AppWinStyle.Hide, true);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /end /tn mfe", AppWinStyle.Hide);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /end /tn micafix", AppWinStyle.Hide);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /delete /f /tn mfe", AppWinStyle.Hide);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /delete /f /tn micafix", AppWinStyle.Hide);
+            if (Directory.Exists(Path.Combine(Variables.r11Folder, "themes")))
+            {
+                try
+                {
+                    Logger.WriteLine(Path.Combine(Variables.r11Folder, "themes") + " exists. Deleting it.");
+                    Directory.Delete(Path.Combine(Variables.r11Folder, "themes"), true);
                 }
-				catch
-				{
-                    UninstallThemeWallpapers();
-
-					MessageBox.Show("Failed to install UxTheme patcher as SecureUXHelper.exe is missing (most likely deleted by antivirus. Try excluding the C:\\Windows\\Rectify11 folder from your anti-virus, and rerun the installer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Logger.WriteLine("InstallThemes() failed as SecureUXHelper is missing (most likely deleted by antivirus. Please exclude the C:\\Windows\\Rectify11 folder from your anti-virus.");
-
-					return false;
+                catch (Exception ex)
+                {
+                    Logger.WriteLine("Deleting " + Path.Combine(Variables.r11Folder, "themes") + " failed. ", ex);
                 }
-				Helper.ImportReg(Path.Combine(Variables.r11Folder, "themes", "Themes.reg"));
+            }
 
-				InstallCursors();
-				InstallMsstyles();
-				return true;
-			}
-			catch (Exception ex)
-			{
-				Logger.WriteLine("InstallThemes() failed", ex);
-				UninstallThemeWallpapers();
-				UninstallCursors();
-				UninstallMsstyles();
-				Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "ThemeTool.exe"));
-				try
-				{
-                    Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " uninstall", AppWinStyle.Hide, true);
-                }
-				catch
-				{
+            // extract the 7z
+            Helper.SvExtract("themes.7z", "themes");
 
-				}
-				return false;
-			}
-		}
-
-		/// <summary>
-		/// installs control center
-		/// </summary>
-		public static void InstallR11Cpl()
-		{
-			UninstallR11Cpl();
-
-			// Delete r11 control center
-			Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), false);
-			Helper.SafeFileDeletion(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs"));
-
-			// install new
-            string cplPath = Path.Combine(Variables.r11Folder, "Rectify11CPL", "Rectify11CPL.dll");
-
-            //create files
-            Directory.CreateDirectory(Path.Combine(Variables.r11Folder, "Rectify11CPL"));
-
-            File.WriteAllBytes(cplPath, Properties.Resources.Rectify11CPL);
-
-            // write SecureUxTheme helper dll
-            if (!Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "Rectify11CPL", "ThemeDLL.dll"), Properties.Resources.ThemeDLL, Helper.OperationType.Write))
-                return;
-
-            // create shortcut
-            using ShellLink shortcut = new();
-            shortcut.Target = Path.Combine(Variables.sys32Folder, "control.exe");
-            shortcut.Arguments = "/name Rectify11.SettingsCPL";
-            shortcut.WorkingDirectory = @"%windir%\system32";
-            shortcut.IconPath = Path.Combine(Variables.r11Folder, "Rectify11CPL", "Rectify11CPL.dll");
-            shortcut.IconIndex = 0;
-            shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
-
-            string startmenu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs");
-            Directory.CreateDirectory(startmenu);
+            Logger.WriteLine("Extracted themes.7z");
+            if (!InstallThemes())
+            {
+                Logger.WriteLine("InstallThemes() failed.");
+                return false;
+            }
             try
             {
-                shortcut.Save(Path.Combine(startmenu, "Rectify11 Control Center.lnk"));
-            }
-            catch (Exception ex)
-            {
-                Logger.Warn("Error while saving shortcut: " + ex);
-            }
-            shortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Rectify11 Control Center.lnk"));
-
-            // register CPL
-            var proc = new Process();
-            proc.StartInfo.FileName = "regsvr32.exe";
-            proc.StartInfo.Arguments = "/s \"" + cplPath + "\"";
-            proc.Start();
-            proc.WaitForExit();
-
-            if (proc.ExitCode != 0)
-            {
-                Logger.WriteLine("Error while registering CPL: " + proc.ExitCode);
-            }
-        }
-        /// <summary>
-        /// uninstalls control center
-        /// </summary>
-        private static void UninstallR11Cpl()
-        {
-            string cplPath = Path.Combine(Variables.r11Folder, "Rectify11CPL", "Rectify11CPL.dll");
-            string startmenuShortcut = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "Rectify11 Control Center.lnk");
-            string desktopShortcut = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Rectify11 Control Center.lnk");
-
-            // delete shortcut
-            Helper.SafeFileDeletion(startmenuShortcut);
-            Helper.SafeFileDeletion(desktopShortcut);
-
-            if (File.Exists(cplPath))
-            {
-                // unregister CPL
-                var proc = new Process();
-                proc.StartInfo.FileName = "regsvr32.exe";
-                proc.StartInfo.Arguments = "/s /u \"" + cplPath + "\"";
-                proc.Start();
-                proc.WaitForExit();
-
-                if (proc.ExitCode != 0)
+                if (!InstallOptions.SkipMFE)
                 {
-                    Logger.Warn("Error while unregistering CPL: " + proc.ExitCode);
+                    if (Directory.Exists(Path.Combine(Variables.Windir, "MicaForEveryone")))
+                    {
+                        try
+                        {
+                            Directory.Delete(Path.Combine(Variables.Windir, "MicaForEveryone"), true);
+                        }
+                        catch
+                        {
+                            // tf you doing
+                            if (Directory.Exists(Path.Combine(Path.GetTempPath(), "MicaForEveryone")))
+                            {
+                                try
+                                {
+                                    Directory.Delete(Path.Combine(Path.GetTempPath(), "MicaForEveryone"), true);
+                                }
+                                catch { }
+                            }
+                            Directory.Move(Path.Combine(Variables.Windir, "MicaForEveryone"), Path.Combine(Path.GetTempPath(), "MicaForEveryone"));
+                        }
+                    }
+                    Directory.Move(Path.Combine(Variables.r11Folder, "Themes", "MicaForEveryone"), Path.Combine(Variables.Windir, "MicaForEveryone"));
+                    InstallMfe();
+                    Logger.WriteLine("InstallMfe() succeeded.");
                 }
             }
-            // nuke r11cp
-            Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), false);
-
-            //delete folder
-            Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Rectify11CPL"), false);
+            catch
+            {
+                Logger.WriteLine("InstallMfe() failed.");
+            }
+            try
+            {
+                Installr11cpl();
+                Logger.WriteLine("Installr11cpl() succeeded.");
+            }
+            catch
+            {
+                Logger.WriteLine("Installr11cpl() failed.");
+            }
+            Variables.RestartRequired = true;
+            Logger.WriteLine("InstallThemes() succeeded.");
+            Logger.WriteLine("══════════════════════════════════════════════");
+            return true;
         }
 
         /// <summary>
-        /// installs mfe
+        /// installs themes
         /// </summary>
-        private static void InstallMfe()
+        private static bool InstallThemes()
         {
-            UninstallMfe();
-            Directory.Move(Path.Combine(Variables.r11Folder, "Themes", "MicaForEveryone"), Path.Combine(Variables.Windir, "MicaForEveryone"));
-            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /create /tn mfe /xml " + Path.Combine(Variables.Windir, "MicaForEveryone", "XML", "mfe.xml"), AppWinStyle.Hide, true);
+            DirectoryInfo cursors = new(Path.Combine(Variables.r11Folder, "themes", "cursors"));
+            var curdir = cursors.GetDirectories("*", SearchOption.TopDirectoryOnly);
+            DirectoryInfo themedir = new(Path.Combine(Variables.r11Folder, "themes", "themes"));
+            var msstyleDirList = themedir.GetDirectories("*", SearchOption.TopDirectoryOnly);
+            var themefiles = themedir.GetFiles("*.theme");
 
-            // Remove any old configuraion
-            string path = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "Mica For Everyone");
-            Helper.SafeDirectoryDeletion(path, false);
-
-
-            // Enable MFE
-            Console.WriteLine("Installing MFE: bEnabled: " + InstallOptions.EnableMicaEffect + ",bTabbed: " + InstallOptions.UseTabbedInsteadOfMica);
-            RectifyThemeUtil.Utility.SetMicaForEveryoneEnabled(InstallOptions.EnableMicaEffect, InstallOptions.UseTabbedInsteadOfMica);
-        }
-
-        #region Internal
-        private static bool InstallThemeWallpapers()
-        {
-            UninstallThemeWallpapers();
-            Directory.CreateDirectory(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified"));
+            if (Directory.Exists(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified")))
+            {
+                try
+                {
+                    List<string> wallpapers = new List<string>
+                    {
+                        "cosmic.png",
+                        "img0.png",
+                        "img19.png",
+                        "metal.png"
+                    };
+                    var files = Directory.GetFiles(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified"));
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        if (!wallpapers.Contains(Path.GetFileName(files[j])))
+                        {
+                            try
+                            {
+                                File.Delete(files[j]);
+                            }
+                            catch
+                            {
+                                // idk why it would fail to delete a fucking png
+                                if (File.Exists(Path.Combine(Path.GetTempPath(), Path.GetFileName(files[j]))))
+                                {
+                                    File.Delete(Path.Combine(Path.GetTempPath(), Path.GetFileName(files[j])));
+                                }
+                                File.Move(files[j], Path.Combine(Path.GetTempPath(), Path.GetFileName(files[j])));
+                                MoveFileEx(Path.Combine(Path.GetTempPath(), Path.GetFileName(files[j])), null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                            }
+                        }
+                    }
+                    Logger.WriteLine("Deleted old wallpapers");
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLine("Error deleting old wallpapers" + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
+                }
+            }
+            if (!Directory.Exists(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified")))
+            {
+                Directory.CreateDirectory(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified"));
+            }
             try
             {
                 var files = Directory.GetFiles(Path.Combine(Variables.r11Folder, "themes", "wallpapers"));
@@ -343,52 +161,39 @@ namespace Rectify11Installer.Core
             }
             catch (Exception ex)
             {
-                Logger.WriteLine("Error copying wallpapers", ex);
+                Logger.WriteLine("Error copying wallpapers. " + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
             }
-            return true;
-        }
-        private static bool UninstallThemeWallpapers()
-        {
-            if (Directory.Exists(Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified")))
-            {
-                try
-                {
-                    List<string> wallpapers = new()
-                    {
-                        "cosmic.png",
-                        "img0.png",
-                        "img19.png",
-                        "metal.png"
-                    };
-                    string path = Path.Combine(Variables.Windir, "web", "wallpaper", "Rectified");
-                    var files = Directory.GetFiles(path);
-                    for (int j = 0; j < files.Length; j++)
-                    {
-                        if (!wallpapers.Contains(Path.GetFileName(files[j])))
-                            Helper.SafeFileDeletion(files[j]);
-                    }
-                    if (Directory.GetFiles(path).Length == 0)
-                    {
-                        Helper.SafeDirectoryDeletion(path, false);
-                        Logger.WriteLine("Deleted " + path);
-                    }
-                    Logger.WriteLine("Deleted old wallpapers.");
-                }
-                catch (Exception ex)
-                {
-                    Logger.WriteLine("Error deleting old wallpapers", ex);
-                }
-            }
-            return true;
-        }
-        private static bool InstallCursors()
-        {
-            UninstallCursors();
-            var curdir = new DirectoryInfo(Path.Combine(Variables.r11Folder, "themes", "cursors"))
-                .GetDirectories("*", SearchOption.TopDirectoryOnly);
+
+            // todo: remove r11cp
+            File.Copy(Path.Combine(Variables.r11Folder, "themes", "ThemeTool.exe"), Path.Combine(Variables.Windir, "ThemeTool.exe"), true);
+            Logger.WriteLine("Copied Themetool.");
+            Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " install", AppWinStyle.Hide, true);
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "reg.exe") + " import " + Path.Combine(Variables.r11Folder, "themes", "Themes.reg"), AppWinStyle.Hide);
 
             for (var i = 0; i < curdir.Length; i++)
             {
+                if (Directory.Exists(Path.Combine(Variables.Windir, "cursors", curdir[i].Name)))
+                {
+                    try
+                    {
+                        Directory.Delete(Path.Combine(Variables.Windir, "cursors", curdir[i].Name), true);
+                        Logger.WriteLine("Deleted existing cursor directory " + Path.Combine(Variables.Windir, "cursors", curdir[i].Name));
+                    }
+                    catch
+                    {
+                        if (Directory.Exists(Path.Combine(Path.GetTempPath(), curdir[i].Name)))
+                        {
+                            Directory.Delete(Path.Combine(Path.GetTempPath(), curdir[i].Name), true);
+                        }
+                        Directory.Move(Path.Combine(Variables.Windir, "cursors", curdir[i].Name), Path.Combine(Path.GetTempPath(), curdir[i].Name));
+                        var files = Directory.GetFiles(Path.Combine(Path.GetTempPath(), curdir[i].Name));
+                        for (int j = 0; j < files.Length; j++)
+                        {
+                            MoveFileEx(files[j], null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                        }
+                        Logger.WriteLine("Moved " + Path.Combine(Variables.Windir, "cursors", curdir[i].Name) + " to " + Path.Combine(Path.GetTempPath(), curdir[i].Name));
+                    }
+                }
                 try
                 {
                     Directory.Move(curdir[i].FullName, Path.Combine(Variables.Windir, "cursors", curdir[i].Name));
@@ -396,162 +201,120 @@ namespace Rectify11Installer.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.WriteLine("Error copying " + curdir[i].Name, ex);
+                    Logger.WriteLine("Error copying " + curdir[i].Name + ". " + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
                     return false;
                 }
             }
-            return true;
-        }
-        private static bool UninstallCursors()
-        {
-            var dirs = Directory.GetDirectories(Path.Combine(Variables.Windir, "cursors"), "WindowsRectified*");
-            for (int i = 0; i < dirs.Length; i++)
-            {
-                try
-                {
-                    Helper.SafeDirectoryDeletion(dirs[i], false);
-                    Logger.WriteLine("Deleted existing cursor directory " + dirs[i]);
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        private static bool UninstallMsstyles()
-        {
-            // .theme files
-            List<string> themefiles = new()
-            {
-                "black.theme",
-                "darkcolorized.theme",
-                "darkrectified.theme",
-                "lightrectified.theme",
-                "darkpartial.theme"
-            };
-            try
-            {
-                for (int i = 0; i < themefiles.Count; i++)
-                {
-                    Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "Resources", "Themes", themefiles[i]));
-                }
-                Logger.WriteLine("Deleted themes.");
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("Error deleting themes", ex);
-            }
-
-            // msstyles
-            try
-            {
-                Helper.SafeDirectoryDeletion(Path.Combine(Variables.Windir, "Resources", "Themes", "Rectified"), false);
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("Error deleting " + Path.Combine(Variables.Windir, "Resources", "Themes", "Rectified"), ex);
-                return false;
-            }
-            return true;
-        }
-        private static bool InstallMsstyles()
-        {
-            UninstallMsstyles();
-            DirectoryInfo themedir = new(Path.Combine(Variables.r11Folder, "themes", "themes"));
-            var msstyleDirList = themedir.GetDirectories("*", SearchOption.TopDirectoryOnly);
-            var themefiles = themedir.GetFiles("*.theme");
-
             for (var i = 0; i < themefiles.Length; i++)
             {
                 // why would it fail
                 File.Copy(themefiles[i].FullName, Path.Combine(Variables.Windir, "Resources", "Themes", themefiles[i].Name), true);
             }
-
+            File.WriteAllBytes(Path.Combine(Variables.r11Folder, "aRun1.exe"), Properties.Resources.AdvancedRun);
             for (var i = 0; i < msstyleDirList.Length; i++)
             {
+                if (Directory.Exists(Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name)))
+                {
+                    try
+                    {
+                        string name = Path.GetRandomFileName();
+                        Directory.Move(Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name), Path.Combine(Path.GetTempPath(), name));
+                        Directory.Delete(Path.Combine(Path.GetTempPath(), name, "Shell"), true);
+                        var files = Directory.GetFiles(Path.Combine(Path.GetTempPath(), name));
+                        for (int j = 0; j < files.Length; j++)
+                        {
+                            MoveFileEx(files[j], null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                        }
+                        MoveFileEx(Path.Combine(Path.GetTempPath(), name), null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                        Logger.WriteLine(Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name) + " exists. Deleting it.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLine("Error deleting " + Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name) + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
+                        return false;
+                    }
+                }
                 try
                 {
-                    if (Environment.OSVersion.Version.Build >= 22543
-                        && !msstyleDirList[i].Name.Contains("Legacy"))
-                    {
-                        Directory.Move(msstyleDirList[i].FullName, Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name));
-                        Logger.WriteLine("Copied " + msstyleDirList[i].Name + " directory.");
-                    }
-                    else if (Environment.OSVersion.Version.Build < 22543)
-                    {
-                        Directory.Move(msstyleDirList[i].FullName, Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name.Replace("Legacy", "")));
-                        Logger.WriteLine("Copied " + msstyleDirList[i].Name + " directory.");
-                    }
+                    Directory.Move(msstyleDirList[i].FullName, Path.Combine(Variables.Windir, "Resources", "Themes", msstyleDirList[i].Name));
+                    Logger.WriteLine("Copied " + msstyleDirList[i].Name + " directory.");
                 }
                 catch (Exception ex)
                 {
-                    Logger.WriteLine("Error copying " + msstyleDirList[i].Name, ex);
+                    Logger.WriteLine("Error copying " + msstyleDirList[i].Name + ". " + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
                     return false;
                 }
             }
+            File.Delete(Path.Combine(Variables.r11Folder, "aRun1.exe"));
             return true;
         }
-        private static bool UninstallMfe()
+
+
+        /// <summary>
+        /// installs control center
+        /// </summary>
+        private static void Installr11cpl()
         {
-            try
+            if (Directory.Exists(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter")))
             {
-                Helper.KillProcess("micaforeveryone.exe");
-                Helper.KillProcess("micafix.exe");
-                Helper.KillProcess("explorerframe.exe");
-                Helper.DeleteTask("mfe");
-                Helper.DeleteTask("micafix");
-                Helper.DeleteTask("mfefix");
-                if (!Helper.SafeDirectoryDeletion(Path.Combine(Variables.Windir, "MicaForEveryone"), false))
+                try
                 {
-                    Logger.WriteLine("Deleting " + Path.Combine(Variables.Windir, "MicaForEveryone") + " failed. ");
-                    return false;
+                    Directory.Delete(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), true);
                 }
-                return true;
+                catch
+                {
+                    string name = Path.GetRandomFileName();
+                    Directory.Move(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), Path.Combine(Path.GetTempPath(), name));
+                    var files = Directory.GetFiles(Path.Combine(Path.GetTempPath(), name));
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        MoveFileEx(files[j], null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                    }
+                    MoveFileEx(Path.Combine(Path.GetTempPath(), name), null, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT);
+                }
             }
-            catch { return false; }
+            Directory.CreateDirectory(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"));
+            File.WriteAllBytes(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter", "Rectify11ControlCenter.exe"), Properties.Resources.Rectify11ControlCenter);
+            using ShellLink shortcut = new();
+            shortcut.Target = Path.Combine(Variables.r11Folder, "Rectify11ControlCenter", "Rectify11ControlCenter.exe");
+            shortcut.WorkingDirectory = @"%windir%\Rectify11\Rectify11ControlCenter";
+            shortcut.IconPath = Path.Combine(Variables.r11Folder, "Rectify11ControlCenter", "Rectify11ControlCenter.exe");
+            shortcut.IconIndex = 0;
+            shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
+            shortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "Rectify11 Control Center.lnk"));
+            shortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Rectify11 Control Center.lnk"));
+            shortcut.Dispose();
         }
 
         /// <summary>
-        /// Applies theme, and schedules removal of 
+        /// installs mfe
         /// </summary>
-        private static void ApplyScheme()
+        private static void InstallMfe()
         {
-            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce", true);
-
-            var config = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Rectify11", true);
-            if (key != null && config != null)
+            Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /create /tn mfe /xml " + Path.Combine(Variables.Windir, "MicaForEveryone", "XML", "mfe.xml"), AppWinStyle.Hide);
+            if (Directory.Exists(Path.Combine(Environment.GetEnvironmentVariable("localappdata") ?? string.Empty, "Mica For Everyone")))
             {
-                // The goal here is to apply the theme and visual style. For some reason, running the .theme
-                // file only applies cursors, wallpaper, etc but does not change the visual style. Because of that,
-                // RectifyStart applies it on the next boot after theme patcher is installed. It is ran on the next boot
-                // to ensure that the UxTheme patcher is running.
-                if (InstallOptions.ThemeLight)
-                {
-                    Helper.RunShellExec(Path.Combine(Variables.Windir, "Resources", "Themes", "lightrectified.theme"));
-                    config.SetValue("ApplyThemeOnNextRun", "Rectify11 light theme");
-                }
-                else if (InstallOptions.ThemeDark)
-                {
-                    Helper.RunShellExec(Path.Combine(Variables.Windir, "Resources", "Themes", "darkrectified.theme"));
-                    config.SetValue("ApplyThemeOnNextRun", "Rectify11 dark theme");
-                }
-                else if (InstallOptions.ThemePDark)
-                {
-                    Helper.RunShellExec(Path.Combine(Variables.Windir, "Resources", "Themes", "darkpartial.theme"));
-                    config.SetValue("ApplyThemeOnNextRun", "Rectify11 partial dark theme");
-                }
-                else
-                {
-                    Helper.RunShellExec(Path.Combine(Variables.Windir, "Resources", "Themes", "black.theme"));
-                    config.SetValue("ApplyThemeOnNextRun", "Rectify11 Dark theme with Mica");
-                }
-
-                config.Close();
-                key.SetValue("DeleteJunk", "rmdir /s /q " + Path.Combine(Environment.SpecialFolder.LocalApplicationData.ToString(), "junk"), RegistryValueKind.String);
-                key.Close();
+                Directory.Delete(Path.Combine(Environment.GetEnvironmentVariable("localappdata") ?? string.Empty, "Mica For Everyone"), true);
             }
+            string t = "";
+            if (InstallOptions.TabbedNotMica) t = "T";
+            if (InstallOptions.ThemeLight)
+            {
+                File.Copy(Path.Combine(Variables.Windir, "MicaForEveryone", "CONF", t + "lightrectified.conf"), Path.Combine(Variables.Windir, "MicaForEveryone", "MicaForEveryone.conf"), true);
+            }
+            else if (InstallOptions.ThemeDark)
+            {
+                File.Copy(Path.Combine(Variables.Windir, "MicaForEveryone", "CONF", t + "darkrectified.conf"), Path.Combine(Variables.Windir, "MicaForEveryone", "MicaForEveryone.conf"), true);
+            }
+            else
+            {
+                File.Copy(Path.Combine(Variables.Windir, "MicaForEveryone", "CONF", t + "black.conf"), Path.Combine(Variables.Windir, "MicaForEveryone", "MicaForEveryone.conf"), true);
+                string amdorarm = "AMD";
+                if (NativeMethods.IsArm64()) amdorarm = "ARM";
+                Interaction.Shell(Path.Combine(Variables.sys32Folder, "schtasks.exe") + " /create /tn micafix /xml " + Path.Combine(Variables.Windir, "MicaForEveryone", "XML", "micafix" + amdorarm + "64.xml"), AppWinStyle.Hide);
+            }
+
         }
-        #endregion
+
     }
 }
