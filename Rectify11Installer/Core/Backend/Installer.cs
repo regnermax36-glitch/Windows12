@@ -111,12 +111,10 @@ namespace Rectify11Installer.Core
             }
 
             // copy duires if any icons were patched or if themes was selected (required for r11cpl)
-            if (InstallOptions.iconsList.Count > 0 || InstallOptions.InstallThemes)
+           if (InstallOptions.iconsList.Count > 0 || InstallOptions.InstallThemes)
             {
                 File.Copy(Path.Combine(Variables.r11Files, "duires.dll"), Path.Combine(Variables.sys32Folder, "duires.dll"), true);
             }
-
-            InstallChangelogApp();
 
             frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.creatingUninstaller;
             Common.CreateUninstall();
