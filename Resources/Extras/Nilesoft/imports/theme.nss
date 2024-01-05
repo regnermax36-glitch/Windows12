@@ -1,12 +1,11 @@
-theme
+﻿theme
 {
-	name = "modern"
-	dark = sys.dark
+	name="modern"
+	dark=auto
 	background
 	{
-		color = default
-		opacity = sys.is11 ? default : 90
-		effect = default
+		color=auto
+		effect=3
 	}
-	image.align = 2
+	image.align=2
 }
