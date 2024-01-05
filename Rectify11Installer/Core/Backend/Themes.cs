@@ -6,247 +6,230 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using static Rectify11Installer.Win32.NativeMethods;
 
 namespace Rectify11Installer.Core
 {
-    internal class Themes
-    {
-        /// <summary>
-        /// themes installation logic
-        /// </summary>
-        /// <returns>true if succeeds, else returns false</returns>
-        public static bool Install()
-        {
-            try
-            {
-                Logger.WriteLine("Installing Themes");
-                Logger.WriteLine("─────────────────");
-                if (!Common.WriteFiles(false, true))
-                    return false;
+	internal class Themes
+	{
+		/// <summary>
+		/// themes installation logic
+		/// </summary>
+		/// <returns>true if succeeds, else returns false</returns>
+		public static bool Install()
+		{
+			try
+			{
+				Logger.WriteLine("Installing Themes");
+				Logger.WriteLine("─────────────────");
+				if (!Common.WriteFiles(false, true))
+					return false;
 
 
-                if (Directory.Exists(Path.Combine(Variables.r11Folder, "themes")))
-                {
-                    Logger.WriteLine(Path.Combine(Variables.r11Folder, "themes") + " exists. Deleting it.");
-                    if (!Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "themes"), false))
-                    {
-                        return false;
-                    }
+				if (Directory.Exists(Path.Combine(Variables.r11Folder, "themes")))
+				{
+					Logger.WriteLine(Path.Combine(Variables.r11Folder, "themes") + " exists. Deleting it.");
+					if (!Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "themes"), false))
+					{
+						return false;
+					}
+				}
+
+				// extract the 7z
+				Helper.SvExtract("themes.7z", "themes");
+
+				if (!InstallThemes())
+					return false;
+
+				try
+				{
+					if (!InstallOptions.SkipMFE)
+					{
+						InstallMfe();
+						Logger.WriteLine("InstallMfe() succeeded.");
+					}
+				}
+				catch (Exception ex)
+				{
+					Logger.Warn("InstallMfe() failed", ex);
+				}
+
+				try
+				{
+					InstallR11Cpl();
+					Logger.WriteLine("Installr11cpl() succeeded.");
+				}
+				catch (Exception ex)
+				{
+					Logger.Warn("Installr11cpl() failed", ex);
+				}
+
+				// mmc dpi fix
+				Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 1 /f");
+				Helper.SvExtract(true, "themes.7z", "mmc.exe.manifest");
+				Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"), Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"), Helper.OperationType.Copy);
+				File.Delete(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"));
+
+				try
+				{
+					ApplyScheme();
+					Logger.WriteLine("ApplyScheme() succeeded.");
+				}
+				catch (Exception ex)
+				{
+					Logger.Warn("ApplyScheme() failed", ex);
+				}
+
+				Variables.RestartRequired = true;
+				Logger.WriteLine("Themes.Install() succeeded.");
+				Logger.WriteLine("══════════════════════════════════════════════");
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLine("Themes.Install() failed", ex);
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// themes uninstallation logic
+		/// </summary>
+		/// <returns>true if succeeds, else returns false</returns>
+		public static bool Uninstall()
+		{
+			try
+			{
+				var s = IsArm64() ? Properties.Resources.secureux_arm64 : Properties.Resources.secureux_x64;
+				var dll = IsArm64() ? Properties.Resources.ThemeDll_arm64 : Properties.Resources.ThemeDll_x64;
+
+				if (!Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe"), s, Helper.OperationType.Write))
+					return false;
+				if (!Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "ThemeDll.dll"), dll, Helper.OperationType.Write))
+					return false;
+
+				string mode = Theme.IsUsingDarkMode ? "dark.theme" : "aero.theme";
+				if (File.Exists(Path.Combine(Variables.Windir, "Resources", "Themes", mode)))
+					Process.Start(Path.Combine(Variables.Windir, "Resources", "Themes", mode));
+				string theme = Theme.IsUsingDarkMode ? "Windows (dark)" : "Windows (light)";
+				Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " apply " + '"' + theme + '"', AppWinStyle.Hide, true);
+
+				UninstallThemeWallpapers();
+
+				Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " uninstall", AppWinStyle.Hide, true);
+				Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "Themetool.exe"));
+
+				UninstallCursors();
+
+				UninstallMsstyles();
+
+				Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe"));
+				Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "ThemeDll.dll"));
+
+				UninstallMfe();
+
+				try
+				{
+					var key = Registry.ClassesRoot.OpenSubKey(@"CLSID", true);
+					key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
+					key.Dispose();
+					key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace", true);
+					key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
+					key.Dispose();
+					key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontSubstitutes", true);
+					key.SetValue("MS Shell Dlg 2", "Tahoma");
+					key.SetValue("MS Shell Dlg", "Microsoft Sans Serif");
+					key.Dispose();
+					key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
+					key.SetValue("MenuHeight", "-285");
+					key.SetValue("MenuWidth", "-285");
+					key.Dispose();
+					Logger.WriteLine("Removed registry entries.");
+				}
+				catch { }
+
+				UninstallR11Cpl();
+				Logger.WriteLine("Deleted Rectify11 Control Center.");
+
+				Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 0 /f");
+				Helper.SafeFileDeletion(Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"));
+
+				Logger.WriteLine("Themes.Uninstall() succeeded.");
+				Logger.WriteLine("══════════════════════════════════════════════");
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLine("Themes.Uninstall() failed", ex);
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// installs themes
+		/// </summary>
+		private static bool InstallThemes()
+		{
+			try
+			{
+				InstallThemeWallpapers();
+
+				Helper.SafeFileOperation(
+					Path.Combine(Variables.r11Folder, "themes", "ThemeTool.exe"),
+					Path.Combine(Variables.Windir, "ThemeTool.exe"),
+					Helper.OperationType.Copy);
+
+				Logger.WriteLine("Copied Themetool.");
+				try
+				{
+                    Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " install", AppWinStyle.Hide, true);
                 }
-
-                // extract the 7z
-                Helper.SvExtract("themes.7z", "themes");
-
-          
-
-                if (!InstallThemes())
-                    return false;
-
-                try
-                {
-                    File.WriteAllBytes(Path.Combine(Variables.r11Folder, "Rectify11TrayTool.exe"), Properties.Resources.Rectify11TrayTool);
-                }
-                catch (Exception ex)
-                {
-                    Logger.WriteLine("Failed to copy tray utility: " + ex.Message);
-                }
-
-                try
-                {
-                    InstallMfe();
-                    Logger.WriteLine("InstallMfe() succeeded.");
-                }
-                catch (Exception ex)
-                {
-                    Logger.Warn("InstallMfe() failed", ex);
-                }
-
-                // mmc dpi fix
-                Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 1 /f");
-                Helper.SvExtract(true, "themes.7z", "mmc.exe.manifest");
-                Helper.SafeFileOperation(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"), Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"), Helper.OperationType.Copy);
-                File.Delete(Path.Combine(Variables.r11Folder, "mmc.exe.manifest"));
-
-                try
-                {
-                    ApplyScheme();
-                    Logger.WriteLine("ApplyScheme() succeeded.");
-                }
-                catch (Exception ex)
-                {
-                    Logger.Warn("ApplyScheme() failed", ex);
-                }
-
-                Variables.RestartRequired = true;
-                Logger.WriteLine("Themes.Install() succeeded.");
-                Logger.WriteLine("══════════════════════════════════════════════");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("Themes.Install() failed", ex);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// themes uninstallation logic
-        /// </summary>
-        /// <returns>true if succeeds, else returns false</returns>
-        public static bool Uninstall()
-        {
-            try
-            {
-                string mode = ThemeUtil.IsUsingDarkMode ? "dark.theme" : "aero.theme";
-                if (File.Exists(Path.Combine(Variables.Windir, "Resources", "Themes", mode)))
-                    Helper.RunShellExec(Path.Combine(Variables.Windir, "Resources", "Themes", mode));
-                string theme = ThemeUtil.IsUsingDarkMode ? "Windows (dark)" : "Windows (light)";
-                RectifyThemeUtil.Utility.ApplyTheme(theme);
-
-                UninstallThemeWallpapers();
-
-                nint hr = RectifyThemeUtil.Utility.UninstallThemeTool();
-                if (hr != 0)
-                {
-                    Logger.WriteLine("FAILED TO REMOVE THEMETOOL: " + hr);
-                }
-                Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "Themetool.exe"));
-
-                UninstallCursors();
-
-                UninstallMsstyles();
-
-                // Remove leftovers from previous versions
-                Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe"));
-                Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "ThemeDll.dll"));
-
-                UninstallMfe();
-
-                // kill tray tool
-                Helper.KillProcess("rectify11traytool.exe");
-
-                try
-                {
-                    var key = Registry.ClassesRoot.OpenSubKey(@"CLSID", true);
-                    key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
-                    key.Dispose();
-                    key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace", true);
-                    key.DeleteSubKeyTree("{959E11F4-0A48-49cf-8416-FF9BC49D9656}", false);
-                    key.Dispose();
-                    key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontSubstitutes", true);
-                    key.SetValue("MS Shell Dlg 2", "Tahoma");
-                    key.SetValue("MS Shell Dlg", "Microsoft Sans Serif");
-                    key.Dispose();
-                    key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-                    key.SetValue("MenuHeight", "-285");
-                    key.SetValue("MenuWidth", "-285");
-                    key.Dispose();
-                    Logger.WriteLine("Removed registry entries.");
-                }
-                catch { }
-
-                try
-                {
-                    UninstallR11Cpl();
-                }
-                catch(Exception ex)
-                {
-                    Logger.WriteLine("error while uninstalling r11cpl: ", ex);
-                }
-                Logger.WriteLine("Deleted Rectify11 Control Panel");
-
-                Process.Start(Path.Combine(Variables.sys32Folder, "reg.exe"), @" ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide /v PreferExternalManifest /t REG_DWORD /d 0 /f");
-                Helper.SafeFileDeletion(Path.Combine(Variables.sys32Folder, "mmc.exe.manifest"));
-
-                Logger.WriteLine("Themes.Uninstall() succeeded.");
-                Logger.WriteLine("══════════════════════════════════════════════");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("Themes.Uninstall() failed", ex);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// installs themes
-        /// </summary>
-        private static bool InstallThemes()
-        {
-            try
-            {
-                InstallThemeWallpapers();
-
-                Helper.SafeFileOperation(
-                    Path.Combine(Variables.r11Folder, "themes", "ThemeTool.exe"),
-                    Path.Combine(Variables.Windir, "ThemeTool.exe"),
-                    Helper.OperationType.Copy);
-                Logger.WriteLine("Copied Themetool.");
-                nint hr = 0;
-                try
-                {
-                    hr = RectifyThemeUtil.Utility.InstallThemeTool();
-                }
-                catch (Exception ex)
-                {
+				catch
+				{
                     UninstallThemeWallpapers();
 
-                    MessageBox.Show("Failed to install UxTheme patcher: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Failed to install UxTheme patcher as SecureUXHelper.exe is missing (most likely deleted by antivirus. Try excluding the C:\\Windows\\Rectify11 folder from your anti-virus, and rerun the installer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Logger.WriteLine("InstallThemes() failed as SecureUXHelper is missing (most likely deleted by antivirus. Please exclude the C:\\Windows\\Rectify11 folder from your anti-virus.");
 
-                    return false;
+					return false;
                 }
+				Helper.ImportReg(Path.Combine(Variables.r11Folder, "themes", "Themes.reg"));
 
-                if (hr != 0)
-                {
-                    MessageBox.Show("Failed to install UxTheme patcher. HRESULT is " + hr, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Logger.WriteLine("Failed to install UxTheme patcher. HRESULT is " + hr);
+				InstallCursors();
+				InstallMsstyles();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLine("InstallThemes() failed", ex);
+				UninstallThemeWallpapers();
+				UninstallCursors();
+				UninstallMsstyles();
+				Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "ThemeTool.exe"));
+				try
+				{
+                    Interaction.Shell(Path.Combine(Variables.r11Folder, "SecureUXHelper.exe") + " uninstall", AppWinStyle.Hide, true);
                 }
-                Helper.ImportReg(Path.Combine(Variables.r11Folder, "themes", "Themes.reg"));
+				catch
+				{
 
-                InstallCursors();
-                InstallMsstyles();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("InstallThemes() failed", ex);
-                UninstallThemeWallpapers();
-                UninstallCursors();
-                UninstallMsstyles();
-                Helper.SafeFileDeletion(Path.Combine(Variables.Windir, "ThemeTool.exe"));
+				}
+				return false;
+			}
+		}
 
-                nint hr = 0;
-                try
-                {
-                    hr = RectifyThemeUtil.Utility.UninstallThemeTool();
-                }
-                catch (Exception ex2)
-                {
-                    Logger.WriteLine("Failed to uninstall themetool: ", ex2);
-                }
+		/// <summary>
+		/// installs control center
+		/// </summary>
+		public static void InstallR11Cpl()
+		{
+			UninstallR11Cpl();
 
-                if (hr != 0)
-                {
-                    Logger.WriteLine("Failed to uninstall themetool. HRESULT is " + hr);
-                }
-                return false;
-            }
-        }
+			// Delete r11 control center
+			Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), false);
+			Helper.SafeFileDeletion(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs"));
 
-        /// <summary>
-        /// installs control center
-        /// </summary>
-        public static void InstallR11Cpl()
-        {
-            UninstallR11Cpl();
-
-            // Delete r11 control center
-            Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Rectify11ControlCenter"), false);
-            Helper.SafeFileDeletion(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs"));
-
-            // install new
+			// install new
             string cplPath = Path.Combine(Variables.r11Folder, "Rectify11CPL", "Rectify11CPL.dll");
 
             //create files
