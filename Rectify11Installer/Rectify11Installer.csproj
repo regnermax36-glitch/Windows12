@@ -26,10 +26,17 @@
 		<Content Include="Core\rectify11.xml">
 			<SubType>Designer</SubType>
 		</Content>
+		<None Include="Resources\wsudo.exe" />
+		<None Include="Resources\ThemeDll-x64.dll" />
+		<None Include="Resources\ThemeDll-arm64.dll" />
+		<None Include="Resources\secureux-x64.exe" />
+		<None Include="Resources\secureux-arm64.exe" />
+		<None Include="Resources\Rectify11ControlCenter.exe" />
 		<Content Include="Resources\ResourceHacker.exe" />
 		<Content Include="r11.ico" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="KPreisser.UI.TaskDialog" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.VisualBasic" Version="10.4.0-preview.18571.3" />
 		<PackageReference Include="Resource.Embedder">
