@@ -16,6 +16,7 @@
 </div>
 
 Rectify11 improves the consistency of Windows 11 by modifying system files in a safe way, and by using various programs to improve the Windows 11 experience.
+NOTE: Due to Rectify 11 V4 being a complete rewrite and using a different approach to improve Windows 11, starting 3/22/25, the issues tab on the GitHub repo has been disabled. Thank you for reporting issues.
 
 <br/>
 
