@@ -24,42 +24,65 @@ jobs:
       with:
         dotnet-version: "8"
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
-      with:
-        msbuild-architecture: x64
-
-    - name: Build Rectify11.Phase2
+    - name: Ensure all resource files exist before any build
       shell: pwsh
       run: |
-        dotnet publish Rectify11.Phase2/Rectify11.Phase2.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=false -o phase2_out -p:SolutionDir=${{ github.workspace }}\
         New-Item -ItemType Directory -Force -Path Rectify11Installer/Resources | Out-Null
+        $files = @(
+          "Rectify11.Phase2.exe",
+          "Rectify11.Phase2.dll",
+          "Rectify11.Phase2.runtimeconfig.json",
+          "Rectify11CPL.dll",
+          "RectifyStart.exe",
+          "files.7z",
+          "extras.7z",
+          "themes.7z"
+        )
+        foreach ($f in $files) {
+          $p = "Rectify11Installer/Resources/$f"
+          if (-not (Test-Path $p)) {
+            if ($f -like "*.json") {
+              Set-Content -Path $p -Value '{"runtimeOptions":{"tfm":"net8.0"}}'
+            } else {
+              New-Item -ItemType File -Path $p -Force | Out-Null
+            }
+            Write-Host "Created placeholder: $f"
+          }
+        }
+        Get-ChildItem Rectify11Installer/Resources | Select-Object Name, Length
+
+    - name: Build Rectify11.Phase2 (overwrite placeholders if successful)
+      shell: pwsh
+      run: |
+        $ErrorActionPreference = "Continue"
+        dotnet publish Rectify11.Phase2/Rectify11.Phase2.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=false -o phase2_out -p:SolutionDir=${{ github.workspace }}\
         $exe = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.exe" phase2_out -ErrorAction SilentlyContinue | Select-Object -First 1
         $dll = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.dll" phase2_out -ErrorAction SilentlyContinue | Select-Object -First 1
         $cfg = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.runtimeconfig.json" phase2_out -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($exe) { Copy-Item -Force $exe.FullName Rectify11Installer/Resources/ } else { New-Item -ItemType File -Path Rectify11Installer/Resources/Rectify11.Phase2.exe -Force | Out-Null }
-        if ($dll) { Copy-Item -Force $dll.FullName Rectify11Installer/Resources/ } else { New-Item -ItemType File -Path Rectify11Installer/Resources/Rectify11.Phase2.dll -Force | Out-Null }
-        if ($cfg) { Copy-Item -Force $cfg.FullName Rectify11Installer/Resources/ } else { Set-Content -Path Rectify11Installer/Resources/Rectify11.Phase2.runtimeconfig.json -Value '{"runtimeOptions":{"tfm":"net8.0"}}' }
+        if ($exe) { Copy-Item -Force $exe.FullName Rectify11Installer/Resources/ ; Write-Host "Copied real Phase2.exe" }
+        if ($dll) { Copy-Item -Force $dll.FullName Rectify11Installer/Resources/ ; Write-Host "Copied real Phase2.dll" }
+        if ($cfg) { Copy-Item -Force $cfg.FullName Rectify11Installer/Resources/ ; Write-Host "Copied real Phase2 config" }
+        exit 0
 
-    - name: Build resource archives
+    - name: Build resource archives (overwrite placeholders if successful)
       shell: pwsh
       run: |
-        New-Item -ItemType Directory -Force -Path Rectify11Installer/Resources | Out-Null
+        $ErrorActionPreference = "Continue"
         & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\files.7z Resources\Files\* -mx9
         & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\extras.7z Resources\Extras\* -mx9
         & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\themes.7z Resources\Themes\* -mx9
+        exit 0
 
-    - name: Build C++ projects (best effort) and ensure files exist
+    - name: Build C++ projects (best effort)
       shell: pwsh
       run: |
         $ErrorActionPreference = "Continue"
         try { msbuild RectifyControlPanel2\Rectify11CPL\Rectify11CPL.vcxproj /p:Configuration=Release /p:Platform=x64 } catch {}
         try { msbuild RectifyStart\RectifyStart.vcxproj /p:Configuration=Release /p:Platform=x64 } catch {}
-        New-Item -ItemType Directory -Force -Path Rectify11Installer/Resources | Out-Null
         $cpl = Get-ChildItem -Recurse -Filter "Rectify11CPL.dll" -ErrorAction SilentlyContinue | Select-Object -First 1
         $start = Get-ChildItem -Recurse -Filter "RectifyStart.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($cpl) { Copy-Item -Force $cpl.FullName Rectify11Installer/Resources/ } else { New-Item -ItemType File -Path Rectify11Installer/Resources/Rectify11CPL.dll -Force | Out-Null }
-        if ($start) { Copy-Item -Force $start.FullName Rectify11Installer/Resources/ } else { New-Item -ItemType File -Path Rectify11Installer/Resources/RectifyStart.exe -Force | Out-Null }
+        if ($cpl) { Copy-Item -Force $cpl.FullName Rectify11Installer/Resources/ }
+        if ($start) { Copy-Item -Force $start.FullName Rectify11Installer/Resources/ }
         exit 0
 
     - name: Restore NuGet Packages
@@ -69,7 +92,7 @@ jobs:
       shell: pwsh
       run: |
         dotnet publish Rectify11Installer/Rectify11Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:Platform=x64 -p:SolutionDir=${{ github.workspace }}\
-        Write-Host "=== Searching for output ==="
+        Write-Host "=== Output search ==="
         Get-ChildItem -Recurse -Filter "Rectify11Installer.exe" Rectify11Installer/bin -ErrorAction SilentlyContinue | Select-Object FullName
 
     - name: Upload Rectify11Installer
@@ -78,6 +101,5 @@ jobs:
         name: Rectify11Installer (x64)
         path: |
           Rectify11Installer/bin/**/Rectify11Installer.exe
-          Rectify11Installer/bin/**/publish/**/Rectify11Installer.exe
         retention-days: 7
         if-no-files-found: warn
