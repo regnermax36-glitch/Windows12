@@ -2,44 +2,36 @@
     x:Class="Windows12.OOBE.InstallerMain"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Project Rebirth Setup">
+    Title="Windows 12 Project Rebirth Setup" Width="900" Height="640">
 
     <Grid Background="{StaticResource SunsetGradientBrush}">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="24">
-            
-            <TextBlock Text="Just Like Home." 
-                       FontSize="64" 
-                       FontWeight="Bold" 
-                       Foreground="#111111" 
-                       HorizontalAlignment="Center"/>
-            
-            <TextBlock Text="No bloat. No forced telemetry. Absolute system control." 
-                       FontSize="20" 
-                       Foreground="#333333" 
-                       HorizontalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <Border Background="#CCFFFFFF" CornerRadius="12" Padding="32" Margin="0,40,0,0">
-                <StackPanel Spacing="16">
-                    <TextBlock Text="Establish your local environment:" FontWeight="SemiBold"/>
-                    
-                    <TextBox x:Name="LocalAccountName" PlaceholderText="Local Admin Username" Width="300"/>
-                    <PasswordBox x:Name="LocalAccountPassword" PlaceholderText="Secure Password" Width="300"/>
-                    
-                    <Button Content="Configure Default Browser" 
-                            Width="300" 
-                            Height="40" 
-                            Margin="0,16,0,0"
-                            Click="OnBrowserSelectClicked"/>
-                            
-                    <Button Content="Initialize CorePC Architecture" 
-                            Background="#FF7EB9" 
-                            Foreground="White"
-                            Width="300" 
-                            Height="48" 
-                            Margin="0,8,0,0"
-                            Click="OnInitializeSystemClicked"/>
-                </StackPanel>
-            </Border>
+        <StackPanel Grid.Row="0" Margin="40,24" Spacing="6">
+            <TextBlock Text="Windows 12 Project Rebirth" FontSize="36" FontWeight="Bold" Foreground="#111111"/>
+            <TextBlock Text="Just Like Home. No bloat. No forced telemetry. Absolute system control." FontSize="16" Foreground="#333333"/>
+            <ProgressBar Value="25" Maximum="100" Height="5" Margin="0,12,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="#E6FFFFFF" CornerRadius="20" Margin="40,0,40,16" Padding="32">
+            <StackPanel Spacing="16" MaxWidth="420" HorizontalAlignment="Center">
+                <TextBlock Text="Establish your local environment" FontSize="24" FontWeight="SemiBold"/>
+                <TextBox x:Name="LocalAccountName" PlaceholderText="Local Admin Username" Height="44" CornerRadius="8"/>
+                <PasswordBox x:Name="LocalAccountPassword" PlaceholderText="Secure Password" Height="44" CornerRadius="8"/>
+                <ToggleSwitch Header="Disable all telemetry" IsOn="True"/>
+                <ToggleSwitch Header="Enable Time-Travel Engine" IsOn="True"/>
+                <Button Content="Configure Default Browser" Width="320" Height="40" Click="OnBrowserSelectClicked"/>
+                <Button Content="Initialize CorePC Architecture" Background="#FF7EB9" Foreground="White" Width="320" Height="48" Click="OnInitializeSystemClicked"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="40,0,40,24" Spacing="8">
+            <Button Content="Cancel" Background="Transparent"/>
+            <Button Content="Skip" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </Window>
