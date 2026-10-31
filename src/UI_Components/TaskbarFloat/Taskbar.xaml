@@ -8,7 +8,6 @@
             BorderThickness="1.5"
             BorderBrush="{ThemeResource TaskbarBorderBrush}"
             Padding="22,12"
-            Shadow="{ThemeResource FloatingElevationShadow}"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Margin="0,0,0,18">
