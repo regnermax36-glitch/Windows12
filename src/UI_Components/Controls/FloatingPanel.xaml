@@ -2,7 +2,7 @@
     x:Class="Windows12.UI_Components.Controls.FloatingPanel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="{ThemeResource SurfaceBackgroundBrush}" CornerRadius="24" Padding="20" Shadow="{ThemeResource FloatingElevationShadow}">
+    <Border Background="{ThemeResource SurfaceBackgroundBrush}" CornerRadius="24" Padding="20">
         <TextBlock Text="FloatingPanel" FontWeight="SemiBold"/>
     </Border>
 </UserControl>
