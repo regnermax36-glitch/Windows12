@@ -5,7 +5,7 @@ namespace Windows12.UI_Components
 {
     public partial class App : Application
     {
-        private Window? _window;
+        public static Window? MainWindow { get; private set; }
 
         public App()
         {
@@ -14,13 +14,11 @@ namespace Windows12.UI_Components
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            _window = new Window();
-            _window.Content = new InstallerPage();
-            _window.Title = "Windows 12 Installer";
-
-            // Ensure the window is visible and sized
-            _window.AppWindow.Resize(new Windows.Graphics.SizeInt32(900, 600));
-            _window.Activate();
+            MainWindow = new Window();
+            MainWindow.Content = new InstallerPage();
+            MainWindow.Title = "Windows 12 Installer";
+            MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32(900, 600));
+            MainWindow.Activate();
         }
     }
 }
