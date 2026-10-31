@@ -20,10 +20,10 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore NuGet Dependencies
-      run: dotnet restore src/UI_Components/UI_Components.csproj -r win-x64 -p:UseRidGraph=true
+      run: dotnet restore src/UI_Components/UI_Components.csproj -r win-x64 -p:Platform=x64 -p:UseRidGraph=true
 
     - name: Build ShellHost UI Components
-      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 --no-restore -p:UseRidGraph=true
+      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true
 
     - name: Execute UI Component Verification Tests
-      run: dotnet test src/UI_Components/UI_Components.csproj -c Release -r win-x64 --no-build -p:UseRidGraph=true
+      run: dotnet test src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-build -p:UseRidGraph=true
