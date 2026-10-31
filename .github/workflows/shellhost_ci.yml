@@ -30,12 +30,20 @@ jobs:
     - name: Show XamlCompiler diagnostics
       if: steps.build.outcome == 'failure'
       run: |
+        Write-Host "=== input.json ==="
+        if (Test-Path "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/input.json") {
+          Get-Content "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/input.json"
+        } else {
+          Write-Host "input.json not found"
+        }
+        Write-Host "=== output.json ==="
         if (Test-Path "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json") {
           Get-Content "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json"
         } else {
           Write-Host "output.json not found"
-          Get-ChildItem -Recurse "src/UI_Components/obj" -Filter "*.json" | Select-Object FullName
         }
+        Write-Host "=== All JSON in obj ==="
+        Get-ChildItem -Recurse "src/UI_Components/obj" -Filter "*.json" | Select-Object FullName
 
     - name: Fail if build failed
       if: steps.build.outcome == 'failure'
