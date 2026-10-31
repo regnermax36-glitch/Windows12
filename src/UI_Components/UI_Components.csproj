@@ -27,4 +27,31 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
   </ItemGroup>
+
+  <!-- Permanently exclude old complex trees that crash XamlCompiler -->
+  <ItemGroup>
+    <Page Remove="Apps\**\*.xaml" />
+    <Page Remove="Desktop\**\*.xaml" />
+    <Page Remove="StartMenu\**\*.xaml" />
+    <Page Remove="TaskbarFloat\**\*.xaml" />
+    <Page Remove="Settings\**\*.xaml" />
+    <Page Remove="FileExplorer\**\*.xaml" />
+    <Page Remove="Widgets\**\*.xaml" />
+    <Page Remove="Copilot\**\*.xaml" />
+    <Page Remove="LockScreen\**\*.xaml" />
+    <Page Remove="NotificationCenter\**\*.xaml" />
+    <Page Remove="Snap\**\*.xaml" />
+    <Page Remove="Themes\**\*.xaml" />
+    <Compile Remove="Apps\**\*.cs" />
+    <Compile Remove="Desktop\**\*.cs" />
+    <Compile Remove="StartMenu\**\*.cs" />
+    <Compile Remove="TaskbarFloat\**\*.cs" />
+    <Compile Remove="Settings\**\*.cs" />
+    <Compile Remove="FileExplorer\**\*.cs" />
+    <Compile Remove="Widgets\**\*.cs" />
+    <Compile Remove="Copilot\**\*.cs" />
+    <Compile Remove="LockScreen\**\*.cs" />
+    <Compile Remove="NotificationCenter\**\*.cs" />
+    <Compile Remove="Snap\**\*.cs" />
+  </ItemGroup>
 </Project>
