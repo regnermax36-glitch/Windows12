@@ -1,0 +1,20 @@
+<Page
+    x:Class="Windows12.UI_Components.LockScreen.LockScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{ThemeResource SunsetDesktopBackground}">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="24">
+            <TextBlock Text="14:32" FontSize="72" FontWeight="Light" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBlock Text="Saturday, October 31" FontSize="24" Foreground="White" Opacity="0.9" HorizontalAlignment="Center"/>
+            <Border Background="#40FFFFFF" CornerRadius="16" Padding="32" Margin="0,40,0,0">
+                <StackPanel Spacing="12">
+                    <Ellipse Width="80" Height="80" Fill="{ThemeResource AccentColorBrush}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Power User" FontSize="20" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center"/>
+                    <PasswordBox PlaceholderText="PIN or Password" Width="280" CornerRadius="8" HorizontalAlignment="Center"/>
+                    <Button Content="Sign in" HorizontalAlignment="Center" Background="{ThemeResource AccentColorBrush}" Foreground="White" CornerRadius="8" Padding="24,8"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

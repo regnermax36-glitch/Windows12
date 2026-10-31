@@ -1,0 +1,19 @@
+<UserControl
+    x:Class="Windows12.UI_Components.Snap.SnapLayoutsOverlay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border Background="#80000000" CornerRadius="16" Padding="20">
+        <StackPanel Spacing="12">
+            <TextBlock Text="Snap Layouts" FontSize="16" FontWeight="SemiBold" Foreground="White"/>
+            <UniformGrid Columns="3" Rows="2">
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+                <Border Background="#40FFFFFF" CornerRadius="8" Margin="4" Height="60"/>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>
