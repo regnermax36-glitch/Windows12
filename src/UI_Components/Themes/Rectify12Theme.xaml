@@ -21,9 +21,6 @@
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FF1A1A1A"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#FF5A5A5A"/>
 
-    <ThemeShadow x:Key="FloatingElevationShadow"/>
-    <ThemeShadow x:Key="CardElevationShadow"/>
-
     <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
     <CornerRadius x:Key="CardCornerRadius">20</CornerRadius>
     <CornerRadius x:Key="WindowCornerRadius">16</CornerRadius>
