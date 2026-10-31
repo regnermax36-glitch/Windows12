@@ -27,14 +27,4 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
   </ItemGroup>
-
-  <!-- Absolute minimum: only App + InstallerPage -->
-  <ItemGroup>
-    <Page Remove="**\*.xaml" />
-    <Compile Remove="**\*.cs" />
-    <Page Include="App.xaml" />
-    <Compile Include="App.xaml.cs" />
-    <Page Include="Installer\InstallerPage.xaml" />
-    <Compile Include="Installer\InstallerPage.xaml.cs" />
-  </ItemGroup>
 </Project>
