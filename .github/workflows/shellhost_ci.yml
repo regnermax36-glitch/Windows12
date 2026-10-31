@@ -23,7 +23,23 @@ jobs:
       run: dotnet restore src/UI_Components/UI_Components.csproj -r win-x64 -p:Platform=x64 -p:UseRidGraph=true
 
     - name: Build ShellHost UI Components (Installer EXE)
-      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true
+      id: build
+      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true -v n
+      continue-on-error: true
+
+    - name: Show XamlCompiler diagnostics
+      if: steps.build.outcome == 'failure'
+      run: |
+        if (Test-Path "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json") {
+          Get-Content "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json"
+        } else {
+          Write-Host "output.json not found"
+          Get-ChildItem -Recurse "src/UI_Components/obj" -Filter "*.json" | Select-Object FullName
+        }
+
+    - name: Fail if build failed
+      if: steps.build.outcome == 'failure'
+      run: exit 1
 
     - name: Upload Installer EXE
       if: success()
