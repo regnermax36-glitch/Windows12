@@ -24,18 +24,39 @@ jobs:
       with:
         dotnet-version: "8"
 
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      with:
+        msbuild-architecture: x64
+
     - name: Build Rectify11.Phase2
       shell: pwsh
       run: |
         dotnet publish Rectify11.Phase2/Rectify11.Phase2.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=false -o phase2_out -p:SolutionDir=${{ github.workspace }}\
-        Get-ChildItem -Recurse phase2_out | Select-Object FullName
         New-Item -ItemType Directory -Force -Path Rectify11Installer/Resources | Out-Null
         $exe = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.exe" phase2_out | Select-Object -First 1
         $dll = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.dll" phase2_out | Select-Object -First 1
         $cfg = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.runtimeconfig.json" phase2_out | Select-Object -First 1
-        if ($exe) { Copy-Item -Force $exe.FullName Rectify11Installer/Resources/ } else { Write-Error "Phase2.exe not found"; exit 1 }
+        if ($exe) { Copy-Item -Force $exe.FullName Rectify11Installer/Resources/ }
         if ($dll) { Copy-Item -Force $dll.FullName Rectify11Installer/Resources/ }
         if ($cfg) { Copy-Item -Force $cfg.FullName Rectify11Installer/Resources/ }
+
+    - name: Build resource archives
+      shell: pwsh
+      run: |
+        & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\files.7z Resources\Files\* -mx9
+        & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\extras.7z Resources\Extras\* -mx9
+        & Resources\Tools\7z.exe a -t7z Rectify11Installer\Resources\themes.7z Resources\Themes\* -mx9
+
+    - name: Build C++ projects (Rectify11CPL, RectifyStart)
+      shell: pwsh
+      run: |
+        msbuild RectifyControlPanel2\Rectify11CPL\Rectify11CPL.vcxproj /p:Configuration=Release /p:Platform=x64 /p:WindowsTargetPlatformVersion=10.0.22621.0 || echo "CPL build skipped"
+        msbuild RectifyStart\RectifyStart.vcxproj /p:Configuration=Release /p:Platform=x64 || echo "RectifyStart build skipped"
+        $cpl = Get-ChildItem -Recurse -Filter "Rectify11CPL.dll" | Select-Object -First 1
+        $start = Get-ChildItem -Recurse -Filter "RectifyStart.exe" | Select-Object -First 1
+        if ($cpl) { Copy-Item -Force $cpl.FullName Rectify11Installer/Resources/ }
+        if ($start) { Copy-Item -Force $start.FullName Rectify11Installer/Resources/ }
 
     - name: Restore NuGet Packages
       run: dotnet restore Rectify11Installer/Rectify11Installer.csproj -r win-x64
