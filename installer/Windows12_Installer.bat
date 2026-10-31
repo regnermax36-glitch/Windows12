@@ -10,74 +10,59 @@ echo              No Bloat. No Telemetry. Full Control.
 echo ========================================================
 echo.
 
-:: Check for admin rights
-net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo [ERROR] This installer requires Administrator privileges.
-    echo Right-click the BAT file and select "Run as administrator".
+:: Locate the real UI_Components.exe produced by the ShellHost build
+set "EXE="
+
+:: 1. Same folder as this BAT
+if exist "%~dp0UI_Components.exe" set "EXE=%~dp0UI_Components.exe"
+
+:: 2. Parent folder
+if not defined EXE if exist "%~dp0..\UI_Components.exe" set "EXE=%~dp0..\UI_Components.exe"
+
+:: 3. Common artifact extract locations
+if not defined EXE if exist "%~dp0Windows12-Installer-EXE\UI_Components.exe" set "EXE=%~dp0Windows12-Installer-EXE\UI_Components.exe"
+if not defined EXE if exist "%~dp0..\Windows12-Installer-EXE\UI_Components.exe" set "EXE=%~dp0..\Windows12-Installer-EXE\UI_Components.exe"
+
+:: 4. bin path if running from source tree
+if not defined EXE if exist "%~dp0..\src\UI_Components\bin\x64\Release\net8.0-windows10.0.19041.0\win-x64\UI_Components.exe" (
+    set "EXE=%~dp0..\src\UI_Components\bin\x64\Release\net8.0-windows10.0.19041.0\win-x64\UI_Components.exe"
+)
+
+if not defined EXE (
+    echo [ERROR] Could not find UI_Components.exe
+    echo.
+    echo Place this BAT in the same folder as UI_Components.exe
+    echo or extract the Windows12-Installer-EXE artifact next to it.
+    echo.
+    echo Expected locations:
+    echo   - Same folder as this BAT
+    echo   - Windows12-Installer-EXE\UI_Components.exe
     echo.
     pause
     exit /b 1
 )
 
-echo [1/6] Checking system...
-ver | find "10." >nul
-if errorlevel 1 (
-    echo [WARN] This is intended for Windows 10/11. Continuing anyway...
-)
-echo        OK.
-
+echo Found installer: %EXE%
 echo.
-echo [2/6] Creating Windows 12 directories...
-set "INSTALL_DIR=%ProgramFiles%\Windows12"
-if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-if not exist "%INSTALL_DIR%\Shell" mkdir "%INSTALL_DIR%\Shell"
-if not exist "%INSTALL_DIR%\OOBE" mkdir "%INSTALL_DIR%\OOBE"
-if not exist "%INSTALL_DIR%\Themes" mkdir "%INSTALL_DIR%\Themes"
-echo        Created: %INSTALL_DIR%
 
-echo.
-echo [3/6] Configuring local account settings...
-:: Disable forced Microsoft account requirement (Windows 11 style)
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f >nul 2>&1
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperience /t REG_DWORD /d 1 /f >nul 2>&1
-echo        Local account bypass enabled.
+:: Set working directory to the EXE folder so all dependent DLLs are found
+for %%I in ("%EXE%") do set "EXE_DIR=%%~dpI"
+cd /d "%EXE_DIR%"
 
+echo Starting Windows 12 Installer UI...
 echo.
-echo [4/6] Disabling telemetry...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f >nul 2>&1
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 1 /f >nul 2>&1
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy" /v TailoredExperiencesWithDiagnosticDataEnabled /t REG_DWORD /d 0 /f >nul 2>&1
-echo        Telemetry disabled.
 
-echo.
-echo [5/6] Applying Rectify12-style visual preferences...
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f >nul 2>&1
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f >nul 2>&1
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f >nul 2>&1
-echo        Dark mode + left-aligned taskbar applied.
+:: Launch the real WinUI installer (InstallerPage)
+start "" "%EXE%"
 
-echo.
-echo [6/6] Finalizing...
-if not exist "%INSTALL_DIR%\README.txt" (
-    echo Windows 12 Project Rebirth > "%INSTALL_DIR%\README.txt"
-    echo Installed via BAT installer. >> "%INSTALL_DIR%\README.txt"
-    echo No Microsoft account required. >> "%INSTALL_DIR%\README.txt"
-    echo Telemetry disabled. >> "%INSTALL_DIR%\README.txt"
+if %errorLevel% neq 0 (
+    echo [ERROR] Failed to start UI_Components.exe
+    echo Make sure all files from the artifact are in the same folder.
+    pause
+    exit /b 1
 )
 
+echo Installer launched. Close this window if the UI appears.
 echo.
-echo ========================================================
-echo                    INSTALLATION COMPLETE
-echo ========================================================
-echo.
-echo Install location: %INSTALL_DIR%
-echo.
-echo Next steps:
-echo   - Restart your PC to apply all registry changes.
-echo   - The UI_Components.exe (if present) can be run from the artifact.
-echo   - This BAT is a lightweight setup script for the Windows 12 experience.
-echo.
-echo Press any key to exit...
-pause >nul
+pause
 exit /b 0
