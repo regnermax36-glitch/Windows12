@@ -11,13 +11,24 @@ namespace Windows12.UI_Components.StartMenu
 
         public void ExecuteLocalSearch(string query)
         {
-            // Passes search string exclusively to the local filesystem indexer
-            // Cloud search and Bing telemetry are strictly disabled at the kernel level
+            // Local NPU-powered search: indexes filesystem, settings, and Dev Workspace only.
+            // No cloud or telemetry.
         }
 
         private void OnAppIconClicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            // Fires an asynchronous launch command to the NUPS CorePC bridge
+            // Launch via NUPS CorePC bridge with Time-Travel snapshot optional
         }
+    }
+
+    public sealed class AppTile : UserControl
+    {
+        public AppTile()
+        {
+            // Simple tile template for pinned apps
+        }
+
+        public string Icon { get; set; } = "";
+        public string Name { get; set; } = "";
     }
 }
