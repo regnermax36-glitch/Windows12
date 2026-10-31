@@ -1,21 +1,13 @@
 # Windows 12 Installer
 
-## In-Place System Patcher
+## Exact Launcher
 
-`Windows12_Installer.bat` patches the running Windows installation directly.
-
-### What it does
-1. Copies all build files (EXE + DLLs) into `%SystemRoot%\System32\Windows12`
-2. Patches Explorer and taskbar behavior
-3. Patches OOBE and telemetry
-4. Registers the shell path
-5. Adds the shell to startup
-6. Restarts Explorer so changes take effect immediately
+`Windows12_Installer.bat` launches **UI_Components.exe** exactly as the CI build produces it.
 
 ### How to use
-1. Extract the `Windows12-Installer-EXE` artifact so `UI_Components.exe` and all DLLs are together.
-2. Place `Windows12_Installer.bat` next to that folder.
-3. Right-click the BAT → **Run as administrator**.
-4. Restart if needed.
+1. Download the `Windows12-Installer-EXE` artifact from a successful ShellHost CI run.
+2. Extract it so `UI_Components.exe` and all its DLLs are in one folder.
+3. Place `Windows12_Installer.bat` in that same folder (or next to the extracted folder).
+4. Double-click the BAT.
 
-This modifies the current Windows installation instead of creating a separate program directory.
+The BAT sets the working directory to the folder containing every required file and starts `UI_Components.exe`.
