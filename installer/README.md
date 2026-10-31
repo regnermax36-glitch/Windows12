@@ -1,21 +1,13 @@
 # Windows 12 Installer
 
-## BAT Installer (recommended fallback)
+## BAT Launcher
 
-`Windows12_Installer.bat` is a lightweight setup script that:
-
-- Requires Administrator rights
-- Creates `C:\Program Files\Windows12` directories
-- Enables local account bypass (no Microsoft account forced)
-- Disables telemetry
-- Applies dark mode and left-aligned taskbar preferences
+`Windows12_Installer.bat` launches the real **UI_Components.exe** (the WinUI InstallerPage).
 
 ### How to use
-1. Download `Windows12_Installer.bat`
-2. Right-click → **Run as administrator**
-3. Follow the prompts
-4. Restart when finished
+1. Download the `Windows12-Installer-EXE` artifact from a successful ShellHost CI run.
+2. Extract it so `UI_Components.exe` and all its DLLs are in one folder.
+3. Place `Windows12_Installer.bat` in that same folder (or next to the extracted folder).
+4. Double-click the BAT.
 
-## UI_Components.exe
-The self-contained WinUI installer EXE is produced by the ShellHost CI as the `Windows12-Installer-EXE` artifact.
-If the EXE does not start, use the BAT instead.
+The BAT finds `UI_Components.exe`, sets the working directory so all dependent files load, and starts the installer UI.
