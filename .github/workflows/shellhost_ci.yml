@@ -45,3 +45,13 @@ jobs:
         path: |
           src/UI_Components/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/**/*
         retention-days: 7
+
+    - name: Build Console Installer
+      run: dotnet publish src/InstallerCmd/InstallerCmd.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+
+    - name: Upload Console Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows12-Console-Installer
+        path: src/InstallerCmd/bin/Release/net8.0-windows/win-x64/publish/Windows12Installer.exe
+        retention-days: 7
