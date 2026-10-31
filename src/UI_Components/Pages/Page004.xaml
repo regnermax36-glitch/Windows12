@@ -1,0 +1,12 @@
+<Page
+    x:Class="Windows12.UI_Components.Pages.Page004"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="{ThemeResource SurfaceBackgroundBrush}" Padding="24">
+        <StackPanel Spacing="12">
+            <TextBlock Text="Page004" FontSize="28" FontWeight="SemiBold"/>
+            <TextBlock Text="Windows 12 Rectify12 page 4" Opacity="0.7"/>
+            <Button Content="Action 4" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </Grid>
+</Page>
