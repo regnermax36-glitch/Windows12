@@ -59,6 +59,6 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<PreBuildEvent>call $(SolutionDir)Resources\Tools\rebuild_archives.bat "$(SolutionDir)" "$(MSBuildProjectDirectory)"</PreBuildEvent>
+		<PreBuildEvent>if exist "$(SolutionDir)Resources\Tools\rebuild_archives.bat" (call "$(SolutionDir)Resources\Tools\rebuild_archives.bat" "$(SolutionDir)" "$(MSBuildProjectDirectory)") else (echo Skipping archive rebuild - SolutionDir not set or bat missing)</PreBuildEvent>
 	</PropertyGroup>
 </Project>
