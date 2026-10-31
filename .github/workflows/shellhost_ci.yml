@@ -22,28 +22,15 @@ jobs:
     - name: Restore NuGet Dependencies
       run: dotnet restore src/UI_Components/UI_Components.csproj -r win-x64 -p:Platform=x64 -p:UseRidGraph=true
 
-    - name: Build ShellHost UI Components (Installer EXE)
-      id: build
-      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true -p:EnableCoreMrtTooling=false -p:EnableMsixTooling=false -v n
-      continue-on-error: true
-
-    - name: Show diagnostics
-      if: steps.build.outcome == 'failure'
-      run: |
-        Write-Host "=== Last 50 lines of build log already shown above ==="
-        Get-ChildItem -Recurse "src/UI_Components/obj" -Filter "*.json" | Select-Object FullName
-
-    - name: Fail if build failed
-      if: steps.build.outcome == 'failure'
-      run: exit 1
+    - name: Publish Self-Contained Installer (x64)
+      run: dotnet publish src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 -p:UseRidGraph=true -p:EnableCoreMrtTooling=false -p:EnableMsixTooling=false -p:SelfContained=true -p:WindowsAppSDKSelfContained=true --no-restore
 
     - name: Upload Installer EXE
-      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: Windows12-Installer-EXE
         path: |
-          src/UI_Components/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/**/*
+          src/UI_Components/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/publish/**/*
         retention-days: 7
 
     - name: Build Console Installer
