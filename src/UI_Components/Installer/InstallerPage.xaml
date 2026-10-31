@@ -2,7 +2,11 @@
     x:Class="Windows12.UI_Components.Installer.InstallerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid Background="#FF6B9D">
-        <TextBlock Text="Windows 12 Installer" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Background="#1E1E1E">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+            <TextBlock Text="Windows 12" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBlock Text="Project Rebirth Installer" FontSize="24" Foreground="#CCCCCC" HorizontalAlignment="Center"/>
+            <TextBlock Text="No Bloat. No Telemetry. Full Control." FontSize="16" Foreground="#888888" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>
