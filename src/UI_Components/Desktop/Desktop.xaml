@@ -2,23 +2,26 @@
     x:Class="Windows12.UI_Components.Desktop.Desktop"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:widgets="using:Windows12.UI_Components.Widgets">
+    xmlns:local="using:Windows12.UI_Components.Desktop"
+    xmlns:taskbar="using:Windows12.UI_Components.TaskbarFloat"
+    xmlns:widgets="using:Windows12.UI_Components.Widgets"
+    xmlns:start="using:Windows12.UI_Components.StartMenu">
 
     <Grid Background="{ThemeResource SunsetDesktopBackground}">
-        <Canvas>
-            <StackPanel Canvas.Left="40" Canvas.Top="40" Spacing="4" Width="80">
-                <FontIcon Glyph="&#xE8B7;" FontSize="40" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="This PC" HorizontalAlignment="Center" Foreground="White" FontSize="12" TextWrapping="Wrap"/>
-            </StackPanel>
-            <StackPanel Canvas.Left="40" Canvas.Top="140" Spacing="4" Width="80">
-                <FontIcon Glyph="&#xE8A5;" FontSize="40" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="Windows12" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
-            </StackPanel>
-            <StackPanel Canvas.Left="40" Canvas.Top="240" Spacing="4" Width="80">
-                <FontIcon Glyph="&#xE943;" FontSize="40" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="Dev Mode" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
-            </StackPanel>
+        <Canvas x:Name="IconCanvas">
+            <local:DesktopIcon Canvas.Left="32" Canvas.Top="32" Icon="&#xE8B7;" Label="This PC"/>
+            <local:DesktopIcon Canvas.Left="32" Canvas.Top="130" Icon="&#xE8A5;" Label="Windows12"/>
+            <local:DesktopIcon Canvas.Left="32" Canvas.Top="228" Icon="&#xE943;" Label="Dev Workspace"/>
+            <local:DesktopIcon Canvas.Left="32" Canvas.Top="326" Icon="&#xE8F1;" Label="Time Travel"/>
+            <local:DesktopIcon Canvas.Left="32" Canvas.Top="424" Icon="&#xE70F;" Label="Settings"/>
+            <local:DesktopIcon Canvas.Left="140" Canvas.Top="32" Icon="&#xE7F4;" Label="Copilot"/>
+            <local:DesktopIcon Canvas.Left="140" Canvas.Top="130" Icon="&#xE713;" Label="Widgets"/>
         </Canvas>
-        <widgets:WidgetCanvas HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,40,40,0" Width="360" Height="480"/>
+
+        <widgets:AdvancedWidgetBoard HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,48,48,0" Width="380"/>
+
+        <start:StartMenu x:Name="StartMenuOverlay" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,100" Visibility="Collapsed"/>
+
+        <taskbar:Taskbar HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
     </Grid>
 </Page>
