@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\libmsstyle\libmsstyle.csproj" />
+		<!-- libmsstyle reference removed: project not present in this repo -->
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Core\rectify11.xml">
@@ -59,6 +59,6 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<PreBuildEvent>call $(SolutionDir)Resources\Tools\rebuild_archives.bat "$(SolutionDir)" "$(MSBuildProjectDirectory)"</PreBuildEvent>
+		<!-- PreBuildEvent disabled: rebuild_archives.bat not available in CI -->
 	</PropertyGroup>
 </Project>
