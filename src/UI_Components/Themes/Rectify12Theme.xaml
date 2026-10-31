@@ -1,0 +1,43 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Rectify12 - Windows 12 Fluent 2 Aesthetic -->
+    <LinearGradientBrush x:Key="SunsetDesktopBackground" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FF6B9D" Offset="0.0"/>
+        <GradientStop Color="#FFC75F" Offset="0.45"/>
+        <GradientStop Color="#FF8E6B" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <AcrylicBrush x:Key="TaskbarBackgroundBrush" TintColor="#FFFFFF" TintOpacity="0.72" FallbackColor="#CCFFFFFF"/>
+    <AcrylicBrush x:Key="SurfaceBackgroundBrush" TintColor="#FFFFFF" TintOpacity="0.88" FallbackColor="#F0FFFFFF"/>
+    <AcrylicBrush x:Key="ElevatedSurfaceBrush" TintColor="#FFFFFF" TintOpacity="0.92" FallbackColor="#F5FFFFFF"/>
+
+    <SolidColorBrush x:Key="TaskbarBorderBrush" Color="#30FFFFFF"/>
+    <SolidColorBrush x:Key="SearchBackgroundBrush" Color="#F8FFFFFF"/>
+    <SolidColorBrush x:Key="PrimaryIconColor" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="AccentColorBrush" Color="#FF0078D4"/>
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="#FF106EBE"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#FF5A5A5A"/>
+
+    <ThemeShadow x:Key="FloatingElevationShadow"/>
+    <ThemeShadow x:Key="CardElevationShadow"/>
+
+    <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="CardCornerRadius">20</CornerRadius>
+    <CornerRadius x:Key="WindowCornerRadius">16</CornerRadius>
+
+    <Style x:Key="ModernButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="16,10"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButtonStyle}">
+        <Setter Property="Background" Value="{ThemeResource AccentColorBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+</ResourceDictionary>

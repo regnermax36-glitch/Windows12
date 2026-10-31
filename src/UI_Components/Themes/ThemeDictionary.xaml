@@ -5,15 +5,15 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Rectify12Theme.xaml"/>
                 <ResourceDictionary Source="SunsetDefault.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
         <ResourceDictionary x:Key="HighContrast">
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DarkModeOverride.xaml"/>
+                <ResourceDictionary Source="DarkCarbon.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-
 </ResourceDictionary>
