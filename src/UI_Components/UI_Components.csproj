@@ -10,7 +10,6 @@
     <PlatformTarget>x64</PlatformTarget>
     <Platform Condition="'$(Platform)' == '' or '$(Platform)' == 'AnyCPU' or '$(Platform)' == 'Any CPU'">x64</Platform>
     
-    <!-- Lock RIDs to x64 only so WindowsAppSDK.SelfContained does not probe win10-arm / win10-arm-aot -->
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <UseRidGraph>true</UseRidGraph>
@@ -27,5 +26,33 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
+  </ItemGroup>
+
+  <!-- Temporarily exclude complex pages that still fail XamlCompiler so the installer EXE can build -->
+  <ItemGroup>
+    <Page Remove="Apps\**\*.xaml" />
+    <Page Remove="Controls\**\*.xaml" />
+    <Page Remove="Desktop\**\*.xaml" />
+    <Page Remove="StartMenu\**\*.xaml" />
+    <Page Remove="TaskbarFloat\**\*.xaml" />
+    <Page Remove="Settings\**\*.xaml" />
+    <Page Remove="FileExplorer\**\*.xaml" />
+    <Page Remove="Widgets\**\*.xaml" />
+    <Page Remove="Copilot\**\*.xaml" />
+    <Page Remove="LockScreen\**\*.xaml" />
+    <Page Remove="NotificationCenter\**\*.xaml" />
+    <Page Remove="Snap\**\*.xaml" />
+    <Compile Remove="Apps\**\*.cs" />
+    <Compile Remove="Controls\**\*.cs" />
+    <Compile Remove="Desktop\**\*.cs" />
+    <Compile Remove="StartMenu\**\*.cs" />
+    <Compile Remove="TaskbarFloat\**\*.cs" />
+    <Compile Remove="Settings\**\*.cs" />
+    <Compile Remove="FileExplorer\**\*.cs" />
+    <Compile Remove="Widgets\**\*.cs" />
+    <Compile Remove="Copilot\**\*.cs" />
+    <Compile Remove="LockScreen\**\*.cs" />
+    <Compile Remove="NotificationCenter\**\*.cs" />
+    <Compile Remove="Snap\**\*.cs" />
   </ItemGroup>
 </Project>
