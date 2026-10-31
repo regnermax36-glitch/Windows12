@@ -1,13 +1,24 @@
 # Windows 12 Installer
 
-## Exact Launcher
+Modeled after the Rectify11 installer approach.
 
-`Windows12_Installer.bat` launches **UI_Components.exe** exactly as the CI build produces it.
+## How it works
 
-### How to use
-1. Download the `Windows12-Installer-EXE` artifact from a successful ShellHost CI run.
-2. Extract it so `UI_Components.exe` and all its DLLs are in one folder.
-3. Place `Windows12_Installer.bat` in that same folder (or next to the extracted folder).
-4. Double-click the BAT.
+- Installs to `C:\Windows\Windows12` (same pattern as Rectify11's `C:\Windows\Rectify11`)
+- Multi-step UI that shows progress
+- Patches the running Windows installation in place:
+  - OOBE / local account bypass
+  - Telemetry disabled
+  - Dark mode + left-aligned taskbar
+- Requires Administrator rights
+- Creates registry markers for the installation
 
-The BAT sets the working directory to the folder containing every required file and starts `UI_Components.exe`.
+## Getting the EXE
+
+1. Run the ShellHost CI workflow (or wait for a push to main).
+2. Download the `Windows12-Installer-EXE` artifact.
+3. Extract it and run `UI_Components.exe` as Administrator.
+
+## Console installer
+
+A separate single-file console installer (`Windows12Installer.exe`) is also built and uploaded as the `Windows12-Console-Installer` artifact.
