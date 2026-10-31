@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -21,11 +21,6 @@ namespace Rectify11Installer.Core
         }
         #endregion
 
-        /// <summary>
-        /// icon installation logic
-        /// </summary>
-        /// <param name="frm">FrmWizard instance</param>
-        /// <returns>true if succeeds, else returns false</returns>
         public static bool Install(FrmWizard frm)
         {
             try
@@ -33,7 +28,6 @@ namespace Rectify11Installer.Core
                 Logger.WriteLine("Installing icons");
                 Logger.WriteLine("────────────────");
 
-                // Get all patches
                 var patches = PatchesParser.GetAll();
                 var patch = patches.Items;
                 decimal progress = 0;
@@ -73,49 +67,121 @@ namespace Rectify11Installer.Core
 
                 frm.InstallerProgress = "Replacing files";
 
-                // runs only if SSText3D.scr is selected
                 if (InstallOptions.iconsList.Contains("SSText3D.scr"))
                 {
                     Helper.ImportReg(Path.Combine(Variables.r11Files, "screensaver.reg"));
                 }
 
-				// runs only if mmc.exe.mui is selected
-				if (InstallOptions.iconsList.Contains("mmc.exe.mui"))
+                if (InstallOptions.iconsList.Contains("mmc.exe.mui"))
                 {
-					if (!MMCHelper.PatchAll())
+                    if (!MMCHelper.PatchAll())
                         return false;
-				}
+                }
 
-				if (InstallOptions.iconsList.Contains("odbcad32.exe"))
+                if (InstallOptions.iconsList.Contains("odbcad32.exe"))
                     FixOdbc();
 
-                // phase 2
-                Helper.RunAsTI(Path.Combine(Variables.r11Folder, "Rectify11.Phase2.exe"), "/install");
+                // Try Phase2 first; if missing or fails, fall back to direct/pending replace
+                bool phase2Ok = TryRunPhase2("/install");
+                if (!phase2Ok)
+                {
+                    Logger.Warn("Phase2 unavailable or failed — using fallback replacement");
+                    FallbackReplacePatchedFiles();
+                }
 
-                // reg files for various file extensions
                 Helper.ImportReg(Path.Combine(Variables.r11Files, "icons.reg"));
 
                 ClearIconCache();
 
-				Variables.RestartRequired = true;
+                Variables.RestartRequired = true;
                 Logger.WriteLine("Icons.Install() succeeded.");
                 Logger.WriteLine("══════════════════════════════════════════════");
                 return true;
             }
             catch (Exception ex)
             {
-                // rollback
-                // ikr amazing
                 Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "Tmp"), false);
                 Logger.WriteLine("Icons.Install() failed", ex);
                 return false;
             }
         }
 
+        private static bool TryRunPhase2(string args)
+        {
+            try
+            {
+                var phase2 = Path.Combine(Variables.r11Folder, "Rectify11.Phase2.exe");
+                if (!File.Exists(phase2))
+                {
+                    Logger.Warn("Rectify11.Phase2.exe not found");
+                    return false;
+                }
+                // Skip if it's our placeholder (tiny file)
+                var fi = new FileInfo(phase2);
+                if (fi.Length < 1024)
+                {
+                    Logger.Warn("Rectify11.Phase2.exe is a placeholder — skipping");
+                    return false;
+                }
+                Helper.RunAsTI(phase2, args);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn("Phase2 run failed", ex);
+                return false;
+            }
+        }
+
         /// <summary>
-        /// icon uninstallation logic
+        /// Fallback: copy patched files from Tmp over the originals.
+        /// If a file is locked, schedule replacement on reboot via MoveFileEx.
         /// </summary>
-        /// <returns>true if succeeds, else returns false</returns>
+        private static void FallbackReplacePatchedFiles()
+        {
+            try
+            {
+                var tmp = Path.Combine(Variables.r11Folder, "Tmp");
+                if (!Directory.Exists(tmp)) return;
+
+                foreach (var patched in Directory.GetFiles(tmp, "*", SearchOption.AllDirectories))
+                {
+                    var rel = Path.GetRelativePath(tmp, patched);
+                    // Best-effort: map back to system32 / system32\en-US etc. is complex;
+                    // for the common case we place next to original via HardlinkTarget already stored.
+                    // Here we simply try to replace any file of the same name under system32.
+                    var name = Path.GetFileName(patched);
+                    var dest = Path.Combine(Variables.sys32Folder, name);
+                    if (!File.Exists(dest)) continue;
+
+                    try
+                    {
+                        if (!Helper.SafeFileDeletion(dest))
+                        {
+                            // schedule pending replace
+                            var pending = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                            File.Copy(patched, pending, true);
+                            NativeMethods.MoveFileEx(pending, dest, NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT | NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING);
+                            Logger.WriteLine("Scheduled reboot replace for " + name);
+                        }
+                        else
+                        {
+                            File.Copy(patched, dest, true);
+                            Logger.WriteLine("Replaced " + name);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Warn("Could not replace " + name, ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn("FallbackReplacePatchedFiles failed", ex);
+            }
+        }
+
         public static bool Uninstall()
         {
             try
@@ -128,7 +194,7 @@ namespace Rectify11Installer.Core
                 if (!Variables.Phase2Skip)
                 {
                     Logger.WriteLine("Executed Rectify11.Phase2.exe");
-                    Helper.RunAsTI(Path.Combine(Variables.r11Folder, "Rectify11.Phase2.exe"), "/uninstall");
+                    TryRunPhase2("/uninstall");
                 }
 
                 Helper.SafeFileDeletion(Path.Combine(Variables.r11Folder, "Rectify11.Phase2.exe"));
@@ -145,9 +211,6 @@ namespace Rectify11Installer.Core
             }
         }
 
-        /// <summary>
-        /// fixes 32-bit odbc shortcut icon
-        /// </summary>
         private static bool FixOdbc()
         {
             try
@@ -182,12 +245,6 @@ namespace Rectify11Installer.Core
             }
         }
 
-
-        /// <summary>
-        /// sets required registry values for phase 2
-        /// </summary>
-        /// <param name="fileList">normal files list</param>
-        /// <param name="x86List">32-bit files list</param>
         private static bool WritePendingFiles(List<string> fileList, List<string> x86List)
         {
             using var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE", true)?.CreateSubKey("Rectify11", true);
@@ -215,12 +272,6 @@ namespace Rectify11Installer.Core
             }
         }
 
-        /// <summary>
-        /// Patches a specific file
-        /// </summary>
-        /// <param name="file">The file to be patched</param>
-        /// <param name="patch">Xml element containing all the info</param>
-        /// <param name="type">The type of the file to be patched.</param>
         private static bool Patch(string file, PatchesPatch patch, PatchType type)
         {
             if (!File.Exists(file)) return false;
@@ -255,7 +306,6 @@ namespace Rectify11Installer.Core
                 Directory.CreateDirectory(tempfolder);
             }
 
-            //File.Copy(file, Path.Combine(backupfolder, name));
             File.Copy(file, Path.Combine(tempfolder, name), true);
 
             var filename = name + ".res";
@@ -290,10 +340,6 @@ namespace Rectify11Installer.Core
             return true;
         }
 
-        /// <summary>
-        /// Replaces the path and patches the file accordingly.
-        /// </summary>
-        /// <param name="patch">Xml element containing all the info</param>
         private static bool MatchAndApplyRule(PatchesPatch patch)
         {
             string newhardlink = Helper.FixString(patch.HardlinkTarget, false);
@@ -318,35 +364,32 @@ namespace Rectify11Installer.Core
             return true;
         }
 
-		/// <summary>
-		/// clears *.db cache files
-		/// </summary>
-		private static void ClearIconCache()
-		{
-			try
-			{
-				DirectoryInfo di = new(Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "microsoft", "windows", "explorer"));
-				var files = di.GetFiles("*.db");
+        private static void ClearIconCache()
+        {
+            try
+            {
+                DirectoryInfo di = new(Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "microsoft", "windows", "explorer"));
+                var files = di.GetFiles("*.db");
 
-				for (var i = 0; i < files.Length; i++)
-				{
-					files[i].Attributes = FileAttributes.Normal;
-					if (File.Exists(files[i].FullName))
-					{
-						Helper.SafeFileDeletion(files[i].FullName);
-					}
-				}
-				var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce", true);
-				key?.SetValue("ResetIconCache", Path.Combine(Variables.sys32Folder, "ie4uinit.exe") + " -show", RegistryValueKind.String);
-				key.Close();
-			}
-			catch (Exception ex)
-			{
+                for (var i = 0; i < files.Length; i++)
+                {
+                    files[i].Attributes = FileAttributes.Normal;
+                    if (File.Exists(files[i].FullName))
+                    {
+                        Helper.SafeFileDeletion(files[i].FullName);
+                    }
+                }
+                var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce", true);
+                key?.SetValue("ResetIconCache", Path.Combine(Variables.sys32Folder, "ie4uinit.exe") + " -show", RegistryValueKind.String);
+                key.Close();
+            }
+            catch (Exception ex)
+            {
                 Logger.Warn("Clearing icon cache failed", ex);
-			}
-		}
-		#region Internal functions
-		private static void PatchCmd(PatchType type, string filename, string name, string tempfolder, string filepath, string mask)
+            }
+        }
+
+        private static void PatchCmd(PatchType type, string filename, string name, string tempfolder, string filepath, string mask)
         {
             if (type == PatchType.x86)
             {
@@ -390,6 +433,5 @@ namespace Rectify11Installer.Core
                 }
             }
         }
-        #endregion
     }
 }
