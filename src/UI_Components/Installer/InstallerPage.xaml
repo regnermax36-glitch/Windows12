@@ -4,12 +4,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid Background="#FF6B9D">
-        <StackPanel Margin="48" Spacing="16" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Windows 12 Project Rebirth" FontSize="36" FontWeight="Bold"/>
-            <TextBlock Text="Just Like Home. No bloat. No telemetry." FontSize="16"/>
-            <TextBox PlaceholderText="Username" Width="280"/>
-            <PasswordBox PlaceholderText="Password" Width="280"/>
-            <Button Content="Continue" HorizontalAlignment="Stretch"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="48,32" Spacing="8">
+            <TextBlock Text="Windows 12 Project Rebirth" FontSize="36" FontWeight="Bold" Foreground="#111111"/>
+            <TextBlock Text="Just Like Home. No bloat. No telemetry. Full control." FontSize="16" Foreground="#333333"/>
+            <ProgressBar Value="33" Maximum="100" Height="6" Margin="0,16,0,0"/>
+            <TextBlock Text="Step 1 of 3 — Local Account" Opacity="0.7"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="#E6FFFFFF" CornerRadius="16" Margin="48,0,48,24" Padding="32">
+            <StackPanel Spacing="16" MaxWidth="420" HorizontalAlignment="Center">
+                <TextBlock Text="Create your local account" FontSize="24" FontWeight="SemiBold"/>
+                <TextBlock Text="This account stays entirely on-device. No Microsoft account required." Opacity="0.8" TextWrapping="Wrap"/>
+
+                <TextBox x:Name="UsernameBox" PlaceholderText="Username" Height="44" FontSize="16"/>
+                <PasswordBox x:Name="PasswordBox" PlaceholderText="Password" Height="44"/>
+                <PasswordBox PlaceholderText="Confirm Password" Height="44"/>
+
+                <ToggleSwitch Header="Enable Time-Travel snapshots by default" IsOn="True"/>
+                <ToggleSwitch Header="Activate Dev Workspace Mode" IsOn="False"/>
+                <ToggleSwitch Header="Disable all telemetry" IsOn="True"/>
+
+                <Button Content="Next: Privacy & Browser" HorizontalAlignment="Stretch" Height="48" Background="#FF0078D4" Foreground="White" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="48,0,48,32" Spacing="12">
+            <Button Content="Back" Background="Transparent" Padding="20,10"/>
+            <Button Content="Skip to Desktop" Background="Transparent" Padding="20,10"/>
         </StackPanel>
     </Grid>
 </Page>
