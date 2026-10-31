@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Rectify11Installer.Win32;
 using System;
 using System.IO;
@@ -8,7 +8,6 @@ namespace Rectify11Installer.Core
 {
     public class Installer
     {
-        #region Public Methods
         public bool Install(FrmWizard frm)
         {
             frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.preparingInstall;
@@ -17,7 +16,6 @@ namespace Rectify11Installer.Core
 
             Directory.CreateDirectory(Variables.r11Folder);
 
-            // goofy fix
             Registry.LocalMachine.OpenSubKey(@"SOFTWARE", true)
                 ?.CreateSubKey("Rectify11", true)
                 ?.DeleteValue("x86PendingFiles", false);
@@ -41,7 +39,6 @@ namespace Rectify11Installer.Core
                 }
             }
 
-            // runtimes
             frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.installingRt;
             Common.InstallRuntimes();
             if (Variables.vcRedist && Variables.core31)
@@ -60,10 +57,8 @@ namespace Rectify11Installer.Core
             }
             Logger.WriteLine("══════════════════════════════════════════════");
 
-            // some random issue where the installer's frame gets extended
             if (!ThemeUtil.IsUsingDarkMode) DarkMode.UpdateFrame(frm, false);
 
-            // extract files, delete if folder exists
             frm.InstallerProgress = "Extracting files...";
             Helper.SafeDirectoryDeletion(Path.Combine(Variables.r11Folder, "files"), false);
             if (!Helper.SafeFileOperation(
@@ -72,12 +67,10 @@ namespace Rectify11Installer.Core
                 Helper.OperationType.Write))
                 return false;
 
-            // extract the 7z
             Helper.SvExtract("files.7z", "files");
 
             if (InstallOptions.InstallThemes || InstallOptions.InstallExtras())
             {
-                // Install/update r11cpl first to make RectifyUtil class work
                 try
                 {
                     Themes.InstallR11Cpl();
@@ -90,30 +83,47 @@ namespace Rectify11Installer.Core
                 }
             }
 
-            // theme
             if (InstallOptions.InstallThemes)
             {
                 frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.installingThemes;
                 if (!Themes.Install()) return false;
             }
 
-            // extras
             if (InstallOptions.InstallExtras())
             {
                 frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.installingExtras;
                 if (!Extras.Install(frm)) return false;
             }
 
-            // Icons
             if (InstallOptions.iconsList.Count > 0)
             {
                 if (!Icons.Install(frm)) return false;
             }
 
-            // copy duires if any icons were patched or if themes was selected (required for r11cpl)
             if (InstallOptions.iconsList.Count > 0 || InstallOptions.InstallThemes)
             {
-                File.Copy(Path.Combine(Variables.r11Files, "duires.dll"), Path.Combine(Variables.sys32Folder, "duires.dll"), true);
+                try
+                {
+                    var src = Path.Combine(Variables.r11Files, "duires.dll");
+                    var dst = Path.Combine(Variables.sys32Folder, "duires.dll");
+                    if (File.Exists(src))
+                    {
+                        if (!Helper.SafeFileDeletion(dst))
+                        {
+                            var pending = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                            File.Copy(src, pending, true);
+                            MoveFileEx(pending, dst, MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT | MoveFileFlags.MOVEFILE_REPLACE_EXISTING);
+                        }
+                        else
+                        {
+                            File.Copy(src, dst, true);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn("duires.dll copy failed", ex);
+                }
             }
 
             InstallChangelogApp();
@@ -124,7 +134,6 @@ namespace Rectify11Installer.Core
             InstallStatus.IsRectify11Installed = true;
             Logger.WriteLine("══════════════════════════════════════════════");
 
-            // cleanup
             frm.InstallerProgress = Rectify11Installer.Strings.Rectify11.cleaningUp;
             Common.Cleanup();
             Logger.CommitLog();
@@ -133,11 +142,9 @@ namespace Rectify11Installer.Core
 
         private void InstallChangelogApp()
         {
-            // Register RectifyStart.exe to run on startup
             var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
             key?.SetValue("RectifyStart", Path.Combine(Variables.r11Folder, "RectifyStart.exe"), RegistryValueKind.String);
             key.Close();
         }
-        #endregion
     }
 }
