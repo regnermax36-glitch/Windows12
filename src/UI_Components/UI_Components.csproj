@@ -22,17 +22,17 @@
     <SelfContained>true</SelfContained>
     <PublishSelfContained>true</PublishSelfContained>
 
-    <!-- Single-file EXE (supported for unpackaged self-contained WinUI 1.5+) -->
+    <!-- Required for single-file EXE (Windows App SDK SingleFile.targets) -->
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <EnableMsixTooling>true</EnableMsixTooling>
 
     <!-- Prevent bootstrapper from showing runtime dialog -->
     <WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>false</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
     <WindowsAppSdkUndockedRegFreeWinRTInitialize>true</WindowsAppSdkUndockedRegFreeWinRTInitialize>
 
-    <!-- Disable MSIX / PRI tooling that fails on GitHub Actions -->
-    <EnableMsixTooling>false</EnableMsixTooling>
+    <!-- Disable PRI generation that can fail on CI -->
     <EnableCoreMrtTooling>false</EnableCoreMrtTooling>
     <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
     <GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
