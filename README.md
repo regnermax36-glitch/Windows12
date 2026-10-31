@@ -29,9 +29,14 @@ The presentation layer has been massively extended with production-like componen
 - **Full Settings App**: System, Personalization, Time-Travel controls, Dev Workspace, Privacy (telemetry disabled by default)
 - **File Explorer Simulation**: Sidebar with This PC / Dev Workspace / Snapshots, modern toolbar and grid view
 - **Notification Center**: Quick actions and system notifications
+- **Desktop**: Icon grid + floating widget board on Sunset background
+- **Lock Screen**: Large clock, date, PIN entry
+- **Advanced Widgets**: Weather, Time-Travel, Dev Workspace indicators
+- **Copilot Panel**: Local NPU chat (no cloud)
+- **Snap Layouts Overlay**: Visual snap preview
 - **Enhanced Themes**: Acrylic Sunset, Dark Carbon, better shadows, larger corner radii
 
-See `docs/UI_EXPANSION.md` for full details.
+See `docs/UI_EXPANSION.md` and `docs/MORE_UI.md` for full details.
 
 ## Industry Context & Speculation
 The architecture within this repository is heavily informed by—and in some cases, directly subverts—current industry intelligence regarding Microsoft's actual next-generation plans.
@@ -51,4 +56,4 @@ A dedicated GitHub Actions workflow (`.github/workflows/build_iso.yml`) packages
 
 Trigger it manually via workflow_dispatch or on push to main. The ISO contains the full conceptual architecture ready for local builds on Windows with CMake + .NET 8 + Windows App SDK.
 
-Native CI continues in `build_corepc.yml` and `shellhost_ci.yml`.
+Native CI continues in `build_corepc.yml` and `shellhost_ci.yml`. Build errors have been fixed (platform targeting, test discovery, YAML packaging).
