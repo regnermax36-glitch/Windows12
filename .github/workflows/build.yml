@@ -66,11 +66,18 @@ jobs:
       run: dotnet restore Rectify11Installer/Rectify11Installer.csproj -r win-x64
 
     - name: Publish Full Rectify11 Installer EXE
-      run: dotnet publish Rectify11Installer/Rectify11Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:Platform=x64 -p:SolutionDir=${{ github.workspace }}\
+      shell: pwsh
+      run: |
+        dotnet publish Rectify11Installer/Rectify11Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:Platform=x64 -p:SolutionDir=${{ github.workspace }}\
+        Write-Host "=== Searching for output ==="
+        Get-ChildItem -Recurse -Filter "Rectify11Installer.exe" Rectify11Installer/bin -ErrorAction SilentlyContinue | Select-Object FullName
 
     - name: Upload Rectify11Installer
       uses: actions/upload-artifact@v4
       with:
         name: Rectify11Installer (x64)
-        path: Rectify11Installer/bin/Release/net8.0-windows/win-x64/publish/Rectify11Installer.exe
+        path: |
+          Rectify11Installer/bin/**/Rectify11Installer.exe
+          Rectify11Installer/bin/**/publish/**/Rectify11Installer.exe
         retention-days: 7
+        if-no-files-found: warn
