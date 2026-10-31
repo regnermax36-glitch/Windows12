@@ -8,8 +8,7 @@
             Width="760" Height="860"
             BorderThickness="1.5"
             BorderBrush="{ThemeResource TaskbarBorderBrush}"
-            Padding="32"
-            Shadow="{ThemeResource FloatingElevationShadow}">
+            Padding="32">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -37,7 +36,7 @@
             <ScrollViewer Grid.Row="2">
                 <StackPanel Spacing="24">
                     <TextBlock Text="Pinned" FontWeight="SemiBold" FontSize="20"/>
-                    <UniformGrid Columns="6" Rows="2">
+                    <StackPanel Orientation="Horizontal" Spacing="16">
                         <StackPanel Spacing="6" Width="90" HorizontalAlignment="Center">
                             <FontIcon Glyph="&#xE8B7;" FontSize="32" HorizontalAlignment="Center"/>
                             <TextBlock Text="Explorer" FontSize="12" HorizontalAlignment="Center"/>
@@ -62,7 +61,7 @@
                             <FontIcon Glyph="&#xE8F1;" FontSize="32" HorizontalAlignment="Center"/>
                             <TextBlock Text="Time Travel" FontSize="12" HorizontalAlignment="Center"/>
                         </StackPanel>
-                    </UniformGrid>
+                    </StackPanel>
 
                     <TextBlock Text="Recommended" FontWeight="SemiBold" FontSize="20" Margin="0,8,0,0"/>
                     <ListView>
@@ -82,9 +81,9 @@
             <Grid Grid.Row="3" Margin="0,20,0,0">
                 <Button HorizontalAlignment="Left" Content="All Apps" Background="Transparent" FontWeight="SemiBold"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
-                    <Button Content="Sleep" Style="{ThemeResource ModernButtonStyle}"/>
-                    <Button Content="Restart" Style="{ThemeResource ModernButtonStyle}"/>
-                    <Button Content="Shutdown" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button Content="Sleep"/>
+                    <Button Content="Restart"/>
+                    <Button Content="Shutdown"/>
                 </StackPanel>
             </Grid>
         </Grid>
