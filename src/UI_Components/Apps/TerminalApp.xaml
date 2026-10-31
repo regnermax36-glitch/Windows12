@@ -1,0 +1,18 @@
+<Page
+    x:Class="Windows12.UI_Components.Apps.TerminalApp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#FF111111">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#FF222222" Padding="16">
+            <TextBlock Text="Windows Terminal — Dev Workspace" Foreground="White" FontWeight="SemiBold"/>
+        </Border>
+        <ScrollViewer Grid.Row="1" Padding="16">
+            <TextBlock Text="PS C:\\Windows12&gt; Get-TimeTravelSnapshot&#x0a;Last snapshot: 16:27&#x0a;PS C:\\Windows12&gt; " Foreground="#FF00FF9C" FontFamily="Cascadia Mono" FontSize="14"/>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,23 @@
+<Page
+    x:Class="Windows12.UI_Components.Apps.PhotosApp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{ThemeResource SurfaceBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="20">
+            <TextBlock Text="Photos" FontSize="28" FontWeight="SemiBold"/>
+        </Border>
+        <GridView Grid.Row="1" Padding="24">
+            <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="16" Width="220" Height="180">
+                <TextBlock Text="Sunset Wallpaper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="16" Width="220" Height="180">
+                <TextBlock Text="Desktop Capture" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </GridView>
+    </Grid>
+</Page>

@@ -9,26 +9,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="16,8" CornerRadius="0,0,12,12">
-            <StackPanel Orientation="Horizontal" Spacing="12">
-                <Button Content="New" />
-                <Button Content="Cut" />
-                <Button Content="Copy" />
-                <Button Content="Paste" />
-                <TextBox Width="300" PlaceholderText="Search this PC..." CornerRadius="8"/>
-                <Button Content="View" />
+        <Border Grid.Row="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="16,10" CornerRadius="0,0,16,16">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="New" Style="{ThemeResource ModernButtonStyle}"/>
+                <Button Content="Cut" Style="{ThemeResource ModernButtonStyle}"/>
+                <Button Content="Copy" Style="{ThemeResource ModernButtonStyle}"/>
+                <Button Content="Paste" Style="{ThemeResource ModernButtonStyle}"/>
+                <TextBox Width="320" PlaceholderText="Search this PC..." CornerRadius="10" Height="36"/>
+                <Button Content="View" Style="{ThemeResource ModernButtonStyle}"/>
             </StackPanel>
         </Border>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="260"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="12">
+            <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="16">
                 <StackPanel Spacing="8">
-                    <TextBlock Text="This PC" FontWeight="SemiBold"/>
+                    <TextBlock Text="This PC" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,8"/>
                     <TextBlock Text="Quick Access" Margin="8,4"/>
                     <TextBlock Text="Desktop" Margin="8,4"/>
                     <TextBlock Text="Documents" Margin="8,4"/>
@@ -38,23 +38,23 @@
                 </StackPanel>
             </Border>
 
-            <GridView Grid.Column="1" Padding="20">
+            <GridView Grid.Column="1" Padding="24">
                 <GridViewItem>
-                    <StackPanel Width="100" Height="100">
-                        <FontIcon Glyph="&#xE8B7;" FontSize="48" HorizontalAlignment="Center"/>
+                    <StackPanel Width="110" Height="110">
+                        <FontIcon Glyph="&#xE8B7;" FontSize="52" HorizontalAlignment="Center"/>
                         <TextBlock Text="Projects" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     </StackPanel>
                 </GridViewItem>
                 <GridViewItem>
-                    <StackPanel Width="100" Height="100">
-                        <FontIcon Glyph="&#xE8A5;" FontSize="48" HorizontalAlignment="Center"/>
+                    <StackPanel Width="110" Height="110">
+                        <FontIcon Glyph="&#xE8A5;" FontSize="52" HorizontalAlignment="Center"/>
                         <TextBlock Text="Windows12" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     </StackPanel>
                 </GridViewItem>
                 <GridViewItem>
-                    <StackPanel Width="100" Height="100">
-                        <FontIcon Glyph="&#xE943;" FontSize="48" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Kernel Sources" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <StackPanel Width="110" Height="110">
+                        <FontIcon Glyph="&#xE943;" FontSize="52" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Kernel" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     </StackPanel>
                 </GridViewItem>
             </GridView>

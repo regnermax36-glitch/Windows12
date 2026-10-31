@@ -5,53 +5,54 @@
 
     <Grid Background="{ThemeResource SurfaceBackgroundBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="16">
-            <StackPanel Spacing="8">
-                <TextBlock Text="Settings" FontSize="28" FontWeight="Bold" Margin="0,0,0,20"/>
+        <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="20">
+            <StackPanel Spacing="6">
+                <TextBlock Text="Settings" FontSize="32" FontWeight="Bold" Margin="0,0,0,24"/>
                 <NavigationViewItem Content="System" Icon="Home"/>
                 <NavigationViewItem Content="Personalization" Icon="Brush"/>
-                <NavigationViewItem Content="Apps &amp; Features" Icon="Library"/>
+                <NavigationViewItem Content="Apps" Icon="Library"/>
                 <NavigationViewItem Content="Time Travel" Icon="Clock"/>
                 <NavigationViewItem Content="Dev Workspace" Icon="Code"/>
                 <NavigationViewItem Content="Privacy &amp; Security" Icon="Shield"/>
+                <NavigationViewItem Content="Windows Update" Icon="Sync"/>
                 <NavigationViewItem Content="About" Icon="Info"/>
             </StackPanel>
         </Border>
 
-        <ScrollViewer Grid.Column="1" Padding="40">
-            <StackPanel Spacing="24" MaxWidth="800">
-                <TextBlock Text="System" FontSize="32" FontWeight="SemiBold"/>
-                <TextBlock Text="Windows 12 Project Rebirth • Build 2026.10.31" Opacity="0.7"/>
+        <ScrollViewer Grid.Column="1" Padding="48">
+            <StackPanel Spacing="28" MaxWidth="860">
+                <TextBlock Text="System" FontSize="36" FontWeight="SemiBold"/>
+                <TextBlock Text="Windows 12 Project Rebirth • Build 2026.10.31" Opacity="0.65"/>
 
-                <Border Background="{ThemeResource TaskbarBackgroundBrush}" CornerRadius="12" Padding="20">
-                    <StackPanel Spacing="12">
-                        <TextBlock Text="Display &amp; Theme" FontWeight="SemiBold" FontSize="18"/>
-                        <ToggleSwitch Header="Sunset Gradient Theme" IsOn="True"/>
+                <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="20" Padding="24">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Display &amp; Theme" FontWeight="SemiBold" FontSize="20"/>
+                        <ToggleSwitch Header="Rectify12 Theme" IsOn="True"/>
                         <ToggleSwitch Header="Floating Taskbar" IsOn="True"/>
                         <ToggleSwitch Header="Dark Carbon Mode" IsOn="False"/>
                         <Slider Header="Animation Refresh Rate" Minimum="60" Maximum="144" Value="120"/>
                     </StackPanel>
                 </Border>
 
-                <Border Background="{ThemeResource TaskbarBackgroundBrush}" CornerRadius="12" Padding="20">
-                    <StackPanel Spacing="12">
-                        <TextBlock Text="Time-Travel Engine" FontWeight="SemiBold" FontSize="18"/>
-                        <ToggleSwitch Header="Enable Automatic Snapshots" IsOn="True"/>
-                        <Button Content="Create Snapshot Now"/>
-                        <Button Content="View Rollback History"/>
+                <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="20" Padding="24">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Time-Travel Engine" FontWeight="SemiBold" FontSize="20"/>
+                        <ToggleSwitch Header="Automatic Snapshots" IsOn="True"/>
+                        <Button Content="Create Snapshot Now" Style="{ThemeResource ModernButtonStyle}"/>
+                        <Button Content="View History" Style="{ThemeResource ModernButtonStyle}"/>
                     </StackPanel>
                 </Border>
 
-                <Border Background="{ThemeResource TaskbarBackgroundBrush}" CornerRadius="12" Padding="20">
-                    <StackPanel Spacing="12">
-                        <TextBlock Text="Privacy" FontWeight="SemiBold" FontSize="18"/>
+                <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="20" Padding="24">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Privacy" FontWeight="SemiBold" FontSize="20"/>
                         <ToggleSwitch Header="Disable All Telemetry" IsOn="True"/>
-                        <ToggleSwitch Header="Local NPU Only for AI" IsOn="True"/>
-                        <TextBlock Text="No cloud dependency. All AI runs on-device." Opacity="0.7" FontSize="12"/>
+                        <ToggleSwitch Header="Local NPU Only" IsOn="True"/>
+                        <TextBlock Text="All AI and search stay on-device." Opacity="0.7" FontSize="13"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
