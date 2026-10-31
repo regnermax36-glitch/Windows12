@@ -5,6 +5,7 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build-ui:
@@ -19,17 +20,30 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Restore NuGet Dependencies
+    - name: Restore NuGet Dependencies (UI_Components)
       run: dotnet restore src/UI_Components/UI_Components.csproj -r win-x64 -p:Platform=x64 -p:UseRidGraph=true
 
-    - name: Publish Single-File Installer (x64)
+    - name: Publish Single-File Installer (x64) - UI_Components
       run: dotnet publish src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 -p:UseRidGraph=true -p:SelfContained=true -p:WindowsAppSDKSelfContained=true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true -p:EnableMsixTooling=true --no-restore
 
-    - name: Upload Installer EXE
+    - name: Upload UI_Components Installer EXE
       uses: actions/upload-artifact@v4
       with:
         name: Windows12-Installer-EXE
         path: src/UI_Components/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/publish/UI_Components.exe
+        retention-days: 7
+
+    - name: Restore Rectify11 Installer
+      run: dotnet restore Rectify11Installer/Rectify11Installer.csproj -r win-x64
+
+    - name: Publish Full Rectify11 Installer EXE (self-contained single-file)
+      run: dotnet publish Rectify11Installer/Rectify11Installer.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:Platform=x64
+
+    - name: Upload Full Rectify11 Installer EXE
+      uses: actions/upload-artifact@v4
+      with:
+        name: Rectify11-Full-Installer-EXE
+        path: Rectify11Installer/bin/Release/net8.0-windows/win-x64/publish/Rectify11Installer.exe
         retention-days: 7
 
     - name: Build Console Installer
