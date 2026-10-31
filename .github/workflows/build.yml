@@ -27,11 +27,15 @@ jobs:
     - name: Build Rectify11.Phase2
       shell: pwsh
       run: |
-        dotnet publish Rectify11.Phase2/Rectify11.Phase2.csproj -c Release -r win-x64 --self-contained false -o phase2_out
+        dotnet publish Rectify11.Phase2/Rectify11.Phase2.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=false -o phase2_out -p:SolutionDir=${{ github.workspace }}\
+        Get-ChildItem -Recurse phase2_out | Select-Object FullName
         New-Item -ItemType Directory -Force -Path Rectify11Installer/Resources | Out-Null
-        Copy-Item -Force phase2_out/Rectify11.Phase2.exe Rectify11Installer/Resources/
-        Copy-Item -Force phase2_out/Rectify11.Phase2.dll Rectify11Installer/Resources/
-        Copy-Item -Force phase2_out/Rectify11.Phase2.runtimeconfig.json Rectify11Installer/Resources/
+        $exe = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.exe" phase2_out | Select-Object -First 1
+        $dll = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.dll" phase2_out | Select-Object -First 1
+        $cfg = Get-ChildItem -Recurse -Filter "Rectify11.Phase2.runtimeconfig.json" phase2_out | Select-Object -First 1
+        if ($exe) { Copy-Item -Force $exe.FullName Rectify11Installer/Resources/ } else { Write-Error "Phase2.exe not found"; exit 1 }
+        if ($dll) { Copy-Item -Force $dll.FullName Rectify11Installer/Resources/ }
+        if ($cfg) { Copy-Item -Force $cfg.FullName Rectify11Installer/Resources/ }
 
     - name: Restore NuGet Packages
       run: dotnet restore Rectify11Installer/Rectify11Installer.csproj -r win-x64
