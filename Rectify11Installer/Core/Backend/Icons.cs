@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
+using Rectify11Installer.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -81,7 +82,6 @@ namespace Rectify11Installer.Core
                 if (InstallOptions.iconsList.Contains("odbcad32.exe"))
                     FixOdbc();
 
-                // Try Phase2 first; if missing or fails, fall back to direct/pending replace
                 bool phase2Ok = TryRunPhase2("/install");
                 if (!phase2Ok)
                 {
@@ -116,7 +116,6 @@ namespace Rectify11Installer.Core
                     Logger.Warn("Rectify11.Phase2.exe not found");
                     return false;
                 }
-                // Skip if it's our placeholder (tiny file)
                 var fi = new FileInfo(phase2);
                 if (fi.Length < 1024)
                 {
@@ -133,10 +132,6 @@ namespace Rectify11Installer.Core
             }
         }
 
-        /// <summary>
-        /// Fallback: copy patched files from Tmp over the originals.
-        /// If a file is locked, schedule replacement on reboot via MoveFileEx.
-        /// </summary>
         private static void FallbackReplacePatchedFiles()
         {
             try
@@ -146,10 +141,6 @@ namespace Rectify11Installer.Core
 
                 foreach (var patched in Directory.GetFiles(tmp, "*", SearchOption.AllDirectories))
                 {
-                    var rel = Path.GetRelativePath(tmp, patched);
-                    // Best-effort: map back to system32 / system32\en-US etc. is complex;
-                    // for the common case we place next to original via HardlinkTarget already stored.
-                    // Here we simply try to replace any file of the same name under system32.
                     var name = Path.GetFileName(patched);
                     var dest = Path.Combine(Variables.sys32Folder, name);
                     if (!File.Exists(dest)) continue;
@@ -158,7 +149,6 @@ namespace Rectify11Installer.Core
                     {
                         if (!Helper.SafeFileDeletion(dest))
                         {
-                            // schedule pending replace
                             var pending = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                             File.Copy(patched, pending, true);
                             NativeMethods.MoveFileEx(pending, dest, NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT | NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING);
