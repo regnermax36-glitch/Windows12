@@ -22,8 +22,9 @@
     <SelfContained>true</SelfContained>
     <PublishSelfContained>true</PublishSelfContained>
 
-    <!-- Disable PRI / MSIX tooling that fails on SDK 10 + WindowsAppSDK 1.5 -->
+    <!-- Disable MSIX / PRI tooling that fails on GitHub Actions (missing AppxPackage tasks) -->
     <EnableMsixTooling>false</EnableMsixTooling>
+    <EnableCoreMrtTooling>false</EnableCoreMrtTooling>
     <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
     <GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
     <AppxPackage>false</AppxPackage>
