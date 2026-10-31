@@ -7,6 +7,18 @@ Project "Rebirth" is a highly advanced, conceptual source code architecture simu
 
 Engineered entirely without mandatory telemetry or pre-installed bloatware, Project Rebirth focuses on deep-system modularity, native universal compatibility, and ultra-fluid, dynamic user interfaces built on WinUI 3 and C++23.
 
+## Rectify12 — Full Windows 12 UI
+**Rectify12** is the complete visual and structural overhaul delivering a true Windows 12 experience (inspired by Rectify11 principles, redesigned for the next generation).
+
+- Consistent Fluent 2 language (16–28 px corners, acrylic, soft shadows)
+- Modern floating Taskbar + full Start Menu
+- Complete Desktop with icons & widgets
+- Multi-step privacy-first OOBE / Installer
+- Transformed apps: Settings, File Explorer, Copilot, Widgets, Notifications, Lock Screen, Photos, Terminal, Snap Layouts
+- Themes: Rectify12 (default), Sunset, Dark Carbon
+
+See `docs/RECTIFY12.md` for full details.
+
 ## Architectural Highlights
 
 ### 1. Universal Time-Travel Computing
@@ -22,21 +34,7 @@ A registry-free, deep-system repository layout that seamlessly unifies Win32, UW
 The default presentation features a vibrant, unanchored floating taskbar with a signature pink-and-yellow gradient. The user interface has been rigorously optimized for highly responsive, direct finger touch input on glass displays, bypassing any reliance on external styluses. For legacy enthusiasts, the "Retro-Shell" engine allows the system to seamlessly map classic UI skins (such as Windows XP's Luna or Windows 7's Aero) over the modern compositor. Included in the developer resources is also a Triple Black Carbon aesthetic for high-contrast coding environments.
 
 ## Massive UI Expansion (True Windows 12 Experience)
-The presentation layer has been massively extended with production-like components:
-
-- **Modern Start Menu**: Search + local Copilot, Pinned Apps, Recommended, user profile, power options
-- **Floating Taskbar**: Centered dock with system tray (clock, notifications, system icons), Task View, Widgets
-- **Full Settings App**: System, Personalization, Time-Travel controls, Dev Workspace, Privacy (telemetry disabled by default)
-- **File Explorer Simulation**: Sidebar with This PC / Dev Workspace / Snapshots, modern toolbar and grid view
-- **Notification Center**: Quick actions and system notifications
-- **Desktop**: Icon grid + floating widget board on Sunset background
-- **Lock Screen**: Large clock, date, PIN entry
-- **Advanced Widgets**: Weather, Time-Travel, Dev Workspace indicators
-- **Copilot Panel**: Local NPU chat (no cloud)
-- **Snap Layouts Overlay**: Visual snap preview
-- **Enhanced Themes**: Acrylic Sunset, Dark Carbon, better shadows, larger corner radii
-
-See `docs/UI_EXPANSION.md` and `docs/MORE_UI.md` for full details.
+The presentation layer has been massively extended with production-like components. See the Rectify12 section above and the docs for the full list.
 
 ## Industry Context & Speculation
 The architecture within this repository is heavily informed by—and in some cases, directly subverts—current industry intelligence regarding Microsoft's actual next-generation plans.
