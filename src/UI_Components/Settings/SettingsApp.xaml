@@ -12,14 +12,14 @@
         <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="20">
             <StackPanel Spacing="6">
                 <TextBlock Text="Settings" FontSize="32" FontWeight="Bold" Margin="0,0,0,24"/>
-                <NavigationViewItem Content="System" Icon="Home"/>
-                <NavigationViewItem Content="Personalization" Icon="Brush"/>
-                <NavigationViewItem Content="Apps" Icon="Library"/>
-                <NavigationViewItem Content="Time Travel" Icon="Clock"/>
-                <NavigationViewItem Content="Dev Workspace" Icon="Code"/>
-                <NavigationViewItem Content="Privacy &amp; Security" Icon="Shield"/>
-                <NavigationViewItem Content="Windows Update" Icon="Sync"/>
-                <NavigationViewItem Content="About" Icon="Info"/>
+                <Button Content="System" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Personalization" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Apps" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Time Travel" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Dev Workspace" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Privacy & Security" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="Windows Update" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                <Button Content="About" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
             </StackPanel>
         </Border>
 
@@ -30,7 +30,7 @@
 
                 <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="20" Padding="24">
                     <StackPanel Spacing="14">
-                        <TextBlock Text="Display &amp; Theme" FontWeight="SemiBold" FontSize="20"/>
+                        <TextBlock Text="Display & Theme" FontWeight="SemiBold" FontSize="20"/>
                         <ToggleSwitch Header="Rectify12 Theme" IsOn="True"/>
                         <ToggleSwitch Header="Floating Taskbar" IsOn="True"/>
                         <ToggleSwitch Header="Dark Carbon Mode" IsOn="False"/>
@@ -42,8 +42,8 @@
                     <StackPanel Spacing="14">
                         <TextBlock Text="Time-Travel Engine" FontWeight="SemiBold" FontSize="20"/>
                         <ToggleSwitch Header="Automatic Snapshots" IsOn="True"/>
-                        <Button Content="Create Snapshot Now" Style="{ThemeResource ModernButtonStyle}"/>
-                        <Button Content="View History" Style="{ThemeResource ModernButtonStyle}"/>
+                        <Button Content="Create Snapshot Now"/>
+                        <Button Content="View History"/>
                     </StackPanel>
                 </Border>
 
