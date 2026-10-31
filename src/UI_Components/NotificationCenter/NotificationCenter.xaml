@@ -1,0 +1,37 @@
+<UserControl
+    x:Class="Windows12.UI_Components.NotificationCenter.NotificationCenter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border Background="{ThemeResource SurfaceBackgroundBrush}" 
+            CornerRadius="20" Width="380" Height="600"
+            BorderThickness="1" BorderBrush="{ThemeResource TaskbarBorderBrush}"
+            Padding="20" Shadow="{ThemeResource FloatingElevationShadow}">
+        <StackPanel Spacing="16">
+            <TextBlock Text="Notifications" FontSize="20" FontWeight="SemiBold"/>
+            <TextBlock Text="No active notifications • Telemetry suppressed" Opacity="0.6"/>
+
+            <Border Background="{ThemeResource TaskbarBackgroundBrush}" CornerRadius="12" Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Time-Travel Snapshot Complete" FontWeight="Medium"/>
+                    <TextBlock Text="System state saved at 14:28" FontSize="12" Opacity="0.7"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{ThemeResource TaskbarBackgroundBrush}" CornerRadius="12" Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Dev Workspace Mode Active" FontWeight="Medium"/>
+                    <TextBlock Text="Background services suspended for maximum performance" FontSize="12" Opacity="0.7"/>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Quick Actions" FontWeight="SemiBold" Margin="0,16,0,0"/>
+            <UniformGrid Columns="2" Rows="2">
+                <Button Content="Wi-Fi" Margin="4"/>
+                <Button Content="Bluetooth" Margin="4"/>
+                <Button Content="Focus Assist" Margin="4"/>
+                <Button Content="Night Light" Margin="4"/>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>
