@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System;
+using Windows12.UI_Components.Shell;
 
 namespace Windows12.UI_Components.Installer;
 
@@ -34,6 +34,16 @@ public sealed partial class InstallerPage : Page
         ProgressBar.Value = 100;
         StatusText.Text = "Installation complete. Restart recommended.";
         InstallButton.Content = "Done";
+        ShellButton.Visibility = Visibility.Visible;
+    }
+
+    private void ShellButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (this.XamlRoot?.Content is Window window)
+        {
+            window.Content = new DesktopShell();
+            window.Title = "Windows 12";
+        }
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)
