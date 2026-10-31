@@ -22,12 +22,19 @@
     <SelfContained>true</SelfContained>
     <PublishSelfContained>true</PublishSelfContained>
 
-    <!-- Disable MSIX / PRI tooling that fails on GitHub Actions (missing AppxPackage tasks) -->
+    <!-- Prevent bootstrapper from showing "Windows App Runtime not found" on self-contained apps -->
+    <WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>false</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
+    <WindowsAppSdkUndockedRegFreeWinRTInitialize>true</WindowsAppSdkUndockedRegFreeWinRTInitialize>
+
+    <!-- Disable MSIX / PRI tooling that fails on GitHub Actions -->
     <EnableMsixTooling>false</EnableMsixTooling>
     <EnableCoreMrtTooling>false</EnableCoreMrtTooling>
     <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
     <GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
     <AppxPackage>false</AppxPackage>
+
+    <!-- Avoid trimming that can break WinUI at runtime -->
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
