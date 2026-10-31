@@ -2,7 +2,7 @@
     x:Class="Windows12.UI_Components.Controls.Control003"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="{ThemeResource SurfaceBackgroundBrush}" CornerRadius="12" Padding="16">
+    <Border Background="#F0FFFFFF" CornerRadius="12" Padding="16">
         <TextBlock Text="Control003" FontWeight="SemiBold"/>
     </Border>
 </UserControl>
