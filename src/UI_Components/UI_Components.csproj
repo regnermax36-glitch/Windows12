@@ -10,12 +10,18 @@
     <PlatformTarget>x64</PlatformTarget>
     <Platform Condition="'$(Platform)' == '' or '$(Platform)' == 'AnyCPU' or '$(Platform)' == 'Any CPU'">x64</Platform>
     
+    <!-- Lock RIDs to x64 only so WindowsAppSDK.SelfContained does not probe win10-arm / win10-arm-aot -->
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <UseRidGraph>true</UseRidGraph>
+    
     <UseWinUI>true</UseWinUI>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
+    <PublishSelfContained>true</PublishSelfContained>
   </PropertyGroup>
 
   <ItemGroup>
