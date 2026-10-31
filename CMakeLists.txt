@@ -17,5 +17,9 @@ add_subdirectory(src/ShellHost)
 add_subdirectory(src/OOBE)
 add_subdirectory(src/LocalAI_NPU)
 
-enable_testing()
-add_subdirectory(tests)
+option(BUILD_TESTING "Build unit tests" ON)
+
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
