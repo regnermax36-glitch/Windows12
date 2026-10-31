@@ -1,0 +1,63 @@
+<Page
+    x:Class="Windows12.UI_Components.FileExplorer.ExplorerWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{ThemeResource SurfaceBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="16,8" CornerRadius="0,0,12,12">
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button Content="New" />
+                <Button Content="Cut" />
+                <Button Content="Copy" />
+                <Button Content="Paste" />
+                <TextBox Width="300" PlaceholderText="Search this PC..." CornerRadius="8"/>
+                <Button Content="View" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="{ThemeResource TaskbarBackgroundBrush}" Padding="12">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="This PC" FontWeight="SemiBold"/>
+                    <TextBlock Text="Quick Access" Margin="8,4"/>
+                    <TextBlock Text="Desktop" Margin="8,4"/>
+                    <TextBlock Text="Documents" Margin="8,4"/>
+                    <TextBlock Text="Downloads" Margin="8,4"/>
+                    <TextBlock Text="Dev Workspace" Margin="8,4"/>
+                    <TextBlock Text="Time Travel Snapshots" Margin="8,4"/>
+                </StackPanel>
+            </Border>
+
+            <GridView Grid.Column="1" Padding="20">
+                <GridViewItem>
+                    <StackPanel Width="100" Height="100">
+                        <FontIcon Glyph="&#xE8B7;" FontSize="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Projects" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GridViewItem>
+                <GridViewItem>
+                    <StackPanel Width="100" Height="100">
+                        <FontIcon Glyph="&#xE8A5;" FontSize="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Windows12" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GridViewItem>
+                <GridViewItem>
+                    <StackPanel Width="100" Height="100">
+                        <FontIcon Glyph="&#xE943;" FontSize="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Kernel Sources" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GridViewItem>
+            </GridView>
+        </Grid>
+    </Grid>
+</Page>

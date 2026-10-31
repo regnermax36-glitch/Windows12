@@ -7,28 +7,64 @@
     PointerReleased="OnPointerReleased">
 
     <Border Background="{ThemeResource TaskbarBackgroundBrush}" 
-            CornerRadius="20" 
-            BorderThickness="1" 
+            CornerRadius="28" 
+            BorderThickness="1.5" 
             BorderBrush="{ThemeResource TaskbarBorderBrush}"
-            Padding="16,8,16,8"
-            Shadow="{ThemeResource FloatingElevationShadow}">
+            Padding="20,10,20,10"
+            Shadow="{ThemeResource FloatingElevationShadow}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,16">
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
-            <Button Width="48" Height="48" CornerRadius="12" Background="Transparent" Click="OnStartMenuClicked">
-                <FontIcon Glyph="&#xE7EF;" FontSize="20" Foreground="{ThemeResource PrimaryIconColor}"/>
-            </Button>
-            
-            <Rectangle Width="1" Height="24" Fill="{ThemeResource SeparatorBrush}" Margin="8,0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <Button Width="44" Height="44" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Dev Workspace">
-                <FontIcon Glyph="&#xE943;" FontSize="18" Foreground="{ThemeResource PrimaryIconColor}"/>
-            </Button>
-            <Button Width="44" Height="44" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="File Explorer">
-                <FontIcon Glyph="&#xE8B7;" FontSize="18" Foreground="{ThemeResource PrimaryIconColor}"/>
-            </Button>
-            <Button Width="44" Height="44" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Terminal">
-                <FontIcon Glyph="&#xE756;" FontSize="18" Foreground="{ThemeResource PrimaryIconColor}"/>
-            </Button>
-        </StackPanel>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <Button Width="52" Height="52" CornerRadius="16" Background="Transparent" Click="OnStartMenuClicked" ToolTipService.ToolTip="Start">
+                    <FontIcon Glyph="&#xE7EF;" FontSize="22" Foreground="{ThemeResource PrimaryIconColor}"/>
+                </Button>
+                <Button Width="48" Height="48" CornerRadius="14" Background="Transparent" ToolTipService.ToolTip="Search / Copilot">
+                    <FontIcon Glyph="&#xE721;" FontSize="20"/>
+                </Button>
+                <Button Width="48" Height="48" CornerRadius="14" Background="Transparent" ToolTipService.ToolTip="Task View">
+                    <FontIcon Glyph="&#xE7C4;" FontSize="20"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6" VerticalAlignment="Center">
+                <Button Width="46" Height="46" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="File Explorer">
+                    <FontIcon Glyph="&#xE8B7;" FontSize="20"/>
+                </Button>
+                <Button Width="46" Height="46" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Terminal">
+                    <FontIcon Glyph="&#xE756;" FontSize="20"/>
+                </Button>
+                <Button Width="46" Height="46" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Dev Workspace">
+                    <FontIcon Glyph="&#xE943;" FontSize="20"/>
+                </Button>
+                <Button Width="46" Height="46" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Widgets">
+                    <FontIcon Glyph="&#xE713;" FontSize="20"/>
+                </Button>
+                <Button Width="46" Height="46" CornerRadius="12" Background="Transparent" ToolTipService.ToolTip="Settings">
+                    <FontIcon Glyph="&#xE713;" FontSize="20"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                <Button Width="40" Height="40" Background="Transparent" ToolTipService.ToolTip="Notifications">
+                    <FontIcon Glyph="&#xE7E7;" FontSize="18"/>
+                </Button>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="8,0">
+                    <TextBlock Text="14:32" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Oct 31" FontSize="11" Opacity="0.7" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <Button Width="40" Height="40" Background="Transparent" ToolTipService.ToolTip="System">
+                    <FontIcon Glyph="&#xE7F4;" FontSize="16"/>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Border>
 </UserControl>
