@@ -19,6 +19,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
             <Button x:Name="InstallButton" Content="Install" Width="120" Height="40" Click="InstallButton_Click"/>
+            <Button x:Name="ShellButton" Content="Launch Shell" Width="140" Height="40" Click="ShellButton_Click" Visibility="Collapsed"/>
             <Button Content="Close" Width="100" Height="40" Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>
