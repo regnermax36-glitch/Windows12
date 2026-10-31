@@ -21,6 +21,18 @@ A registry-free, deep-system repository layout that seamlessly unifies Win32, UW
 ### 4. Dynamic "Sunset" Interface & Retro-Shell
 The default presentation features a vibrant, unanchored floating taskbar with a signature pink-and-yellow gradient. The user interface has been rigorously optimized for highly responsive, direct finger touch input on glass displays, bypassing any reliance on external styluses. For legacy enthusiasts, the "Retro-Shell" engine allows the system to seamlessly map classic UI skins (such as Windows XP's Luna or Windows 7's Aero) over the modern compositor. Included in the developer resources is also a Triple Black Carbon aesthetic for high-contrast coding environments.
 
+## Massive UI Expansion (True Windows 12 Experience)
+The presentation layer has been massively extended with production-like components:
+
+- **Modern Start Menu**: Search + local Copilot, Pinned Apps, Recommended, user profile, power options
+- **Floating Taskbar**: Centered dock with system tray (clock, notifications, system icons), Task View, Widgets
+- **Full Settings App**: System, Personalization, Time-Travel controls, Dev Workspace, Privacy (telemetry disabled by default)
+- **File Explorer Simulation**: Sidebar with This PC / Dev Workspace / Snapshots, modern toolbar and grid view
+- **Notification Center**: Quick actions and system notifications
+- **Enhanced Themes**: Acrylic Sunset, Dark Carbon, better shadows, larger corner radii
+
+See `docs/UI_EXPANSION.md` for full details.
+
 ## Industry Context & Speculation
 The architecture within this repository is heavily informed by—and in some cases, directly subverts—current industry intelligence regarding Microsoft's actual next-generation plans.
 
@@ -33,3 +45,10 @@ Compiling the CorePC subsystem and the WinUI 3 ShellHost requires a formidable d
 
 *   **Minimum Build Specifications:** Intel Core i5-13420H, dedicated GPU (RTX 4050 or equivalent), and 16GB of RAM.
 *   **Target Compilation Environment:** 64GB of RAM, 4TB of high-speed NVMe storage, and a premium CPU (equivalent to Dell XPS 16 architecture) to successfully handle full kernel profiling and integrated virtualization without compilation bottlenecking.
+
+## Building the Distribution ISO
+A dedicated GitHub Actions workflow (`.github/workflows/build_iso.yml`) packages the complete source tree into a downloadable `Windows12_Rebirth.iso` artifact.
+
+Trigger it manually via workflow_dispatch or on push to main. The ISO contains the full conceptual architecture ready for local builds on Windows with CMake + .NET 8 + Windows App SDK.
+
+Native CI continues in `build_corepc.yml` and `shellhost_ci.yml`.
