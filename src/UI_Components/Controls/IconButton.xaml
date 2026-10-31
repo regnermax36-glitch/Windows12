@@ -1,0 +1,8 @@
+<UserControl
+    x:Class="Windows12.UI_Components.Controls.IconButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Button Width="48" Height="48" CornerRadius="14" Background="Transparent">
+        <FontIcon Glyph="&#xE713;" FontSize="20"/>
+    </Button>
+</UserControl>

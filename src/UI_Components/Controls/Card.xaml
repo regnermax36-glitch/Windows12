@@ -1,0 +1,8 @@
+<UserControl
+    x:Class="Windows12.UI_Components.Controls.Card"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="{ThemeResource ElevatedSurfaceBrush}" CornerRadius="20" Padding="20">
+        <TextBlock Text="Card" FontWeight="SemiBold"/>
+    </Border>
+</UserControl>
