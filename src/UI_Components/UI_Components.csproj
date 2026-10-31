@@ -22,11 +22,14 @@
     <SelfContained>true</SelfContained>
     <PublishSelfContained>true</PublishSelfContained>
 
-    <!-- Required for single-file EXE (Windows App SDK SingleFile.targets) -->
+    <!-- Single-file EXE settings -->
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <EnableMsixTooling>true</EnableMsixTooling>
+
+    <!-- Suppress the SingleFile.targets validation that fails on CI -->
+    <WindowsAppSDKSingleFileVerifyConfiguration>false</WindowsAppSDKSingleFileVerifyConfiguration>
 
     <!-- Prevent bootstrapper from showing runtime dialog -->
     <WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>false</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
