@@ -24,25 +24,13 @@ jobs:
 
     - name: Build ShellHost UI Components (Installer EXE)
       id: build
-      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true -v n
+      run: dotnet build src/UI_Components/UI_Components.csproj -c Release -r win-x64 -p:Platform=x64 --no-restore -p:UseRidGraph=true -p:EnableCoreMrtTooling=false -p:EnableMsixTooling=false -v n
       continue-on-error: true
 
-    - name: Show XamlCompiler diagnostics
+    - name: Show diagnostics
       if: steps.build.outcome == 'failure'
       run: |
-        Write-Host "=== input.json ==="
-        if (Test-Path "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/input.json") {
-          Get-Content "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/input.json"
-        } else {
-          Write-Host "input.json not found"
-        }
-        Write-Host "=== output.json ==="
-        if (Test-Path "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json") {
-          Get-Content "src/UI_Components/obj/x64/Release/net8.0-windows10.0.19041.0/win-x64/output.json"
-        } else {
-          Write-Host "output.json not found"
-        }
-        Write-Host "=== All JSON in obj ==="
+        Write-Host "=== Last 50 lines of build log already shown above ==="
         Get-ChildItem -Recurse "src/UI_Components/obj" -Filter "*.json" | Select-Object FullName
 
     - name: Fail if build failed
