@@ -1,0 +1,11 @@
+<Page
+    x:Class="Windows12.UI_Components.Apps.SoundApp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="{ThemeResource SurfaceBackgroundBrush}" Padding="24">
+        <StackPanel>
+            <TextBlock Text="Sound" FontSize="32" FontWeight="Bold"/>
+            <TextBlock Text="Windows 12 Rectify12 Sound experience" Opacity="0.7" Margin="0,8,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>
