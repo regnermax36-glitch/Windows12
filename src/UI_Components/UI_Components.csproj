@@ -22,7 +22,12 @@
     <SelfContained>true</SelfContained>
     <PublishSelfContained>true</PublishSelfContained>
 
-    <!-- Prevent bootstrapper from showing "Windows App Runtime not found" on self-contained apps -->
+    <!-- Single-file EXE (supported for unpackaged self-contained WinUI 1.5+) -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+    <!-- Prevent bootstrapper from showing runtime dialog -->
     <WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>false</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
     <WindowsAppSdkUndockedRegFreeWinRTInitialize>true</WindowsAppSdkUndockedRegFreeWinRTInitialize>
 
