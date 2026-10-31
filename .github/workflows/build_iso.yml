@@ -18,28 +18,28 @@ jobs:
     - name: Install ISO tools
       run: |
         sudo apt-get update
-        sudo apt-get install -y genisoimage mkisofs
+        sudo apt-get install -y genisoimage
 
     - name: Prepare distribution structure
       run: |
         mkdir -p dist/Windows12_ISO
-        cp -r src docs tools tests dist/Windows12_ISO/
+        cp -r src docs tools tests dist/Windows12_ISO/ || true
         cp README.md LICENSE CMakeLists.txt .gitignore dist/Windows12_ISO/
         mkdir -p dist/Windows12_ISO/boot
         echo "Windows 12 Project Rebirth - Conceptual Boot Loader Placeholder" > dist/Windows12_ISO/boot/bootmgr
         mkdir -p dist/Windows12_ISO/sources
         echo "CorePC modular kernel and ShellHost components" > dist/Windows12_ISO/sources/README.txt
         echo "Windows 12 Rebirth Build $(date +%Y%m%d)" > dist/Windows12_ISO/VERSION.txt
-        cat > dist/Windows12_ISO/setup.txt << 'EOF'
-Windows 12 Project "Rebirth" Distribution
-This ISO contains the full conceptual source architecture for Windows 12.
-To build:
-1. On Windows with Visual Studio 2022+, CMake 3.25+, .NET 8 SDK, Windows App SDK
-2. cmake -B build -A x64
-3. cmake --build build --config Release
-4. Build UI: dotnet build src/UI_Components/UI_Components.csproj -c Release
-Features included: Floating Taskbar, Sunset Theme, Time-Travel Engine, NUPS, Local NPU AI, Retro Shell, Advanced Start Menu, Settings, Explorer simulation, Notification Center.
-EOF
+        printf '%s\n' \
+          'Windows 12 Project "Rebirth" Distribution' \
+          'This ISO contains the full conceptual source architecture for Windows 12.' \
+          'To build:' \
+          '1. On Windows with Visual Studio 2022+, CMake 3.25+, .NET 8 SDK, Windows App SDK' \
+          '2. cmake -B build -A x64' \
+          '3. cmake --build build --config Release' \
+          '4. Build UI: dotnet build src/UI_Components/UI_Components.csproj -c Release -p:Platform=x64' \
+          'Features included: Floating Taskbar, Sunset Theme, Time-Travel Engine, NUPS, Local NPU AI, Retro Shell, Advanced Start Menu, Settings, Explorer, Notification Center, Desktop, Widgets, and more.' \
+          > dist/Windows12_ISO/setup.txt
 
     - name: Create ISO image
       run: |
@@ -57,5 +57,5 @@ EOF
         path: Windows12_Rebirth.iso
         retention-days: 30
 
-    - name: Optional Windows build matrix note
-      run: echo "For full native builds, see build_corepc.yml and shellhost_ci.yml. This ISO packages the complete source distribution."
+    - name: Note
+      run: echo "ISO packaging complete. Native builds available via other workflows."
