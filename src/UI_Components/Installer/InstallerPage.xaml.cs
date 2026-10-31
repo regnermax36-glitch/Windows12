@@ -39,10 +39,10 @@ public sealed partial class InstallerPage : Page
 
     private void ShellButton_Click(object sender, RoutedEventArgs e)
     {
-        if (this.XamlRoot?.Content is Window window)
+        if (App.MainWindow != null)
         {
-            window.Content = new DesktopShell();
-            window.Title = "Windows 12";
+            App.MainWindow.Content = new DesktopShell();
+            App.MainWindow.Title = "Windows 12";
         }
     }
 
